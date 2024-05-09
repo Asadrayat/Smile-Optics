@@ -1,0 +1,451 @@
+{% assign id = section.id %}
+
+<style>
+    .hero-banner--{{ section.id }} {
+     margin-top: {{ section.settings.margin_top }}px;
+     margin-bottom: {{ section.settings.margin_bottom }}px;
+     padding-top: {{ section.settings.padding_top }}px;
+     padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  .hero__banner-body {
+    background-image: url("{{ section.settings.img_bg-parent | image_url: width: section.settings.img_bg-parent.width }}");
+    background-repeat: no-repeat;
+    background-size: calc(100% + 14px) 100%;
+    background-position: top left -7px;
+    box-sizing: border-box;
+    padding: 209px 0 100px 0;
+  }
+  .hero__banner-container {
+    position: relative;
+  }
+  .bg__image-wrapper img{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  .hero__container {
+    display: grid;
+    grid-template-columns: 3fr 5fr;
+    padding: 30px 0 20px 0;
+    /* position: absolute; */
+    top: 0;
+  }
+  .custom__hero-image {
+    justify-self: end;
+  }
+  .custom__hero-content {
+    padding-inline: 44px;
+  }
+  .imag__model {
+    position: relative;
+  }
+  .oragana__pack {
+    position: absolute;
+    /* top: 0; */
+    bottom: -50px;
+    left: -46px;
+  }
+  .oragana__pack img{
+    width: max-content;
+    height: auto;
+    object-fit: cover;
+  }
+  .hero__banner-container{
+      /* background-image: url("{{ section.settings.img_bg-child | image_url: width: section.settings.img_bg-child.width }}"); */
+    }
+  .hero-banner {
+    display: flex;
+    justify-content: center;
+  }
+  .wrapper-{{id}} {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.4s ease-in-out 0s, visibility 0s;
+  }
+  .wrapper-{{id}}:hover {
+    transform: scale(1.05);
+  }
+  .container-{{ id }} {
+    max-width: 1100px;
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    position: relative;
+    z-index: 5;
+    box-sizing: border-box;
+    padding: 55px 35px;
+  }
+
+  .info-{{ id }} {
+    box-sizing: border-box;
+    padding: 0 60px 0 0;
+  }
+  .image-{{ id }} img{
+    width: 100%;
+    height: 100%;
+  }
+  .bg-img-{{ id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 93%;
+    height: 93%;
+    z-index: 2;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .bg-img-{{ id }} img{
+    width: 100%;
+    height: 100%;
+    object-fit:cover;
+  }
+  .custom__hero-title {
+    color: #fff;
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .custom__hero-title span{
+    font-size: 12px;
+  }
+  .ch__rating {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 16px;
+    font-weight: normal;
+    color: #fff;
+  }
+  .custom__hero-desc,
+  .custom__hero-title,
+  .ch-user__info{
+    text-align: justify;
+    line-height: 16.9px;
+    color: #fff;
+  }
+  .custom__hero-desc p strong{
+    font-size: 13px;
+    color: #fff;
+    font-weight: normal;
+  }
+  .desktop__bg {
+    display: block;
+  }
+  .custom__hero-title-m,
+  .ch__rating-m,
+  .mobile__bg{
+    display: none;
+  }
+  
+@media screen and (max-width: 890px){
+ .hero-banner--{{ section.id }} {
+     margin-top: {{ section.settings.margin_top-m }}px;
+     margin-bottom: {{ section.settings.margin_bottom-m }}px;
+     padding-top: {{ section.settings.padding_top-m }}px;
+     padding-bottom: {{ section.settings.padding_bottom-padding_bottom-m }}px;
+  }
+  .hero-banner {
+    padding: 0;
+    background: #27b7af;
+  }
+  .ch__rating,
+  .custom__hero-title,
+  .desktop__bg {
+    display: none;
+  }
+  .custom__hero-title-m,
+  .ch__rating-m{
+    display: block;
+    color: #fff;
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .mobile__bg{
+    display: block;
+  }
+  .ch__rating-m{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 16px;
+    font-weight: normal;
+    color: #fff;
+  }
+  .ch__rating-m img{
+    width: max-content;
+  }
+  .custom__hero-title-m span{
+    font-size: 12px;
+  }
+  .custom__hero-title-m img{
+    width: max-content;
+  }
+  .wrapper-{{id}}:hover {
+    transform: scale(1);
+  }
+  .hero__banner-body {
+    background-image: url("{{ section.settings.img_bg-parent-m | image_url: width: section.settings.img_bg-parent.width }}");
+    padding: 100px 0 0px 0;
+  }  
+  .container-{{ id }} {
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 0 0 70px 40px;
+  }
+   .bg-img-{{ id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 90%;
+    left: 5%;
+    height: 93%;
+    z-index: 2;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+}
+</style>
+
+<section class="hero-banner--{{ section.id }} hero__banner-body">
+  <div class="page-width hero-banner">
+    <div class="wrapper-{{ id }}">
+        <div class="container-{{ id }}">
+          <div class="info-{{ id }}">
+            {% for block in section.blocks %}        
+             <p class="custom__hero-title">{{ block.settings.title }}<br><span>300mg CBD</span></p>
+              <div class="ch__rating"><img  class="" src="{{ block.settings.image_rating | img_url: "master" }}" alt="Money back"><span>{{ block.settings.text_rating }}</span></div>
+              <div class="custom__hero-desc">{{ block.settings.desc_text }}</div>
+              <div class="ch-user__info">{{ block.settings.user__info }}</div>
+            {% endfor %}
+          </div>
+          <div class="image-{{ id }}">
+            {% if section.settings.hero_img %}
+              {% for block in section.blocks %}
+              <p class="custom__hero-title-m">{{ block.settings.title }}<br><span>300mg CBD</span></p>
+              <div class="ch__rating-m"><img  class="" src="{{ block.settings.image_rating | img_url: "master" }}" alt="Money back"><span>{{ block.settings.text_rating }}</span></div>
+              {% endfor %}
+              {% unless section.settings.hero_img == blank %}
+              <img  class="desktop__bg" src="{{ section.settings.hero_img | img_url: "master" }}" alt="img">
+              {% endunless %}
+              {% unless section.settings.hero_img-m == blank %}
+              <img  class="mobile__bg" src="{{ section.settings.hero_img-m | img_url: "master" }}" alt="img">
+              {% endunless %}
+            {% endif %}
+          </div>
+        </div>
+  
+        <div class="bg-img-{{ id }}">
+          {% unless section.settings.img_bg-child == blank %}
+            {{ section.settings.img_bg-child | image_url: width: section.settings.img_bg-child.width | image_tag: loading:'lazy',  class: 'desktop__bg' }}
+          {% endunless %}
+          {% unless section.settings.img_bg-child-m == blank %}
+            {{ section.settings.img_bg-child-m | image_url: width: section.settings.img_bg-child-m.width | image_tag: loading:'lazy', class: 'mobile__bg' }}
+          {% endunless %}
+        </div>
+    </div>
+  </div>  
+</section>
+
+
+
+{% comment %}
+<section class="hero-banner--{{ section.id }}">
+   <div class="hero__banner-container page-width">
+     <div class="bg__image-wrapper"><img  class="" src="{{section.settings.img_bg-child | img_url: "master" }}" alt="img"></div>
+    <div class="hero__container">
+      <div class="custom__hero-content">
+      {% for block in section.blocks %}        
+         <p class="custom__hero-title">{{ block.settings.title }}<br><span>300mg CBD</span></p>
+          <div class="custom__hero-title"><img  class="" src="{{ block.settings.image_rating | img_url: "master" }}" alt="Money back"><span>{{ block.settings.text_rating }}</span></div>
+          <div class="custom__hero-desc">{{ block.settings.desc_text }}</div>
+          <div class="ch-user__info">{{ block.settings.user__info }}</div>
+        {% endfor %}
+      </div>
+      <div class="custom__hero-image">
+        <div class="imag__model">
+          {% if section.settings.hero_img %}
+            <img  class="" src="{{ section.settings.hero_img | img_url: "master" }}" alt="img">
+          {% endif %}
+          <div class="oragana__pack">
+            {% if section.settings.organa_pack %}
+              <img  class="" src="{{ section.settings.organa_pack | img_url: "master" }}" alt="img">
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>   
+   </div>
+    
+</section>
+{% endcomment %}
+{% schema %}
+{
+  "name": "Custom Hero-banner",
+  "settings": [
+    {
+      "id": "img_bg-child",
+      "type": "image_picker",
+      "label": "Add Image background child"
+    },
+    {
+      "id": "img_bg-child-m",
+      "type": "image_picker",
+      "label": "Add Image background child"
+    },
+    {
+      "id": "img_bg-parent-m",
+      "type": "image_picker",
+      "label": "Add Main background Image"
+    },
+    {
+      "id": "img_bg-parent",
+      "type": "image_picker",
+      "label": "Add Main Mobile background Image"
+    },
+    {
+      "id": "hero_img",
+      "type": "image_picker",
+      "label": "Add Hero Image"
+    },
+    {
+      "id": "hero_img-m",
+      "type": "image_picker",
+      "label": "Add Mobile Hero Image"
+    },
+    {
+      "id": "organa_pack",
+      "type": "image_picker",
+      "label": "Add Simble Organa"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 8
+    },
+
+    {
+      "type": "header",
+      "content": "Spacing (Mobile)"
+    },
+    {
+      "type": "range",
+      "id": "margin_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top  (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom  (Mobile)",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Image",
+      "type": "Text",
+      "settings": [
+          {
+            "id": "title",
+            "type": "text",
+            "label": "Add Hero title"
+          },
+          {
+            "id": "image_rating",
+            "type": "image_picker",
+            "label": "Add Image Rating"
+          },
+          {
+            "id": "text_rating",
+            "type": "text",
+            "label": "Add Rating Text"
+          },
+          {
+            "id": "desc_text",
+            "type": "richtext",
+            "label": "Add description"
+          },
+          {
+            "id": "user__info",
+            "type": "text",
+            "label": "Add User Info"
+          }
+      ]
+    }
+  ],
+
+  "presets":[
+    {
+      "name": "Custom Hero-banner"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

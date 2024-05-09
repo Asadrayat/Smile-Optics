@@ -1,0 +1,258 @@
+{% assign id = section.id %}
+
+<style>
+      .coa_contact--{{ id }} {
+        margin-top: 0px;
+        margin-bottom: 0px;
+        padding-top: 64px;
+        padding-bottom: 8px;
+        max-width: 100vw;
+        overflow: hidden;
+        background-image: url("https://cdn.shopify.com/s/files/1/0559/5188/4368/files/Ghee.svg?v=1712035719");
+        background-repeat: no-repeat;
+        background-size: 100%;
+        background-position: bottom left 0;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #BEE2EB;
+        /* background-color: #BEE2EB; */
+      }
+      .container-{{ id }} {
+        /* background-image: url("https://cdn.shopify.com/s/files/1/0559/5188/4368/files/Group_9.svg?v=1712034762");
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: bottom left 0;
+        box-sizing: border-box;
+        padding: 0px 0 100px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center; */
+      }
+      .container-{{ id }} h1{
+        font-size: 140px;
+        line-height: 126px;
+        color: rgb(92, 67, 154);
+        margin: auto;
+        text-align: center;
+        max-width: 900px;
+      }
+      .container-{{ id }} h3{
+        font-size: 35px;
+        line-height: 49px;
+        color: rgb(53, 139, 133);
+        font-weight: 500;
+        font-family: auto;
+      }
+      .container-{{ id }} img{
+        max-width: 974px;
+        height: auto;
+        object-fit: cover;
+        border-radius: 30px;
+      }
+      .container-{{ id }} h4{
+        font-size: 20px;
+        line-height: 32px;
+        color: rgb(10, 14, 139);
+        text-align: center;
+        max-width: 915px;
+        font-weight: 500;
+      }
+      @keyframes fadeIn {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+      }
+      .container-{{ id }} p {
+        animation: fadeIn .8s;
+      }
+    .container-{{ id }} p{
+        font-size: 14px;
+        line-height: 22px;
+        text-align: justify;
+        color: rgb(64, 63, 43);
+        max-width: 900px;
+        margin: 15px auto;
+      }
+  @media screen and (max-width: 890px){
+
+   .coa_contact--{{ id }} {
+     margin-top: {{ section.settings.margin_top-m }}px;
+     margin-bottom: {{ section.settings.margin_bottom-m }}px;
+     padding-top: {{ section.settings.padding_top-m }}px;
+     padding-bottom: {{ section.settings.padding_bottom-padding_bottom-m }}px;
+    }
+    .container-{{ id }} h1 {
+      font-size: 40px;
+      line-height: 35px;
+      max-width: 90%;
+      font-weight: 600;
+    }
+    .container-{{ id }} h3 {
+      font-size: 24px;
+      line-height: 34px;
+      width: 90%;
+      text-align: center;
+    }
+    .container-{{ id }} img{
+      max-width: 90%;
+    }
+    .container-{{ id }} h4{
+      max-width: 90%;
+    }
+    .container-{{ id }} p{
+      max-width: 90%;
+    }
+   }
+</style>
+
+<section class="coa_contact--{{ id }}">
+  <div class="container-{{ id }} ">
+    <h1>{{ section.settings.title }}</h1>
+    <h3>{{ section.settings.subtitle }}</h3>
+    {% if section.settings.img_banner -%}
+      {{-
+        section.settings.img_banner
+        | image_url: width: section.settings.img_banner.width
+        | image_tag: loading: 'lazy'
+      -}}
+    {%- endif %}
+    <h4>{{ section.settings.content_title }}</h4>
+    <p>{{ section.settings.content }}</p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main Our Story",
+  "settings": [
+    {
+      "id": "title",
+      "type": "text",
+      "label": "Add Title"
+    },
+    {
+      "id": "subtitle",
+      "type": "textarea",
+      "label": "Add Sub Title"
+    },
+    {
+      "id": "content_title",
+      "type": "text",
+      "label": "Add Content Title"
+    },
+    {
+      "id": "content",
+      "type": "richtext",
+      "label": "Add Content"
+    },
+    {
+      "id": "img_banner",
+      "type": "image_picker",
+      "label": "Add Image Banner"
+    },
+    {
+      "id": "bg_img",
+      "type": "image_picker",
+      "label": "Image Background"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 8
+    },
+
+    {
+      "type": "header",
+      "content": "Spacing (Mobile)"
+    },
+    {
+      "type": "range",
+      "id": "margin_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top  (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom  (Mobile)",
+      "default": 0
+    }
+  ],
+  "blocks": [],
+  "presets":[
+    {
+      "name": "Main Our Story"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

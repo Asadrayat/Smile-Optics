@@ -1,0 +1,236 @@
+{{ 'organna-product-card.css' | asset_url | stylesheet_tag }}
+<style>
+  .oraganna__collection-1--{{ section.id }}{
+    margin-top: {{ section.settings.margin_top }}px;
+    margin-bottom: {{ section.settings.margin_bottom }}px;
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    overflow: hidden;
+  }
+  .ogc1__wrapper--{{ section.id }} .text-block {
+    /* text-align: center;
+    line-height: 0; */
+    margin: 0 0 50px;
+  }
+ /* .ogc1__wrapper--{{ section.id }} h2.text-block-title {
+    color: #1b0177;
+    letter-spacing: 0em;
+    font-size: 44px;
+    line-height: 1em;
+    text-align: center;
+    font-weight: 100;
+  }
+ .ogc1__wrapper--{{ section.id }} p.text-block--content {
+    font-size: 22px;
+    text-align: center;
+    color: #1b0177;
+    letter-spacing: 0em;
+    font-weight: 600;
+  }
+   .ogc1__wrapper--{{ section.id }} p.text-block--content span {
+      color: #01a6a5;
+    } */
+   .ogc1__wrapper--{{ section.id }} .text-block img{
+     max-width: 65px;
+   }
+
+
+  .ogc1__slider--{{ section.id }} .swiper {
+    overflow : visible;
+  }
+
+  .ogc1__slider--{{ section.id }} #ogc1__dots--{{ section.id }}{
+      margin-top: 10px;
+      width: 100%;
+      max-width : 100%;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 5px;
+      border-radius: 8px;
+      position: static;
+    }
+    .ogc1__slider--{{ section.id }} #ogc1__dots--{{ section.id }} .swiper-pagination-bullet{
+      background-color: #1b0177;
+      width: 8px;
+      height: 6px;
+      margin: 0;
+      border-radius: 9999px;
+      transition-property: all;
+      transition-duration: .35s;
+    }
+    .ogc1__slider--{{ section.id }} #ogc1__dots--{{ section.id }} .swiper-pagination-bullet.swiper-pagination-bullet-active{
+      background-color: #1b0177;
+      width: 16px;
+    }
+
+ @media screen and (max-width: 768px){
+    .oraganna__collection-1--{{ section.id }}{
+      margin-top: {{ section.settings.margin_top-m }}px;
+      margin-bottom: {{ section.settings.margin_bottom-m }}px;
+      padding-top: {{ section.settings.padding_top-m }}px;
+      padding-bottom: {{ section.settings.padding_bottom-m }}px;
+    }
+ }
+</style>
+<section class="oraganna__collection-1--{{ section.id }}">
+  <div class="ogc1__wrapper--{{ section.id }} page-width">
+    {%  render 'organna-icon-title', image: section.settings.image, title: section.settings.title, content: section.settings.content  %}
+    <div class="ogc1__slider--{{ section.id }}">
+      <div class="swiper">
+        <div class="swiper-wrapper">
+          {% for product in section.settings.collection.products %}
+            <div class="swiper-slide">
+              {% render 'organna-product-card', product: product, section.id : section.id %}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div id="ogc1__dots--{{ section.id }}" class="swiper-pagination"></div>
+    </div>
+  </div>
+</section>
+<script>
+  new Swiper('.ogc1__slider--{{ section.id }} .swiper', {
+    slidesPerView: 1.5,
+    loop: false,
+    spaceBetween: 20,
+    pagination: {
+      el: '#ogc1__dots--{{ section.id }}',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '.featured-collection-next',
+      prevEl: '.featured-collection-prev',
+    },
+    breakpoints: {
+      1024: {
+        slidesPerView: 4,
+        spaceBetween: 50,
+      },
+    },
+  });
+</script>
+{% schema %}
+{
+  "name": "Organna Collection 1",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "content",
+      "label": "Content",
+      "default": "Welcome to my Organna!"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "header",
+      "content": "Spacing (Desktop)"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Spacing (Mobile)"
+    },
+    {
+      "type": "range",
+      "id": "margin_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top (Mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom (Mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top  (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom  (Mobile)",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Organna Collection 1"
+    }
+  ]
+}
+{% endschema %}

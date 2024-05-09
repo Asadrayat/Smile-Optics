@@ -1,0 +1,144 @@
+<style>
+  .susbcription__container{
+    position: static;
+    display: grid;
+    height: auto;
+    width: 100%;
+    min-height: auto;
+    grid-template-rows: repeat(3, min-content) 1fr;
+    grid-template-columns: 1fr 100px;
+    border-radius: 20px;
+    padding: 5px 18px 15px;
+    box-shadow: 2.83px 2.83px 15px 3px rgba(0, 0, 0, 0);
+    background-color: rgba(255, 255, 255, 0);
+    border: 1px solid #5C439A;
+    overflow: hidden;
+  }
+  .susbcription__container h4{
+    font-size: 17px;
+    line-height: 21px;
+    color: rgb(92, 67, 154);
+    margin: 0;
+    grid-column: 1/2;
+    grid-row: 1/2;
+  }
+  .susbcription__container p{
+    font-size: 15px;
+    line-height: 21px;
+    color: rgb(92, 67, 154);
+    margin: 0;
+    grid-column: 1/2;
+    grid-row: 2/3;
+  }
+  .susbcription__container p span{
+    font-weight: 700;
+  }
+  .susbcription__container small{
+    display: block;
+    font-size: 10px;
+    line-height: 14px;
+    color: rgb(92, 67, 154);
+    margin: 0;
+    grid-column: 1/2;
+    grid-row: 3/-1;
+  }
+  .susbcription__container .discounted__price{
+    font-size: 30px;
+    line-height: 30px;
+    font-weight: 500;
+    text-align: right;
+    color: rgb(27, 1, 119);
+    display: inline-block;
+    grid-column: 2/-1;
+    grid-row: 1/2;
+  }
+  .susbcription__container .actual__price{
+    display: inline-block;
+    font-size: 25px;
+    line-height: 25px;
+    font-weight: 500;
+    text-align: right;
+    color: rgb(89, 89, 89);
+    position: relative;
+    grid-column: 2/-1;
+    grid-row: 2/3;
+  }
+  .susbcription__container .actual__price:after{
+    content: "";
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    /* transform: translateY(-50%) rotate(-9deg); */
+    height: 2px;
+    width: 90px;
+    background: #ff0000;
+  }
+  @media screen and (min-width: 769px){
+    .susbcription__container h4{
+      display: flex;
+      align-items: flex-end;
+    }
+    .susbcription__container .discounted__price, .susbcription__container .actual__price{
+      transform: translateY(7px);
+    }
+  }
+  @media screen and (max-width: 768px){
+    .susbcription__container{
+      grid-template-columns: 1fr 80px;
+      padding: 10px;
+    }
+   .susbcription__container h4{
+      font-size: 19px;
+      line-height: 24px;
+    }
+    .susbcription__container p{
+      font-size: 14px;
+      line-height: 18px;
+    }
+    .susbcription__container small{
+      font-size: 10px;
+      line-height: 14px;
+    }
+    .susbcription__container .discounted__price{
+      font-size: 25px;
+      line-height: 25px;
+    }
+    .susbcription__container .actual__price{
+      display: inline-block;
+      font-size: 17px;
+      line-height: 17px;
+    }
+    .susbcription__container .actual__price:after{
+      top: 8px;
+      left: 18px;
+      width: 65px;
+    }
+  }
+</style>
+
+
+{% unless product.selling_plan_groups == blank %}
+  {% if product.metafields.custom.subscription_info != blank or product.metafields.custom.subscription_price != blank %}
+    <div class="susbcription__container">
+      {% unless product.metafields.custom.subscription_info == blank %}
+        {{ product.metafields.custom.subscription_info }}
+      {% endunless %}
+      {% unless product.metafields.custom.subscription_price == blank %}
+          {% assign prices = product.metafields.custom.subscription_price | split: ',' %}
+          {% for price in prices limit: 2 %}
+            {% if forloop.first %}
+              <div class="discounted__price">
+                {{- cart.currency.symbol -}}
+                {{- price -}}
+              </div>
+            {% elsif forloop.index == 2 %}
+              <div class="actual__price">
+                {{- cart.currency.symbol -}}
+                {{- price -}}
+              </div>
+            {% endif %}
+          {% endfor %}
+      {% endunless %}
+    </div>
+  {% endif %}
+{% endunless %}

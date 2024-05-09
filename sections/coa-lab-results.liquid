@@ -1,0 +1,309 @@
+{% assign id = section.id %}
+
+<style>
+    .lab_results--{{ section.id }} {
+     margin-top: {{ section.settings.margin_top }}px;
+     margin-bottom: {{ section.settings.margin_bottom }}px;
+     padding-top: {{ section.settings.padding_top }}px;
+     padding-bottom: {{ section.settings.padding_bottom }}px;
+     max-width: 100vw;
+     overflow: hidden;
+    }
+    .lab_result h2{
+      margin: 0 0 5px 0;
+      color: rgb(27, 1, 119);
+      font-size: 70px;
+      line-height: 1;
+      text-align: center;
+    }
+    .desc_wrapper-{{ id }}{
+      display: grid;
+      justify-items: center;
+    }
+    .desc_wrapper-{{ id }} p{
+      font-size: 14px;
+      line-height: 20px;
+      color: rgb(27, 1, 119);
+      max-width: 45%;
+      justify-self: center;
+      margin-left: 40rem;
+    }
+    .img__wrapper-{{ id }}{
+      display: flex;
+      justify-content: center;
+    }
+    .img__wrapper-{{ id }} img{
+      width: 818px;
+      height: auto;
+      object-fit: cover;
+      margin: auto;
+      margin-bottom: 100px;
+    }
+   .card-{{ id }} {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      justify-items: center;
+    }
+    .card_wrapper-{{ id }} {
+      position: relative;
+      max-width: 305px;
+      background: #FEF7EA;
+      border-radu=ius: 15px;
+      padding: 15px;
+      box-sizing: border-box;
+      border-radius: 15px;
+      transition: all 0.4s ease-in-out 0s, visibility 0s;
+    }
+    .card_wrapper-{{ id }}:hover {
+     transform: scale(1.05);  
+    }
+    .card_wrapper-{{ id }} h1{
+      margin: 0;
+      background: #fff;
+      padding: 15px;
+      width: max-content;
+      border-radius: 15px;
+      font-size: 39px;
+      line-height: 47px;
+      font-weight: 700;
+      color: #1B0177;
+    }
+    .card_wrapper-{{ id }} h3{
+      font-size: 21px;
+      font-weight: bold;
+      color: #1B0177;    
+    }
+    .card_wrapper-{{ id }} p{
+      font-size: 12px;
+      line-height: 17px;      
+      font-weight: normal;
+      text-align: justify;
+      color: #1B0177;    
+    }
+    .card_wrapper-{{ id }} img{
+      position: absolute;
+      top: 0;
+      right: 20px;
+      transform: translateY(-60px);
+      width: 84px;
+      height: 140px;   
+    }
+  @media screen and (max-width: 1500px){
+    .card-{{ id }} {
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 100px;
+      }
+    }  
+  @media screen and (max-width: 890px){
+   .lab_results--{{ section.id }} {
+     margin-top: {{ section.settings.margin_top-m }}px;
+     margin-bottom: {{ section.settings.margin_bottom-m }}px;
+     padding-top: {{ section.settings.padding_top-m }}px;
+     padding-bottom: {{ section.settings.padding_bottom-padding_bottom-m }}px;
+    }
+    .card-{{ id }} {
+      grid-template-columns: 1fr;
+    }
+    .img__wrapper-{{ id }} img{
+      display: none;
+    }
+    .desc_wrapper-{{ id }} {
+      display: block;
+      margin-bottom: 100px;
+    }
+    .desc_wrapper-{{ id }} p{
+      max-width: 100%;
+      margin: 0;
+      text-align: justify;
+    }
+    .lab_result h2{
+      font-size: 40px;
+      line-height: 45px;
+      margin-block: 15px;
+    }
+   .card_wrapper-{{ id }} {
+      max-width: 100%;
+    }
+    .card_wrapper-{{ id }} h1{
+      font-size: 34px;
+      line-height: 41px;
+    }
+    .card_wrapper-{{ id }} h3{
+      font-size: 14px;
+    }
+  }
+</style>
+
+<section class="lab_results--{{ section.id }}">
+  <div class="page-width lab_result">
+    <div class="desc_wrapper-{{ id }}">
+     <h2>{{ section.settings.title}}</h2>
+     <p>{{ section.settings.desc }}</p>
+    </div>
+    {% if section.settings.page_img %}
+    <div class="img__wrapper-{{ id }} "><img  src="{{ section.settings.page_img | img_url: "master" }}" alt="Image"></div>
+    {% endif %}
+    <div class="card-{{ id }}">
+      {% for block in section.blocks %}
+        <div class="card_wrapper-{{ id }}">
+          <h1>{{ block.settings.card_no }}</h1>
+          <h3>{{ block.settings.card_title }}</h3>
+          <p>{{ block.settings.card_desc }}</p>
+          {% if block.settings.card_img %}
+            <img  src="{{ block.settings.card_img  | img_url: "master" }}" alt="Image">  
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>  
+</section>
+
+
+
+{% schema %}
+{
+  "name": "Coa Lab Result",
+  "settings": [
+    {
+      "id": "title",
+      "type": "text",
+      "label": "Add  Title"
+    },
+    {
+      "id": "desc",
+      "type": "textarea",
+      "label": "Add description"
+    },
+    {
+      "id": "page_img",
+      "type": "image_picker",
+      "label": "Add Image Bottle"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 8
+    },
+
+    {
+      "type": "header",
+      "content": "Spacing (Mobile)"
+    },
+    {
+      "type": "range",
+      "id": "margin_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top  (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom  (Mobile)",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Add Card",
+      "type": "Text",
+      "settings": [
+          {
+            "id": "card_no",
+            "type": "text",
+            "label": "Add Card Number"
+          },
+          {
+            "id": "card_title",
+            "type": "text",
+            "label": "Add Card Title"
+          },
+          {
+            "id": "card_desc",
+            "type": "textarea",
+            "label": "Add Card Description"
+          },
+          {
+            "id": "card_img",
+            "type": "image_picker",
+            "label": "Add Image Card"
+          }
+      ]
+    }
+  ],
+
+  "presets":[
+    {
+      "name": "Coa Lab Result"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

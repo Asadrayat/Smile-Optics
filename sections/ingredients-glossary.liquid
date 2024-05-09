@@ -1,0 +1,530 @@
+{% liquid
+  assign id = section.id
+  assign settings = section.settings
+  assign blocks = section.blocks
+%}
+
+<style>
+  #shopify-section-{{id}} {
+    box-sizing: border-box;
+    margin-top: {{section.settings.margin_top | append: 'px'}};
+    margin-bottom: {{section.settings.margin_bottom | append: 'px'}};
+    padding-top: {{section.settings.padding_top | append: 'px'}};
+    padding-bottom: {{section.settings.padding_bottom | append: 'px'}};
+  }
+
+  @media(max-width: 768px) {
+    #shopify-section-{{id}} {
+      margin-top: {{section.settings.margin_top_m | append: 'px'}};
+      margin-bottom: {{section.settings.margin_bottom_m | append: 'px'}};
+      padding-top: {{section.settings.padding_top_m | append: 'px'}};
+      padding-bottom: {{section.settings.padding_bottom_m | append: 'px'}};
+    }
+  }
+
+  .wrapper-{{ id }} {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 30px;
+    -max-width: 920px;
+    margin: auto;
+    box-sizing: border-box;
+    padding: 0 30px;
+  }
+
+  
+  
+  .item-{{ id }} {
+    background: #fff;
+    border-width: 1px 1px 1px 1px;
+    border-style: solid solid solid solid;
+    border-color: rgba(232, 230, 230, 0) rgba(232, 230, 230, 0) rgba(232, 230, 230, 0) rgba(232, 230, 230, 0);
+    border-radius: 30px 30px 30px 30px;
+    overflow: hidden;
+    box-sizing: border-box;
+    padding: 15px;
+    transition: .5s;
+    max-width: 440px;
+  }
+  @media(min-width: 769px) {
+    .wrapper-{{ id }} .item-{{ id }}:nth-child(odd) {
+      justify-self: end;
+    }
+    .wrapper-{{ id }} .item-{{ id }}:nth-child(even) {
+      justify-self: start;
+    }
+  }
+  .item-{{ id }}:hover{
+    scale: 1.05;
+  }
+  .title-hazard{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .title-hazard h2{
+    margin: 0;
+    font-size: 24px;
+    line-height: 26px;
+    color: #1b0177;
+  }
+  .title-hazard button{
+    border:none;
+    font-size: 25px;
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    box-shadow: 0 0 0 #000;
+    border-radius: 5px 20px 20px 20px;
+    position: relative;
+    z-index: 3;
+  }
+  .footer-{{id}} {
+    height: 40px;
+    width: 100%;
+    background-color: #fef7ea;
+    overflow: hidden;
+    border-radius: 20px;
+    line-height: 40px;
+    display: grid;
+    grid-template-columns: 1fr 109px;
+    align-items: center;
+    justify-content: center;
+    grid-gap: 20px;
+    box-sizing: border-box;
+    padding: 3px 10px;
+  }
+  .footer-{{id}} img{
+    width: 100%;
+    height: auto;
+    max-height: 35px;
+    object-fit: cover;
+  }
+  .footer-{{id}} a{
+    height: 26px;
+    line-height: 26px;
+    font-size: 12px;
+    color: #1b0177;
+    border: none;
+    border-radius: 13px;
+    text-align: center;
+    text-decoration: none;
+    background: white;
+    transition: all .3s;
+    cursor: pointer;
+    max-width: 109px;
+  }
+  .footer-{{id}} a:hover{
+    color: white;
+    background: #1b0177;
+  }
+  .icons-{{id}} {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 10px;
+    margin-bottom: 12px;
+  }
+  .icon-{{id}} {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    grid-gap: 5px;
+    align-items: center;
+  }
+  .icon-{{id}} img{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  .icon-{{id}} div *{
+    margin: 0;
+    font-size: 12px;
+    line-height: 12px;
+  }
+  .border-hr{
+    margin: 0 0 4px 0;
+    height: 2px;
+    opacity: 0.5;
+    width: 96%;
+    margin-top: -2px;
+  }
+  .text-badge{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .text-badge p{
+    font-size: 12px;
+    line-height: 14px;
+    color: #1b0177;
+    margin: 0;
+  }
+  .text-badge button{
+    border: none;
+    font-size: 10px;
+    height: 14px;
+    line-height: 14px;
+    margin: 0;
+    background-color: #6CC27B;
+  }
+  .textarea-{{ id }} {
+    font-size: 14px;
+    line-height: 17px;
+    margin: 0;
+    color: #000;
+    margin-top: 20px;
+    letter-spacing: 0px;
+  }
+  .conmetics-title {
+    font-size: 12px;
+    line-height: 14px;
+    letter-spacing: 0px;
+    color: #c7c7c7;
+    margin: 0;
+    margin-top: 16px;
+  }
+  .conmetics-text {
+    font-size: 10px;
+    line-height: 12px;
+    letter-spacing: 0px;
+    color: #01a6a5;
+    margin: 3px 0px 17px 0;
+  }
+  .top-{{ id }} h2{
+    font-size: 75px;
+    line-height: 75px;
+    color: #000;
+    margin: 0;
+    text-align: center;
+  }
+  .top-{{ id }} div{
+    font-size: 12px;
+    line-height: 17px;
+    color: #595959;
+    text-align: center;
+    border-bottom: 1px solid;
+    padding-bottom: 8px;
+    margin-bottom: 30px;
+  }
+  @media(max-width: 1500px) {
+    .wrapper-{{ id }} {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+  @media(max-width: 1400px) {
+    .wrapper-{{ id }} {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
+  @media(max-width: 900px) {
+    .wrapper-{{ id }} {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
+  @media(max-width: 768px) {
+    .wrapper-{{ id }} {
+      grid-template-columns: 1fr;
+      justify-items: center;
+    }
+    .top-{{ id }} h2{
+      font-size: 31px;
+      line-height: 40px;
+      width: 70%;
+      margin: auto;
+    }
+    .rte-{{ id }} p{
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: 1px;
+      padding-inline: 20px;
+    }
+    .rte-{{ id }} p a{
+      color: #3D9BE9;
+    }
+  }
+</style>
+
+
+
+<div class="sec-{{ id }}">
+  <div class="{% unless section.settings.full_width %}page-width{% endunless %}">
+    <div class="top-{{ id }}">
+      <h2>{{ section.settings.heading }}</h2>
+      <div class="rte-{{ id }}">{{ section.settings.sub_heading }}</div>
+    </div>
+    <div class="wrapper-{{ id }}">
+      {% for block in section.blocks %}
+        <div class="item-{{ id }}">
+          <div class="title-hazard">
+            <h2>{{ block.settings.title }}</h2>
+            <button type="button" style="background-color: {{ block.settings.hazard_bg }}">{{ block.settings.hazard_quality }}</button>
+          </div>
+          <hr class="border-hr">
+          <div class="text-badge">
+            <p>{{ block.settings.sub_title }}</p>
+            {% unless block.settings.badge == blank %}
+              <button type="button">{{ block.settings.badge }}</button>
+            {% endunless %}
+          </div>
+          <p class="textarea-{{ id }}">{{ block.settings.text }}</p>
+          <p class="conmetics-title">Cosmetic / Ingestion Purposes:</p>
+          <p class="conmetics-text">{{ block.settings.cosmetic }}</p>
+          <div class="icons-{{ id }}">
+            {% for i in (1..3) %}
+              {% assign icon = 'image' | append: i %}
+              {% assign text = 'text' | append: i %}
+              <div class="icon-{{ id }}">
+                {% unless block.settings[icon] == blank %}
+                  {{ block.settings[icon] | image_url: width: block.settings[icon].width | image_tag: loading: 'lazy' }}
+                {% endunless %}
+                <div>{{ block.settings[text] }}</div>
+              </div>
+            {% endfor %}
+          </div>
+          <div class="footer-{{ id }}">
+            {% unless block.settings.scale_image == blank %}
+              {{ block.settings.scale_image | image_url: width: 266 | image_tag: loading: 'lazy' }}
+            {% endunless %}
+            <a href="{{ block.settings.button_url }}">{{ block.settings.button_text }}</a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Ingredients Glossary",
+    "templates": ["page"],
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "full_width",
+        "label": "Full Width Section",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Select Image"
+      },
+      {
+        "type": "textarea",
+        "id": "heading",
+        "label": "heading",
+        "default": "Ingredient Directory."
+      },
+      {
+        "type": "richtext",
+        "id": "sub_heading",
+        "label": "Sub heading"
+      },
+      {
+        "type": "header",
+        "content": "Section Spacing Desktop"
+      },
+      {
+        "type": "range",
+        "id": "margin_top",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Margin Top",
+        "default": 24
+      },
+      {
+        "type": "range",
+        "id": "margin_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Margin Bottom",
+        "default": 24
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding Top",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding Bottom",
+        "default": 0
+      },
+      {
+        "type": "header",
+        "content": "Section Spacing Mobile"
+      },
+      {
+        "type": "range",
+        "id": "margin_top_m",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Margin Top",
+        "default": 24
+      },
+      {
+        "type": "range",
+        "id": "margin_bottom_m",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Margin Bottom",
+        "default": 24
+      },
+      {
+        "type": "range",
+        "id": "padding_top_m",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding Top",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom_m",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding Bottom",
+        "default": 0
+      }
+    ],
+    "blocks": [
+      {
+        "type": "ingredient",
+        "name": "Ingredient",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Acetyl Hexapeptide-8"
+          },
+          {
+            "type": "text",
+            "id": "sub_title",
+            "label": "Sub Title",
+            "default": "*Also Called: Argireline, Acetyl Hexapeptide-3"
+          },
+          {
+            "type": "text",
+            "id": "hazard_quality",
+            "label": "Hazard Quality",
+            "default": "1"
+          },
+          {
+            "type": "color",
+            "id": "hazard_bg",
+            "label": "Hazard Background",
+            "default": "#fa9f18"
+          },
+          {
+            "type": "text",
+            "id": "badge",
+            "label": "Badge",
+            "default": "ORGANIC"
+          },
+          {
+            "type": "textarea",
+            "id": "text",
+            "label": "Text",
+            "default": "Acetyl hexapeptide-8 is a synthetic anti-wrinkle cosmetics ingredient. Don't worry, it's 100% safe!"
+          },
+          {
+            "type": "text",
+            "id": "cosmetic",
+            "label": "Cosmetic/Ingestion Purpose",
+            "default": "Fragrance, Preservative, Stabilizer"
+          },
+          {
+            "type": "header",    
+            "content": "Icon and Details"
+          },
+          {
+            "type": "image_picker",
+            "id": "image1",
+            "label": "Icon 1"
+          },
+          {
+            "type": "richtext",
+            "id": "text1",
+            "label": "Text 1"
+          },
+          {
+            "type": "image_picker",
+            "id": "image2",
+            "label": "Icon 2"
+          },
+          {
+            "type": "richtext",
+            "id": "text2",
+            "label": "Text 2"
+          },
+          {
+            "type": "image_picker",
+            "id": "image3",
+            "label": "Icon 3"
+          },
+          {
+            "type": "richtext",
+            "id": "text3",
+            "label": "Text 3"
+          },
+          {
+            "type": "image_picker",
+            "id": "scale_image",
+            "label": "Scale Image"
+          },
+          {
+            "type": "header",    
+            "content": "Button"
+          },
+          {
+            "type": "text",
+            "id": "button_text",
+            "label": "Button Text",
+            "default":"Read More"
+          },
+          {
+            "type": "url",
+            "id": "button_url",
+            "label": "Button URL"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Ingredients Glossary"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

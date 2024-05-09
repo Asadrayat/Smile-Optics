@@ -1,0 +1,79 @@
+{% comment %}
+  {% render 'smile-product-card', product: product, section.id : section.id %}
+  {{ 'organna-product-card.css' | asset_url | stylesheet_tag }}
+{% endcomment %}
+<style>
+.discount-badge.bundle {
+       background-image: url({{ 'discount.png' | asset_url}});
+       background-size: contain;
+}
+</style>
+<div class="bundle-card-wrapper">
+  <h4>{{ product.title | truncatewords: 3, ' ' }}</h4>
+  <!-- <p class="bundle-contents">Bundle content</p> -->
+  <p class="bundle-contents">{{ product.metafields.custom.bundle_contents }}</p>
+  <div class="discount-badge bundle">10% <br>off</div>
+  <a class="bundle-add-to-cart" href="{{ product.url }}"> {% render 'smile-all-icons', name:'bundle-icon' %} </a>
+  <div class="bundle-price bundle">
+    {% if product.selected_or_first_available_variant.price
+        < product.selected_or_first_available_variant.compare_at_price
+    %}
+      <div class="price-with-discounts">
+        <p class="compare-at-price bundle">
+          <span>Regular Price:</span>
+          {{- product.selected_or_first_available_variant.compare_at_price | money -}}
+        </p>
+        <p class="actual-price bundle">
+          <span>Bundle Price</span>
+          {{ product.selected_or_first_available_variant.price | money }}
+        </p>
+      </div>
+    {% else %}
+      <div class="actual-price bundle">
+        <span>Regular Price:</span>
+        {{ product.selected_or_first_available_variant.price | money }}
+      </div>
+    {% endif %}
+  </div>
+  <div class="bundle-image-wrapper">
+    {{ product.featured_image | img_url: 'master' | img_tag }}
+  </div>
+      
+</div>
+
+<div class="product-card-wrapper bundle hidden">
+  <!-- <a href="{{ product.url }}" class="absolute-link"> </a> -->
+  <div class="product-image-wrapper">
+    {{ product.featured_image | img_url: 'master' | img_tag }}
+  </div>
+  <div class="product-info-block">
+    <div class="product-title">
+      {{ product.title | truncatewords: 3, ' ' }}
+    </div>
+    <div class="product-meta">
+      {{ product.title | truncatewords: 3, ' ' }}
+    </div>
+    <div class="product-review">
+      <div class="jdgm-widget jdgm-preview-badge">
+        {{ product.metafields.judgeme.badge }}
+      </div>
+    </div>
+    <div class="product-price">
+      {% if product.selected_or_first_available_variant.price
+          < product.selected_or_first_available_variant.compare_at_price
+      %}
+        <p>
+          <span class="actual-price">{{ product.selected_or_first_available_variant.price | money }}</span>
+          <span class="compare-at-price">
+            {{- product.selected_or_first_available_variant.compare_at_price | money -}}
+          </span>
+        </p>
+      {% else %}
+        <p class="actual-price">{{ product.selected_or_first_available_variant.price | money }}</p>
+      {% endif %}
+    </div>
+    <div class="product-add-to-cart">
+      <a class="buttton add-to-cart-button button-font" href="{{ product.url }}"> Add to cart </a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,725 @@
+{% assign id = section.id %}
+<style>
+    .section_wrapper-{{ section.id }}{
+        margin-top: {{ section.settings.margin_top | append:'px' }};
+        margin-bottom: {{ section.settings.margin_bottom | append:'px' }};
+        padding-top: {{ section.settings.padding_top | append:'px' }};
+        padding-bottom: {{ section.settings.padding_bottom | append:'px' }};
+        width: 98%;
+        margin: auto;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+        .section-container--{{ section.id }}{
+            background-image: linear-gradient(to left, {{ section.settings.background_color_2 }} {{ section.settings.color_coverage | append: '%' }} , {{ section.settings.background_color_1 }} {{ section.settings.color_coverage | append: '%' }});
+        }
+
+        .section-wrapper--{{ section.id }}.page-width {
+            display: flex;
+        }
+        .section-container--{{ section.id }}     .single-caption-text-block {
+            max-width: max-content;
+        }
+        .section-container--{{ section.id }}     .single-caption-text-block p {
+            max-width: unset;
+        }
+        .section-container--{{ section.id }}      .banner-left-column {
+            width : 30%;
+            /* background : {{ section.settings.background_color_1 }}; */
+            align-self: center;
+        }
+        .section-container--{{ section.id }}      .banner-content {
+            line-height: normal;
+            margin: 8px 0;
+        }
+        .section-container--{{ section.id }}      .banner-right-column {
+            width : 70%;
+            /* background : {{ section.settings.background_color_2 }}; */
+            position : relative;
+        }
+        .section-container--{{ section.id }}      .banner-title-wrapper  h2 {
+            margin-block: 0;
+            line-height: 1;
+        }
+
+        .section-container--{{ section.id }}      .single-banner-icon-wrapper h5 {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            color: #fff;
+        }
+
+
+        .section-container--{{ section.id }}      .banner-review-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: max-content;
+            line-height: 1;
+        }
+        .section-container--{{ section.id }}      .banner-review-wrapper svg {
+            margin-block: 5px;
+        }
+        .section-container--{{ section.id }}      span.review-text-black {
+            color: #5c439a;
+            font-weight: 700;
+            font-size: 10px;
+        }
+        .section-container--{{ section.id }}      span.review-text-blue {
+            font-family: questrial,sans-serif;
+            color: #6f60e9;
+            font-size: 10px;
+            text-decoration: underline;
+        }
+
+
+
+
+        .section-container--{{ section.id }}      .banner-icon-block {
+            display: flex;
+            justify-content: space-around;
+            padding-block: 30px;
+            max-width: 400px;
+        }
+        .section-container--{{ section.id }}      .single-banner-icon-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .section-container--{{ section.id }}      .single-banner-icon-block  svg {
+            width: 40px;
+            height: 40px;
+        }
+        .section-container--{{ section.id }}      .single-banner-icon-block span {
+            font-size: 10px;
+            font-weight: 700;
+        }
+         .section-container--{{ section.id }} a.blue-button-1 {
+            padding: 10px 40px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+    .section-container--{{ section.id }}    .image-wrapper {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 2;
+          transform: scale(1.2);
+          max-width: 100%;
+      }
+    .section-container--{{ section.id }}    .image-wrapper .right-on-mobile,
+    .section-container--{{ section.id }}    .image-wrapper .left-on-mobile {
+          max-width: fit-content;
+          border: 3px solid #cfcff5;
+          margin: 5px;
+          border-radius: 20px;
+      }
+    /* css for highlight starts here    */
+       .img-{{ id }} {
+         position: relative;
+       }
+         .info-{{ id }} {
+          display: flex;
+          flex-direction: row-reverse;
+        }
+        .box1-{{ id }} {
+          position: absolute;
+          top: 40%;
+          right: 180px;
+          /* transform: translate(-170px, 20px); */
+        }
+        .box3-{{ id }} {
+          position: absolute;
+          top: 16%;
+          right: 185px;
+          /* transform: translate(-259px, -45px); */
+        }
+        .info-2{{ id }} {
+          display: flex;
+          flex-direction: row;
+          position: absolute;
+          bottom: 43%;
+          left: 210px;
+          /* transform: translate(260px, 100px); */
+        }
+        .info-2{{ id }} img{
+          rotate: 180deg;
+        }
+        .info-{{ id }} img{
+          width: 81px;
+          height: 42px;
+          object-fit: cover;
+          position: unset;
+          transform: none;
+        }
+        .box-{{ id }} {
+          background: #fff;
+          border: 1px solid #0000009e;
+          font-size: 12px;
+          line-height: 17px;
+          color: #000;
+          text-align: justify;
+          padding: 5px 15px;
+          border-radius: 15px;
+          letter-spacing: 0px;
+          width: max-content;
+        }
+        .box-{{ id }} p{
+          margin: 0;
+        }
+      @media only screen and (max-width: 1290px) and (min-width: 891px)  {
+        /* .wrapper-{{ section.id }} {
+          grid-template-columns: 1fr 1fr 1fr;
+        } */
+       }
+        @media screen and (max-width: 768px){
+        .section_wrapper-{{ section.id }}{
+            margin-top: {{ section.settings.margin_top_mobile | append:'px' }};
+            margin-bottom: {{ section.settings.margin_bottom_mobile | append:'px'  }};
+            padding-top: {{ section.settings.padding_top_mobile | append:'px' }};
+            padding-bottom: {{ section.settings.padding_bottom_mobile | append:'px' }};
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+        .section-container--{{ section.id }}{
+            background-image: linear-gradient(to bottom, {{ section.settings.background_color_1 }} 50% , {{ section.settings.background_color_2 }} 50%);
+
+        }
+
+      .info-{{ id }} img{
+        max-width: 60px;
+      }
+      .info-2{{ id }} {
+        left: 200px;
+        bottom: 23%;
+      }
+
+      .info-2{{ id }} .box-{{ id }}{
+        max-width: 168px;
+      }
+      .box-{{ id }} {
+        max-width: 206px;
+        text-align: start;
+        padding: 3px 7px;
+      }
+      .section-container--{{ section.id }}    .image-wrapper {
+            align-items: end;
+        }
+        .section-wrapper--{{ section.id }}.page-width {
+            flex-direction: column;
+            gap:50px;
+        }
+        .section-container--{{ section.id }}      .banner-left-column {
+            width: 100%;
+        }
+        .section-container--{{ section.id }}      .banner-right-column {
+            width: 100%;
+        }
+        .section-container--{{ section.id }}  .banner-right-column  .image-wrapper img {
+            width: 100%;
+            margin-bottom: -10px;
+        }
+        .section-container--{{ section.id }}      .single-banner-icon-wrapper h5 {
+          font-size: 35px;
+          line-height: normal;
+        }
+    .section-container--{{ section.id }}    .image-wrapper {
+          transform: unset;
+          gap: 20px;
+          scale: 1.05;
+          display: grid;
+      }
+      .end-{{ id }} {
+        justify-self: end;
+      }
+    .section-container--{{ section.id }}      img.left-on-mobile {
+        align-self: flex-start;
+    }
+    .section-container--{{ section.id }}      img.right-on-mobile {
+        align-self: flex-end;
+    }
+    .section-container--{{ section.id }}      .single-caption-text-block p {
+        max-width: 100px;
+    }
+  }
+  @media screen and (max-width: 390px){
+      .box-{{ id }} {
+        max-width: 175px;
+      }
+      .box1-{{ id }},
+      .box3-{{ id }}    {
+        right: 170px;
+      }
+      .info-{{ id }} img{
+        max-width: 50px;
+      }
+      .info-2{{ id }} .box-{{ id }}{
+        max-width: 150px;
+        left: 175px;
+      }
+  }
+</style>
+<div class="section_wrapper-{{ section.id }}">
+  <section class="section-container--{{ section.id }}">
+    <div class="section-wrapper--{{ section.id }} page-width">
+      <div class="banner-left-column">
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'title' %}
+              <div class="banner-title-wrapper">
+                <h2 style="color : {{ block.settings.color }}; font-size: {{ block.settings.font_size | append: 'px'}};">
+                  {{ block.settings.title }}
+
+                  {% unless block.settings.title_icon == blank %}
+                    {{ block.settings.title_icon | img_url: 'master' | img_tag }}
+                  {% endunless %}
+                </h2>
+              </div>
+            {% when 'content' %}
+              <p
+                class="banner-content"
+                style="color : {{ block.settings.color }}; font-size: {{ block.settings.font_size | append: 'px'}}; font-weight: {{ block.settings.font_weight}}; "
+              >
+                {{ block.settings.content }}
+              </p>
+            {% when 'button' %}
+              <a class="blue-button-1" href="{{ block.settings.button_url }}"> {{ block.settings.button_text }} </a>
+
+            {% when 'review' %}
+              <div class="banner-review-wrapper">
+                {% render 'smile-all-icons', name: 'five_star' %}
+                <span class="review-text-black">1000+ 5-Star Reviews</span>
+                <span class="review-text-blue">Kudobuzz™ Verified Reviews </span>
+              </div>
+            {% when 'icon-block' %}
+              <div class="banner-icon-block">
+                <div class="single-banner-icon-block">
+                  {% render 'smile-all-icons', name: 'dentist' %}
+                  <span>Dentist Approved</span>
+                </div>
+                <div class="single-banner-icon-block">
+                  {% render 'smile-all-icons', name: 'result' %}
+                  <span>Results in 3 Days</span>
+                </div>
+                <div class="single-banner-icon-block">
+                  {% render 'smile-all-icons', name: 'safe' %}
+                  <span>Safe for Daily Use</span>
+                </div>
+              </div>
+            {% when 'icon' %}
+              {% unless block.settings.icon == blank %}
+                <div class="single-banner-icon-wrapper">
+                  <h5>
+                    {{ block.settings.icon | img_url: 'master' | img_tag }} re<span style="color: #5c439a;"
+                      >search</span
+                    >
+                  </h5>
+                  <img src="{{ 'white-small-star-icons.png' | asset_url }}">
+                </div>
+              {% endunless %}
+          {% endcase %}
+        {% endfor %}
+      </div>
+      <div class="banner-right-column">
+        <div class="image-wrapper">
+          <div class="img-{{ id }} end-{{ id }}">
+            {{ section.settings.image1 | img_url: 'master' | img_tag: 'Smile Optics', 'right-on-mobile' }}
+            <div class="info-{{ id }} box1-{{ id }}" data-aos="fade-right">
+              <img src="https://cdn.shopify.com/s/files/1/0559/5188/4368/files/star_with_line_PNG_ae0a7f14-ff4e-4505-8b2e-33a18b3c395b.webp?v=1711429158">
+              <div class="box-{{ id }}">{{ section.settings.highlight1 }}</div>
+            </div>
+          </div>
+          <div class="img-{{ id }} start-{{ id }}">
+            {{ section.settings.image2 | img_url: 'master' | img_tag: 'Smile Optics', 'left-on-mobile' }}
+            <div class="info-2{{ id }} info-{{ id }}" data-aos="fade-left">
+              <img src="https://cdn.shopify.com/s/files/1/0559/5188/4368/files/star_with_line_PNG_ae0a7f14-ff4e-4505-8b2e-33a18b3c395b.webp?v=1711429158">
+              <div class="box-{{ id }}">{{ section.settings.highlight2 }}</div>
+            </div>
+          </div>
+          <div class="img-{{ id }} end-{{ id }}">
+            {{ section.settings.image3 | img_url: 'master' | img_tag: 'Smile Optics', 'right-on-mobile' }}
+            <div class="info-{{ id }} box3-{{ id }}" data-aos="fade-right">
+              <img src="https://cdn.shopify.com/s/files/1/0559/5188/4368/files/star_with_line_PNG_ae0a7f14-ff4e-4505-8b2e-33a18b3c395b.webp?v=1711429158">
+              <div class="box-{{ id }}">{{ section.settings.highlight3 }}</div>
+            </div>
+          </div>
+        </div>
+        {% comment %}
+          {% for block in section.blocks %}
+            {% case block.type %}
+              {% when 'left_caption' %}
+                {% render 'smile-left-caption',
+                  title: block.settings.title,
+                  content: block.settings.content,
+                  position_from_top: block.settings.position_from_top,
+                  position_from_left: block.settings.position_from_left,
+                  serial: forloop.index
+                %}
+              {% when 'right_caption' %}
+                {% render 'smile-right-caption',
+                  title: block.settings.title,
+                  content: block.settings.content,
+                  position_from_top: block.settings.position_from_top,
+                  position_from_right: block.settings.position_from_right,
+                  serial: forloop.index
+                %}
+            {% endcase %}
+          {% endfor %}
+        {% endcomment %}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Smile Banner 2",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "image_picker",
+      "id": "image1",
+      "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image2",
+      "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image3",
+      "label": "Image"
+    },
+    {
+      "type": "color",
+      "id": "background_color_1",
+      "label": "Primary Background Color ",
+      "default": "#ffffff"
+    },
+    {
+      "type":"header",
+      "content":"Highlight"
+    },
+    {
+      "type": "image_picker",
+      "id": "right_star",
+      "label": "Star Image"
+    },
+    {
+      "type": "richtext",
+      "id": "highlight1",
+      "label": "Add Highlight Text 1"
+    },
+    {
+      "type": "richtext",
+      "id": "highlight2",
+      "label": "Add Highlight Text 2"
+    },
+    {
+      "type": "richtext",
+      "id": "highlight3",
+      "label": "Add Highlight Text 3"
+    },
+    {
+      "type": "range",
+      "id": "color_coverage",
+      "min": 50,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "label": "Primary Color Coverage",
+      "default": 50
+    },
+    {
+      "type": "color",
+      "id": "background_color_2",
+      "label": "Optional Background Color ",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Desktop Spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Mobile Spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top (Mobile)",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom (Mobile)",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top  (Mobile)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom  (Mobile)",
+      "default": 20
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Title",
+      "type": "title",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "number",
+          "id": "font_size",
+          "label": "Font Size",
+          "default": 20
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "Color",
+          "default": "#000000"
+        },
+        {
+          "type": "image_picker",
+          "id": "title_icon",
+          "label": "Icon"
+        }
+      ]
+    },
+    {
+      "name": "Content",
+      "type": "content",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Content"
+        },
+        {
+          "type": "number",
+          "id": "font_size",
+          "label": "Font Size",
+          "default": 14
+        },
+        {
+          "type": "range",
+          "id": "font_weight",
+          "min": 100,
+          "max": 900,
+          "step": 100,
+          "unit": " - ",
+          "label": "Font Weight",
+          "default": 400
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "Color",
+          "default": "#000000"
+        }
+      ]
+    },
+    {
+      "name": "Button",
+      "type": "button",
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button Url"
+        }
+      ]
+    },
+    {
+      "name": "Review",
+      "type": "review",
+      "settings": []
+    },
+    {
+      "name": "Icon Block",
+      "type": "icon-block",
+      "settings": []
+    },
+    {
+      "name": "Icon",
+      "type": "icon",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        }
+      ]
+    },
+
+    {
+      "name": "Left Caption",
+      "type": "left_caption",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content"
+        },
+
+        {
+          "type": "header",
+          "content": "Position"
+        },
+        {
+          "type": "range",
+          "id": "position_from_top",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "%",
+          "label": "Top",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "position_from_left",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "%",
+          "label": "Left",
+          "default": 0
+        }
+      ]
+    },
+    {
+      "name": "Right Caption",
+      "type": "right_caption",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Content"
+        },
+
+        {
+          "type": "header",
+          "content": "Position"
+        },
+        {
+          "type": "range",
+          "id": "position_from_top",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "%",
+          "label": "Top",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "position_from_right",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "%",
+          "label": "Right",
+          "default": 0
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Smile Banner 2"
+    }
+  ]
+}
+{% endschema %}

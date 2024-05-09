@@ -1,0 +1,184 @@
+{% liquid
+  assign max_priceAmount = filter.range_max | money_without_currency | replace: ',', '' | ceil
+
+  if filter.max_value.value
+    if uses_comma_decimals
+      assign maxValue = filter.max_value.value | money_without_currency | replace: '.', '' | replace: ',', '.'
+    else
+      assign maxValue = filter.max_value.value | money_without_currency | replace: ',', ''
+    endif
+  endif
+
+  if filter.min_value.value
+    if uses_comma_decimals
+      assign minValue = filter.min_value.value | money_without_currency | replace: '.', '' | replace: ',', '.'
+    else
+      assign minValue = filter.min_value.value | money_without_currency | replace: ',', ''
+    endif
+  endif
+
+  if minValue == blank
+    assign minValue = 0
+  endif
+
+  if maxValue == blank
+    assign maxValue = max_priceAmount
+  endif
+
+  assign parcent1 = minValue | divided_by: max_priceAmount | times: 100
+  assign parcent2 = maxValue | divided_by: max_priceAmount | times: 100
+%}
+
+<style>
+    :root {
+        --range-circle: #F77FE1;
+        --range-line: #000;
+        --range-active-line: lightgray;
+        --range-circle-height: 20px;
+        --range-line-height: 5px;
+        --range-circle-mt: calc((var(--range-circle-height) / 2 - var(--range-line-height) / 2) * -1);
+    }
+    .price-range-desktop{
+      /* padding: 20px; */
+    }
+    .price-filter-vertical{
+        display: none;
+    }
+
+    .rander-slider-wrapper {
+        position: relative;
+        width: 100%;
+        background-color: #ffffff;
+        /* padding: 10px 0px; */
+        border-radius: 10px;
+        margin-top: var(--range-circle-mt);
+        margin-top: 15px;
+    }
+    .rander-slider-wrapper-desktop{
+      /* padding: 10px 0 !important; */
+    }
+    .range-slider-container {
+        position: relative;
+        width: 100%;
+  /*       height: 100px; */
+  /*       margin-top: 20px; */
+    }
+
+    .range-slider-container input[type="range"] {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        width: 100%;
+        outline: none;
+        position: absolute;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+        background-color: transparent;
+        pointer-events: none;
+    }
+
+  .range-slider-track:empty{
+    display: block;
+  }
+
+    .range-slider-track {
+        width: 100%;
+        height: var(--range-line-height);
+        position: absolute;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+        border-radius: 5px;
+        background: linear-gradient(to right, var(--range-line) {{ parcent1 | append: '%' }}, var(--range-circle) {{ parcent1 | append: '%' }}, var(--range-circle) {{ parcent2 | append: '%' }}, var(--range-line) {{ parcent2 | append: '%' }});
+    }
+
+    .range-slider-container input[type="range"]::-webkit-slider-runnable-track {
+        -webkit-appearance: none;
+        height: var(--range-line-height);
+    }
+
+    .range-slider-container input[type="range"]::-moz-range-track {
+        -moz-appearance: none;
+        height: var(--range-line-height);
+    }
+
+    .range-slider-container input[type="range"]::-ms-track {
+        appearance: none;
+        height: var(--range-line-height);
+    }
+
+    .range-slider-container input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        height: var(--range-circle-height);
+        width: var(--range-circle-height);
+        background-color: var(--range-circle);
+        cursor: pointer;
+        margin-top: var(--range-circle-mt);
+        pointer-events: auto;
+        border-radius: 50%;
+    }
+
+    .range-slider-container input[type="range"]::-moz-range-thumb {
+        -webkit-appearance: none;
+        height: var(--range-circle-height);
+        width: var(--range-circle-height);
+        cursor: pointer;
+        border-radius: 50%;
+        background-color: var(--range-circle);
+        pointer-events: auto;
+    }
+
+    .range-slider-container input[type="range"]::-ms-thumb {
+        appearance: none;
+        height: var(--range-circle-height);
+        width: var(--range-circle-height);
+        cursor: pointer;
+        border-radius: 50%;
+        background-color: var(--range-circle);
+        pointer-events: auto;
+    }
+
+    .range-slider-container input[type="range"]:active::-webkit-slider-thumb {
+        background-color: #e8c4c6;
+        border: 3px solid var(--range-circle);
+    }
+
+    .rander-slider-values {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 30px;
+    }
+
+    .rander-slider-values input[type=number] {
+        background: #fff;
+        color: #000;
+        border: none;
+        text-align: center;
+        box-sizing: border-box;
+        padding: 6px 2px 6px 10px;
+        width: 48%;
+        font-size: 15px;
+        border: 1px solid #000;
+    }
+    .rander-slider-values input[type=number]:focus{
+      outline: none;
+      box-shadow: none;
+    }
+
+    .active-range-circle {
+        z-index: 9;
+    }
+</style>
+
+<div class="rander-slider-wrapper rander-slider-wrapper-desktop">
+  <div class="rander-slider-values rander-slider-values-dekstop">
+    <input data-slider="min" min="0" max="{{ max_priceAmount }}" value="{{ minValue }}" type="number" class="min-input">
+    <input data-slider="max" min="0" max="{{ max_priceAmount }}" value="{{ maxValue }}" type="number" class="min-input">
+  </div>
+  <div class="range-slider-container range-slider-container-desktop">
+    <div class="range-slider-track range-slider-track-desktop"></div>
+    <input type="range" min="0" max="{{ max_priceAmount }}" value="{{ minValue }}" id="slider-1">
+    <input type="range" min="0" max="{{ max_priceAmount }}" value="{{ maxValue }}" id="slider-2">
+  </div>
+</div>

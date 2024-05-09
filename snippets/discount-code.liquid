@@ -1,0 +1,100 @@
+<!-- discount code CSS (Optional) -->
+<style>
+  .discount-code-container {
+    margin-bottom: 2rem;
+  }
+  .discount-code-container label {
+    margin: 0 0 2rem;
+    color: rgba(1, 166, 165);
+  }
+  .cart-discount.input-wrapper {
+    display: flex;
+    justify-items: center;
+    gap: 20px;
+    align-items: center;
+  }
+  input#discount_code {
+    min-width: 200px;
+    border-radius: 5px;
+    border: 1px solid gainsboro;
+    padding: 10px;
+    color: #333;
+  }
+  button.apply-discount-code {
+    position: relative;
+    padding: 7px 22px;
+    text-transform: uppercase;
+    border-radius: 100px;
+    border: 1px solid transparent;
+    color: #fff;
+    background-color: rgba(1, 166, 165);
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    cursor: pointer;
+  }
+  .loading::before {
+    border: 3px solid #acacac;
+    border-top: 2px solid #000;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    animation: spin .5s linear infinite;
+    content: '';
+    position: absolute;
+    right: -37px;
+    top: 0px;
+ }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+</style>
+
+<!-- discount code html (Required. Also notice the form="cart". This is required as the input is not directly inside the form element) -->
+
+<div class="discount-code-container">
+  <label>Enter Coupon Or Discount Code:</label>
+  <div class="cart-discount input-wrapper">
+    <label for="discount_code" class="visually-hidden sr-only">Enter a promo code</label>
+    <input
+      type="text"
+      id="discount_code"
+      name="discount"
+      class="form-control"
+      value=""
+      placeholder="Coupon code"
+      form="cart"
+    >
+    <div class="apply-btn-wrapper">
+      <button type="button" class="apply-discount-code">Apply</button>
+    </div>
+  </div>
+</div>
+
+<!-- discount code JS (Required)-->
+<script>
+  window.shopUrl = '{{ request.origin }}';
+  const discountSubmitBtn = document.querySelector('.apply-discount-code'),
+    discountCodeInput = document.querySelector('[name="discount"]');
+
+  discountSubmitBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    const discountCode = discountCodeInput.value;
+
+    event.target.classList.add('loading');
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', shopUrl + '/cart.js');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        discountSubmitBtn.classList.remove('loading');
+      } 
+    };
+    xhr.send(JSON.stringify({ 'attributes[discount]': discountCode }));
+    xhr.addEventListener('error', function(e) {
+        console.log(`${e.type}}`)
+        discountSubmitBtn.classList.remove('loading');
+    });
+  });
+</script>

@@ -1,0 +1,423 @@
+<style>
+  .predictive__search-section--{{ section.id }}{
+    margin-top: {{ section.settings.margin_top }}px;
+    margin-bottom: {{ section.settings.margin_bottom }}px;
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: linear-gradient(to bottom, rgb(255, 255, 255) 0%, rgb(239, 246, 248) 20%, rgb(223, 240, 243) 40%, rgb(207, 233, 238) 60%, rgb(191, 227, 234) 80%, rgb(175, 220, 230) 100%);
+  }
+  .pss__header{
+    text-align: center;
+    max-width: 1000px;
+    margin: 0 auto 100px;
+  }
+  .pss__header svg{
+    width: 75px;
+    height: 65px;
+  }
+  .pss__header p{
+    font-size: 20px;
+    line-height: 24px;
+    color: rgb(17, 0, 74);
+  }
+  .pss__header p strong{
+    font-size: 18px;
+    line-height: 22px;
+    color: #1B0177;
+  }
+
+
+  .pss__image{
+    font-size: 0;
+    line-height: 0;
+  }
+  .pss__image img{
+    width: 100%;
+    height: 100%;
+  }
+
+  .pss__info-wrapper {
+    min-width: 600px;
+    background: #FEF7EA;
+    border-radius: 30px;
+    padding: 15px 30px;
+  }
+  .pss__info-wrapper-desktop > svg{
+    width: 50px;
+    height: 55px;
+  }
+  .pss__info-wrapper h2{
+    font-size: 38px;
+    line-height: 1;
+    color: rgb(27, 1, 119);
+    margin: 0 0 9px;
+  }
+  .pss__info-wrapper h4{
+    font-size: 38px;
+    line-height: 1;
+    font-weight: 400;
+    color: rgb(27, 1, 119);
+    margin: 0 0 14px;
+  }
+  .pss__info-wrapper .coa{
+    font-size: 12px;
+    line-height: 14px;
+    color: rgb(167, 242, 246);
+    background-color: rgb(27, 1, 119);
+    padding: 5px 10px;
+    border-radius: 100px;
+    width: max-content;
+  }
+  .pss__info-wrapper h3{
+    font-size: 19px;
+    line-height: 23px;
+    color: rgb(27, 1, 119);
+    border-bottom: 5px solid rgb(27, 1, 119);
+    margin: 10px 0;
+  }
+  .pss__info-wrapper p{
+    font-size: 13px;
+    line-height: 16px;
+    color: #000;
+    margin: 0 0 16px;
+  }
+  .pss__search {
+    display: grid;
+    grid-template-columns: 5fr 2fr;
+    gap: 30px;
+  }
+  .pss__search-bar{
+    position: relative;
+  }
+  .pss__search-bar input {
+    width: 100%;
+    color: #1B0177;
+    padding: 14.5px 16px;
+    border-radius: 100px;
+    border: none;
+    outline: 1px solid #1B0177;
+  }
+  .pss__search-bar input::placeholder{
+    color: #1B0177;
+  }
+   .pss__search-bar input::-webkit-search-cancel-button,
+   .pss__search-bar input::-webkit-search-decoration {
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .pss__search-bar svg{
+    position: absolute;
+    top: 30%;
+    right: 15px;
+    transform: translateY(-50%);
+  }
+  .pss__btn a{
+    width: 100%;
+    display: inline-block;
+    border: none;
+    box-shadow: none;
+    color: #1B0177;
+    text-decoration: none;
+    padding: 6px 16px;
+    border-radius: 100px;
+    outline: 1px solid #1B0177;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .pss__btn a:hover{
+    background-color: #1B0177;
+    color: #fff;
+  }
+  .pss__btn a span{
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #1B0177;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .pss__instruc a{
+    font-size: 10px;
+    line-height: 12px;
+    color: rgb(1, 166, 165);
+    display: inline-block;
+    margin-left: 20px;
+  }
+  .pss__info-wrapper-desktop{
+    display: block;
+  }
+  .pss__info-wrapper-mbl{
+    display: none;
+  }
+  @media screen and (min-width: 989px){
+    .pss__container{
+      display: grid;
+      grid-template-columns: 4fr 2fr;
+      align-items: center;
+      position: relative;
+    }
+    .pss__info {
+      margin-left: -15%;
+    }
+  }
+  @media screen and (max-width: 990px){
+    .pss__info-wrapper-desktop{
+      display: none;
+    }
+    .pss__info-wrapper-mbl{
+      display: block;
+    }
+    .predictive__search-section--{{ section.id }}{
+      margin-top: {{ section.settings.margin_top-m }}px;
+      margin-bottom: {{ section.settings.margin_bottom-m }}px;
+      padding-top: {{ section.settings.padding_top-m }}px;
+      padding-bottom: {{ section.settings.padding_bottom-m }}px;
+    }
+    .pss__header {
+      margin: 0 auto 60px;
+    }
+    .pss__info {
+      margin: -15% auto 0;
+      z-index: 1;
+      position: relative;
+      width: 90%;
+    }
+    .pss__info-wrapper {
+      min-width: 100%;
+      border-radius: 20px;
+      padding: 15px 20px;
+    }
+    .pss__info-wrapper-mbl{
+      text-align: center;
+    }
+   .pss__info-wrapper-mbl > svg{
+      width: 40px;
+      height: 45px;
+    }
+    .pss__info-wrapper-mbl h2{
+      font-size: 22px;
+      line-height: 1;
+      color: rgb(27, 1, 119);
+      margin: 0 0 9px;
+    }
+    .pss__info-wrapper-mbl h4{
+      font-size: 16px;
+      line-height: 1;
+      font-weight: 400;
+      color: rgb(27, 1, 119);
+      margin: 0 0 14px;
+    }
+    .pss__search {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .pss__btn{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .pss__btn a{
+      width: 50%;
+    }
+  }
+</style>
+<section class="predictive__search-section--{{ section.id }}">
+  <div class="pss__wrapper page-width">
+    
+      <div class="pss__header">
+        {% render 'all-icons', name: "tik" %}
+        {% if section.settings.text %}
+          {{ section.settings.text }}
+        {% endif %}
+      </div>
+
+      <div class="pss">
+        <div class="pss__container">
+           <div class="pss__info-wrapper-mbl">
+              {% render 'all-icons', name: "jar" %}
+              {% if section.settings.title != blank %}
+                <h2>{{ section.settings.title }}</h2>
+              {% endif %}
+              {% if section.settings.subtitle != blank %}
+                <h4>{{ section.settings.subtitle }}</h4>
+              {% endif %}
+           </div>
+          <div class="pss__image">
+            {% if section.settings.image %}
+              <img loading="lazy" width="100%" height="100%" src="{{ section.settings.image | img_url: "master" }}" alt="{{ section.settings.title }}">
+            {% endif %}
+          </div>
+          <div class="pss__info">
+            <div class="pss__info-wrapper ">
+              <div class="pss__info-wrapper-desktop">
+                {% render 'all-icons', name: "jar" %}
+                {% if section.settings.title != blank %}
+                  <h2>{{ section.settings.title }}</h2>
+                {% endif %}
+                {% if section.settings.subtitle != blank %}
+                  <h4>{{ section.settings.subtitle }}</h4>
+                {% endif %}
+              </div>
+
+              <div class="coa">⭐Certificate Of Analysis</div>
+              {% if section.settings.header__text != blank %}
+                <h3>{{ section.settings.header__text }}</h3>
+              {% endif %}
+              {% if section.settings.text1 != blank %}
+                {{ section.settings.text1 }}
+              {% endif %}
+              <div class="pss__search">
+                <div class="pss__search-bar">
+                  <input type="search" placeholder="Search BatchID# / Product Name">
+                  {% render 'all-icons', name: "search" %}
+                  <div class="pss__instruc">
+                    <small><a href="/home">Can't find your Batch ID #? Follow our Instructions.</a></small>
+                  </div>
+                </div>
+                <div class="pss__btn">
+                  <a href="#">Read More<span>{% render 'all-icons', name: "enter" %}</span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Predictive Search Section",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Header Text"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Sub Title"
+    },
+    {
+      "type": "text",
+      "id": "header__text",
+      "label": "Text"
+    },
+    {
+      "type": "richtext",
+      "id": "text1",
+      "label": "Search Text"
+    },
+    {
+       "type": "image_picker",
+       "id": "image",
+       "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Spacing (Desktop)"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Spacing (Mobile)"
+    },
+    {
+      "type": "range",
+      "id": "margin_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top (Mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom (Mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top  (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom  (Mobile)",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Predictive Search Section"
+    }
+  ]
+}
+{% endschema %}

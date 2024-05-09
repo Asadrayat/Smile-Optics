@@ -1,0 +1,135 @@
+{% comment %}
+  <form class="form-{{ id }}" action="#" method="post">
+    <div class="input-wp{{ id }}">
+      <input type="text" id="fname" name="firstname" placeholder="First Name" required>
+      <input type="text" id="lname" name="lastname" placeholder="Last Name" required>
+      <input type="email" id="email" name="email" placeholder="Email" required>
+      <input type="text" id="phone" name="phone" placeholder="Phone">
+    </div>
+      <textarea id="message" name="message" placeholder="Message"  required></textarea>
+     <div class="checkbox-{{ id }}">
+      <input type="checkbox" id="terms" name="terms" required>
+        <label for="terms">{{ section.settings.policy }}</label>
+      </div>
+      <div class="btn_{{ id }}"><input class="button-font" type="submit" value="{{ section.settings.btn_text}}"></div>
+  </form>
+{% endcomment %}
+{%- form 'contact', id: 'ContactForm' -%}
+  {%- if form.posted_successfully? -%}
+    <h2 class="form-status form-status-list form__message" tabindex="-1" autofocus>
+      {% render 'icon-success' %}
+      {{ 'templates.contact.form.post_success' | t }}
+    </h2>
+  {%- elsif form.errors -%}
+    <div class="form__message">
+      <h2 class="form-status caption-large text-body" role="alert" tabindex="-1" autofocus>
+        {% render 'icon-error' %}
+        {{ 'templates.contact.form.error_heading' | t }}
+      </h2>
+    </div>
+    <ul class="form-status-list caption-large" role="list">
+      <li>
+        <a href="#ContactForm-email" class="link">
+          {{ form.errors.translated_fields.email | capitalize }}
+          {{ form.errors.messages.email }}
+        </a>
+      </li>
+    </ul>
+  {%- endif -%}
+  <div class="form-{{ id }}">
+    <div class="input-wp{{ id }}">
+      <div class="fieldx">
+        <input
+          class="field__inputx"
+          autocomplete="given-name"
+          type="text"
+          id="ContactForm-name"
+          name="firstname"
+          value="{{ form.first_name }}"
+          placeholder="First Name"
+        >
+        <!-- <label class="field__label" for="ContactForm-name">First Name</label> -->
+      </div>
+      <div class="fieldx">
+        <input
+          class="field__inputx"
+          autocomplete="family-name"
+          type="text"
+          id="ContactForm-name"
+          name="lastname"
+          value="{{ form.last_name }}"
+          placeholder="Last Name"
+        >
+        <!-- <label class="field__label" for="ContactForm-name">Last Name</label> -->
+      </div>
+      <div class="fieldx field--with-error">
+        <input
+          autocomplete="email"
+          type="email"
+          id="ContactForm-email"
+          class="field__inputx"
+          name="email"
+          spellcheck="false"
+          autocapitalize="off"
+          value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+          aria-required="true"
+          {% if form.errors contains 'email' %}
+            aria-invalid="true"
+            aria-describedby="ContactForm-email-error"
+          {% endif %}
+          placeholder="Email"
+        >
+        <!--
+          <label class="field__label" for="ContactForm-email">
+            Email
+            <span aria-hidden="true">*</span></label
+          >
+        -->
+        {%- if form.errors contains 'email' -%}
+          <small class="contact__field-error" id="ContactForm-email-error">
+            <span class="visually-hidden">{{ 'accessibility.error' | t }}</span>
+            <span class="form__message">
+              {%- render 'icon-error' -%}
+              {{- form.errors.translated_fields.email | capitalize }}
+              {{ form.errors.messages.email -}}
+            </span>
+          </small>
+        {%- endif -%}
+      </div>
+      <div class="fieldx">
+        <input
+          type="tel"
+          id="ContactForm-phone"
+          class="field__inputx"
+          autocomplete="tel"
+          name="phone"
+          pattern="[0-9\-]*"
+          value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+          placeholder="Phone"
+        >
+        <!-- <label class="field__label" for="ContactForm-phone">Phone</label> -->
+      </div>
+    </div>
+    <div class="fieldx">
+      <textarea
+        rows="10"
+        id="ContactForm-body"
+        class="text-area "
+        name="message"
+        placeholder="Message"
+      >
+  {{- form.body -}}
+</textarea>
+      <!-- <label class="form__label field__labelx" for="ContactForm-body"> Message </label> -->
+    </div>
+    <div class="checkbox-{{ id }}">
+      <input type="checkbox" id="terms" name="terms" required>
+      <label for="terms">{{ section.settings.policy }}</label>
+    </div>
+    <a href="#" style="text-decoration: none;">
+      <div class="btn_{{ id }}">
+        <input class="button-font" type="submit" value="{{ section.settings.btn_text}}">
+      </div>
+    </a>
+  </div>
+{%- endform -%}

@@ -1,0 +1,568 @@
+{% assign id = section.id %}
+<style>
+    footer {
+    margin-top: {{ section.settings.margin_top }}px;
+    margin-bottom: {{ section.settings.margin_bottom }}px;
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    max-width: 100vw;
+    over-flow: hiddden;
+    background: #5C439A;
+    }
+  .desktop-{{ section.id }} {
+    display: block;
+  }
+  .mobile__only-{{ id }} {
+      display: none;    
+  }
+  .footer__top-wrapper{
+     /* background: #5C439A; */
+     padding-top: 34px; 
+      padding-bottom: 20px;
+  }
+  .footer__bottom{
+    padding-top: 12px;
+    /* background: #5C439A;   */
+    padding-bottom: 15px;
+  }
+  .wrapper-{{ id }} {
+    display: flex;
+    gap: 14px;
+  }
+
+  @media screen and (max-width: 890px){
+     footer {
+       margin-top: {{ section.settings.margin_top-m }}px;
+       margin-bottom: {{ section.settings.margin_bottom-m }}px;
+       padding-top: {{ section.settings.padding_top-m }}px;
+       padding-bottom: {{ section.settings.padding_bottom-padding_bottom-m }}px;
+    }
+    .footer__top-wrapper{
+        padding-top: 10px; 
+    }
+    .desktop-{{ section.id }} {
+      display: none;
+    }
+    .mobile__only-{{ id }} {
+        display: block;    
+    }    
+  }
+</style>
+  {{ 'custom-footer-style.css' | asset_url | stylesheet_tag }}
+<footer class="">
+  <div class="footer__top-wrapper page-width ">
+    <div class="mobile__only-{{ id }}"><div class="footer__top page-width">
+      <div class="desktop-{{ section.id }}">
+        <div class="cf__logo-wrapper ">         
+          <div class="cf__logo">
+            {% for block in section.blocks %}
+              {% if block.settings.logo %}
+              <div class="logo-img__wraper"><img  class="" src="{{ block.settings.logo | img_url: "master" }}" alt="{{ shop.name }}"></div>
+              {% endif %}
+              {% if block.settings.money_back %}
+               <a href="/"><img  class="" src="{{ block.settings.money_back | img_url: "master" }}" alt="Money back"></a>
+               {% endif %}              
+                {% if block.settings.rating_img  %}
+                <div class="cf__rating-wrapper">
+                  <img  class="" src="{{ block.settings.rating_img | img_url: "master" }}" alt="Money back">                
+                  <span class="rating__text">{{ block.settings.text_rating }}</span>
+                </div>
+               {% endif %}
+             {% endfor %}
+          </div>
+          <div class="soical__btn-wrapper">
+            <div class="cf-social_icon">
+             <div> 
+               {% for block in section.blocks %}
+                {% if block.settings.social_icon %}
+                  <a href="/"><img  class="" src="{{ block.settings.social_icon | img_url: "master" }}" alt="Social"></a>
+                {% endif %}
+              {% endfor %}
+             </div>
+              <div>{% if section.settings.btn_text %}<a class="cf__btn-text button-font" href="/">{{ section.settings.btn_text }}</a>{% endif %} </div>           
+            </div>
+          </div>
+      </div>
+      </div>
+      <div class="cn__wrapper">
+        <p>{{ section.settings.rte }}</p>
+        <div class="cf__quote">{{ section.settings.quote }}</div>
+        <div class="custom-newsletter">
+        <div class="form__wrapper">
+          {% form 'customer', class: 'newsletter-form' %}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <div
+              class="newsletter-form__field-wrapper{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+              {% if settings.animations_reveal_on_scroll %}
+                data-cascade
+                style="--animation-order: {{ forloop.index }};"
+              {% endif %}
+            >
+              {%- if form.errors -%}
+                <small
+                  class="newsletter-form__message form__message invalid__nl cf-errror_msg"
+                  id="Newsletter-error--{{ section.id }}"
+                >
+                  <div class="svg__wrapper-error">{%- render 'icon-error' -%}</div>
+                  {{- form.errors.translated_fields.email | capitalize }}
+                  {{ form.errors.messages.email -}}
+                </small>
+              {%- endif -%}
+              <div class="cf__form-wrapper">
+                <input
+                  id="NewsletterForm--{{ section.id }}"
+                  type="email"
+                  name="contact[email]"
+                  class="email_inp"
+                  value="{{ form.email }}"
+                  aria-required="true"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  autocomplete="email"
+                  {% if form.errors %}
+                    autofocus
+                    aria-invalid="true"
+                    aria-describedby="Newsletter-error--{{ section.id }}"
+                  {% elsif form.posted_successfully? %}
+                    aria-describedby="Newsletter-success--{{ section.id }}"
+                  {% endif %}
+                  placeholder="{{ section.settings.nl__plcholder }}"
+                  required
+                >
+                <div class="cf__formbtn-wrapper">
+                  <button
+                    type="submit"
+                    class="btn_submit button-font"
+                    name="commit"
+                    id="Subscribe"
+                    aria-label="{{ section.settings.nl__text}}"
+                  >
+                    {{ section.settings.nl__text}}
+                  </button>
+                </div>
+              </div>
+            </div>
+            {%- if form.posted_successfully? -%}
+              <h3
+                class="newsletter-form__message newsletter-form__message--success form__message"
+                id="Newsletter-success--{{ section.id }}"
+                tabindex="-1"
+                autofocus
+              >
+                {% render 'icon-success' -%}
+                {{- 'newsletter.success' | t }}
+              </h3>
+            {%- endif -%}
+          {% endform %}
+        </div>
+      </div>
+      </div>
+    </div></div>   
+    <div class="footer-menu page-width">
+      {% for block in section.blocks %}
+        {% if block.type == 'navigation' %}
+          <ul>
+            <h2 class="fm__title ">{{ block.settings.linklist.title }}</h2>
+            {% for link in block.settings.linklist.links %}
+              <li class="menu__wrapper submenu">
+                <a class="menu {% if link.url contains '#our-guarantee' %}our-guarantee-btn open-popup{% endif %}" href="{{ link.url }}">{{ link.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}         
+      {% endfor %}
+      <div class="mobile__only-{{ id }}"> <div class="cf__logo-wrapper ">         
+          <div class="cf__logo">
+            {% for block in section.blocks %}
+              {% if block.settings.logo %}
+              <div class="logo-img__wraper"><img  class="" src="{{ block.settings.logo | img_url: "master" }}" alt="{{ shop.name }}"></div>
+              {% endif %}
+              {% if block.settings.money_back %}
+               <a href="/"><img  class="" src="{{ block.settings.money_back | img_url: "master" }}" alt="Money back"></a>
+               {% endif %}              
+                {% if block.settings.rating_img  %}
+                <div class="cf__rating-wrapper">
+                  <img  class="" src="{{ block.settings.rating_img | img_url: "master" }}" alt="Money back">                
+                  <span class="rating__text">{{ block.settings.text_rating }}</span>
+                </div>
+               {% endif %}
+             {% endfor %}
+          </div>
+          <div class="soical__btn-wrapper">
+            <div class="cf-social_icon">
+             <div> 
+               {% for block in section.blocks %}
+                {% if block.settings.social_icon %}
+                  <a href="/"><img  class="" src="{{ block.settings.social_icon | img_url: "master" }}" alt="Social"></a>
+                {% endif %}
+              {% endfor %}
+             </div>
+              <div>{% if section.settings.btn_text %}<a class="cf__btn-text button-font" href="/">{{ section.settings.btn_text }}</a>{% endif %} </div>           
+            </div>
+          </div>
+      </div></div>
+    </div>
+    <div class="desktop-{{ section.id }}"><div class="footer__top page-width">
+      <div class="desktop-{{ section.id }}">
+        <div class="cf__logo-wrapper ">         
+          <div class="cf__logo">
+            {% for block in section.blocks %}
+              {% if block.settings.logo %}
+              <div class="logo-img__wraper"><img  class="" src="{{ block.settings.logo | img_url: "master" }}" alt="{{ shop.name }}"></div>
+              {% endif %}
+              {% if block.settings.money_back %}
+               <a href="/"><img  class="" src="{{ block.settings.money_back | img_url: "master" }}" alt="Money back"></a>
+               {% endif %}              
+                {% if block.settings.rating_img  %}
+                <div class="cf__rating-wrapper">
+                  <img  class="" src="{{ block.settings.rating_img | img_url: "master" }}" alt="Money back">                
+                  <span class="rating__text">{{ block.settings.text_rating }}</span>
+                </div>
+               {% endif %}
+             {% endfor %}
+          </div>
+          <div class="soical__btn-wrapper">
+            <div class="cf-social_icon">
+             <div class="wrapper-{{ id }}"> 
+               {% for block in section.blocks %}
+                {% if block.settings.social_icon %}
+                  <a href="{{ block.settings.url }}" target="_blank"><img  class="" src="{{ block.settings.social_icon | img_url: "master" }}" alt="Social"></a>
+                {% endif %}
+              {% endfor %}
+             </div>
+              <div>{% if section.settings.btn_text %}<a class="cf__btn-text button-font" href="{{ section.settings.url }}" >{{ section.settings.btn_text }}</a>{% endif %} </div>           
+            </div>
+          </div>
+      </div>
+      </div>
+      <div class="cn__wrapper">
+        <p>{{ section.settings.rte }}</p>
+        <div class="cf__quote">{{ section.settings.quote }}</div>
+        <div class="custom-newsletter">
+        <div class="form__wrapper">
+          {% form 'customer', class: 'newsletter-form' %}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <div
+              class="newsletter-form__field-wrapper{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+              {% if settings.animations_reveal_on_scroll %}
+                data-cascade
+                style="--animation-order: {{ forloop.index }};"
+              {% endif %}
+            >
+              {%- if form.errors -%}
+                <small
+                  class="newsletter-form__message form__message invalid__nl cf-errror_msg"
+                  id="Newsletter-error--{{ section.id }}"
+                >
+                  <div class="svg__wrapper-error">{%- render 'icon-error' -%}</div>
+                  {{- form.errors.translated_fields.email | capitalize }}
+                  {{ form.errors.messages.email -}}
+                </small>
+              {%- endif -%}
+              <div class="cf__form-wrapper">
+                <input
+                  id="NewsletterForm--{{ section.id }}"
+                  type="email"
+                  name="contact[email]"
+                  class="email_inp"
+                  value="{{ form.email }}"
+                  aria-required="true"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  autocomplete="email"
+                  {% if form.errors %}
+                    autofocus
+                    aria-invalid="true"
+                    aria-describedby="Newsletter-error--{{ section.id }}"
+                  {% elsif form.posted_successfully? %}
+                    aria-describedby="Newsletter-success--{{ section.id }}"
+                  {% endif %}
+                  placeholder="{{ section.settings.nl__plcholder }}"
+                  required
+                >
+                <div class="cf__formbtn-wrapper">
+                  <button
+                    type="submit"
+                    class="btn_submit button-font"
+                    name="commit"
+                    id="Subscribe"
+                    aria-label="{{ section.settings.nl__text}}"
+                  >
+                    {{ section.settings.nl__text}}
+                  </button>
+                </div>
+              </div>
+            </div>
+            {%- if form.posted_successfully? -%}
+              <h3
+                class="newsletter-form__message newsletter-form__message--success form__message"
+                id="Newsletter-success--{{ section.id }}"
+                tabindex="-1"
+                autofocus
+              >
+                {% render 'icon-success' -%}
+                {{- 'newsletter.success' | t }}
+              </h3>
+            {%- endif -%}
+          {% endform %}
+        </div>
+      </div>
+      </div>
+    </div></div>   
+  </div>
+  <div class="footer__bottom page-width">
+         {% for block in section.blocks %} 
+    <div class="footer__bottom-content page-width"> 
+       {% if block.settings.caution  %}
+      <div class="caution">{{ block.settings.caution }}</div cls="caution">
+         {% endif %}
+       {% if block.settings.copyright  %}
+      <div class="copyright__text">{{ block.settings.copyright }}</div>
+         {% endif %}
+      <div class="copyright__text">
+       {% if block.settings.privacy_policy %}
+        <a href="{{ block.settings.privacy_policy }}"> Privacy Policy</a>
+       {% endif %}
+       {% if block.settings.terms_conditions %}
+        <a href="{{ block.settings.terms_conditions }}"> Terms & Conditions </a>
+       {% endif %}
+       {% if block.settings.website_disclaimer %}
+        <a href="{{ block.settings.website_disclaimer }}">Website disclaimer</a>
+       {% endif %}
+      
+      </div>
+      
+    </div>
+    {% endfor %}
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Custom Footer",
+  "settings": [ 
+    {
+      "type":"richtext",
+      "id": "rte",
+      "label": "Newsletter text"
+    },  
+    {
+      "type": "text",
+      "id": "quote",
+      "label": "Newsletter Quote"
+    },
+    {
+      "id": "btn_text",
+      "type": "text",
+      "label": "Add Button Text",
+      "default": "Shop Bundles"
+    },    
+    {
+      "id": "url",
+      "type": "url",
+      "label": "Button Url"
+    },    
+    {
+      "id": "nl__text",
+      "type": "text",
+      "label": "Add Newsletter Text"
+    },    
+    {
+      "id": "nl__plcholder",
+      "type": "text",
+      "label": "Add Newsletter Placeholder"
+    },        
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "min": 4,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Spacing (Mobile)"
+    },
+    {
+      "type": "range",
+      "id": "margin_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top  (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom  (Mobile)",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Title Image",
+      "type": "title_image",
+      "settings": [
+          {
+            "id": "logo",
+            "type": "image_picker",
+            "label": "Add logo"
+          },
+          {
+            "id": "money_back",
+            "type": "image_picker",
+            "label": "Add Moneyback Image"
+          },
+          {
+            "id": "rating_img",
+            "type": "image_picker",
+            "label": "Add Rating Image"
+          },
+          {
+            "id": "text_rating",
+            "type": "text",
+            "label": "Add Rating Text"
+          }
+      ]
+    },
+    {
+      "name": "Social Icon",
+      "type": "icon",
+      "settings": [
+          {
+            "id": "social_icon",
+            "type": "image_picker",
+            "label": "Add Social Media Icon"
+          },
+          {
+            "id": "url",
+            "type": "url",
+            "label": "Social Media Link"
+          }
+      ]
+    },
+    {
+      "name": "Navigation column",
+      "type": "navigation",
+      "settings": [
+        {
+          "type": "link_list",
+          "id": "linklist",
+          "label": "Navigation menu"
+        }        
+      ]
+    },
+    {
+       "name": "Footer copyright text",
+       "type": "text",
+       "settings": [
+         {
+           "type": "richtext",
+           "id": "caution",
+           "label": "Caution Text"
+         },
+         {
+           "type": "text",
+           "id": "copyright",
+           "label": "Copyright Text"
+         },
+         {
+           "type": "url",
+           "id": "privacy_policy",
+           "label": "Privacy Policy"
+         },
+         {
+           "type": "url",
+           "id": "terms_conditions",
+           "label": "Terms & Conditions"
+         },
+         {
+           "type": "url",
+           "id": "website_disclaimer",
+           "label": "Website Disclaimer"
+         }
+       ]
+     }
+  ],
+  "presets":[
+    {
+      "name": "Custom Footer"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

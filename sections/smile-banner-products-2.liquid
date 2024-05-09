@@ -1,0 +1,500 @@
+<style>
+     .section-container--{{ section.id }}{
+         margin-top: {{ section.settings.margin_top | append:'px' }};
+         margin-bottom: {{ section.settings.margin_bottom | append:'px' }};
+         padding-top: {{ section.settings.padding_top | append:'px' }};
+         padding-bottom: {{ section.settings.padding_bottom | append:'px' }};
+         box-sizing: border-box;
+         overflow: hidden;
+         background-image: linear-gradient(to right, {{ section.settings.background_color_1 }} {{ section.settings.color_coverage | append: '%' }} , {{ section.settings.background_color_2 }} {{ section.settings.color_coverage | append: '%' }});
+     }
+   .section-container--{{ section.id }} img {
+       max-width: 100%;
+       float: right;
+       transform: scale(1.4) translateY(10px);
+   }
+     .section-wrapper--{{ section.id }} {
+         display: flex;
+         padding: 0 5rem;
+     }
+     /* .section-container--{{ section.id }}      .banner-left-column {
+         width : {{  section.settings.color_coverage | append:'%'}};
+         width : 30%;
+         align-self: center;
+         padding: 10px;
+     }
+     .section-container--{{ section.id }}      .banner-right-column {
+         width : {{ 100 | minus: section.settings.color_coverage | append:'%'}};
+         width: 70%;
+         position: relative;
+         display: grid;
+         grid-template-columns: 1fr 1fr;
+     }
+     .section-container--{{ section.id }}      .banner-title-wrapper  h2 {
+         margin-block: 0;
+     }
+
+     .section-container--{{ section.id }}      .single-banner-icon-wrapper h5 {
+         margin: 0;
+         display: flex;
+         align-items: center;
+         color: #fff;
+     }
+     .section-container--{{ section.id }} p.banner-content {
+         margin-block: 0;
+     }
+     .section-container--{{ section.id }} p.banner-content span{
+         color: yellow;
+     }
+ */
+     .section-container--{{ section.id }}      .banner-review-wrapper {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         width: max-content;
+         line-height: 1;
+     }
+     .section-container--{{ section.id }}      .banner-review-wrapper svg {
+         margin-block: 5px;
+     }
+     .section-container--{{ section.id }}      span.review-text-black {
+         color: #5c439a;
+         font-weight: 700;
+         font-size: 10px;
+     }
+     .section-container--{{ section.id }}      span.review-text-blue {
+         font-family: questrial,sans-serif;
+         color: #6f60e9;
+         font-size: 10px;
+         text-decoration: underline;
+     }
+
+
+
+
+     .section-container--{{ section.id }}      .banner-icon-block {
+         display: flex;
+         justify-content: space-around;
+         padding-block: 15px;
+         max-width: 400px;
+     }
+     .section-container--{{ section.id }}      .single-banner-icon-block {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+     }
+     .section-container--{{ section.id }}      .single-banner-icon-block  svg {
+         width: 40px;
+         height: 40px;
+     }
+     .section-container--{{ section.id }}      .single-banner-icon-block span {
+         font-size: 10px;
+         font-weight: 700;
+     }
+         .section-container--{{ section.id }} a.blue-button-1 {
+         padding: 10px 40px;
+         font-weight: 600;
+         display: inline-block;
+         margin-block: 10px;
+     }
+
+   .section-container--{{ section.id }}  .video-wrapper {
+       position: relative;
+   }
+   .section-container--{{ section.id }}  video {
+       width: 100%;
+       height: 100%;
+       object-fit: cover;
+   }
+     @media screen and (max-width: 768px){
+     .section-container--{{ section.id }}{
+         margin-top: {{ section.settings.margin_top_mobile | append:'px' }};
+         margin-bottom: {{ section.settings.margin_bottom_mobile | append:'px'  }};
+         padding-top: {{ section.settings.padding_top_mobile | append:'px' }};
+         padding-bottom: {{ section.settings.padding_bottom_mobile | append:'px' }};
+         background-image: linear-gradient(to top, {{ section.settings.background_color_1 }} 75% , {{ section.settings.background_color_2 }} 20%);
+         overflow: hidden;
+
+     }
+     .section-wrapper--{{ section.id }} {
+         flex-direction: column;
+         padding: 0;
+     }
+     .section-container--{{ section.id }}      .banner-left-column {
+         width: 90%;
+     }
+     .section-container--{{ section.id }}      .banner-right-column {
+         width: 100%;
+         grid-template-columns: 1fr;
+     }
+     .section-container--{{ section.id }}  .banner-right-column  .image-wrapper img {
+         width: 100%;
+         width: 100%;
+         transform: unset;
+         transform: translateX(100px);
+     }
+  .section-container--{{ section.id }} a.blue-button-1 {
+     padding: 10px 40px;
+     font-weight: 600;
+     display: block;
+     text-align: center;
+     margin-block: 10px;
+     border-radius: 50px;
+     }
+             }
+</style>
+<style>
+  .section-wrapper--{{ section.id }} {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  position: relative;
+  }
+  .section-wrapper--{{ section.id }} p {
+  margin-block: 0px;
+  line-height: 1.3em;
+  }
+  .section-container--{{ section.id }}  .content-caption {
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 600;
+  }
+  .section-container--{{ section.id }}  .content-caption span{
+  color: #ffebaa;
+  }
+  .section-container--{{ section.id }}    .caption-0 {
+  position: absolute;
+  margin-left: 5rem;
+  margin-top: 30px;
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 600;
+    
+  }
+  .section-container--{{ section.id }}    .caption-0  span{
+  color: #ffebaa;
+  }
+  .section-container--{{ section.id }}    .caption-1 {
+  position: absolute;
+  z-index: 2;
+  left: 20%;
+  }
+  .section-container--{{ section.id }}    .caption-2 {
+  position: absolute;
+  z-index: 2;
+  left: 20%;
+  }
+  .section-container--{{ section.id }}    .left-contents {
+  grid-column: 1/2;
+  align-self: center;
+  padding: 5rem;
+  }
+  .section-container--{{ section.id }}    p.section-title {
+  color: #5c439a;
+  font-size: 27px;
+  font-weight: 600;
+  line-height: 1.3em;
+  }
+  .section-container--{{ section.id }}    p.content-1 {
+  color: #6f60e9;
+  font-size: 30px;
+  font-weight: 400;
+  }
+  .section-container--{{ section.id }}    p.content-2 {
+  color: #6f60e9;
+  font-size: 14px;
+  font-weight: 600;
+  }
+  .section-container--{{ section.id }}    p.content-3 {
+  color: #000000;
+  font-size: 14px;
+  font-weight: 400;
+  margin-block: 15px;
+  }
+  .section-container--{{ section.id }} .video-wrapper {
+  position: relative;
+  grid-column: 2/3;
+  }
+  .section-container--{{ section.id }} .image-wrapper {
+    position: relative;
+    grid-column: 3/4;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  @media screen and (max-width: 768px){
+  .section-wrapper--{{ section.id }} {
+  grid-template-columns: 1fr;
+  }
+  .section-container--{{ section.id }}  .left-contents {
+  grid-column: 1/-1;
+  grid-row: 2/3;
+  align-self: center;
+  padding: 20px;
+  }
+  .section-container--{{ section.id }} .video-wrapper {
+  grid-column: 1/-1;
+  grid-row: 3/4;
+  }
+  .section-container--{{ section.id }} .image-wrapper {
+  grid-column: 1/-1;;
+  grid-row: 1/2;
+  }
+  .section-container--{{ section.id }} img {
+  max-width: 100%;
+  float: right;
+  transform: scale(1) translate(120px,-40px);
+  }
+  .section-container--{{ section.id }} .caption-0 {
+   margin-left: 10px;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0;
+  }
+  }
+</style>
+<section class="section-container--{{ section.id }}">
+  <div class="section-wrapper--{{ section.id }} ">
+    <div class="caption-0 mobile-only">{{ section.settings.caption }}</div>
+    <div class="caption-1">
+      {% render 'smile-left-caption-static',
+        content: section.settings.caption1,
+        position_from_top: 100,
+        position_from_left: 800,
+        position_from_top_mobile: 100,
+        position_from_left_mobile: 10,
+        serial: 1,
+        id: section.id
+      %}
+    </div>
+    <div class="caption-2">
+      {% render 'smile-left-caption-static',
+        content: section.settings.caption2,
+        position_from_top: 300,
+        position_from_left: 700,
+        position_from_top_mobile: 250,
+        position_from_left_mobile: 40,
+        serial: 2,
+        id: section.id
+      %}
+    </div>
+    <div class="left-contents">
+      <div class="content-caption desktop-only">{{ section.settings.caption }}</div>
+      <p class="section-title">{{ section.settings.title }}</p>
+      <p class="content-1">{{ section.settings.content1 }}</p>
+      <p class="content-2">{{ section.settings.content2 }}</p>
+      <p class="content-3">{{ section.settings.content3 }}</p>
+      <div class="banner-icon-block">
+        <div class="single-banner-icon-block">
+          {% render 'smile-all-icons', name: 'dentist' %}
+          <span>Dentist Approved</span>
+        </div>
+        <div class="single-banner-icon-block">
+          {% render 'smile-all-icons', name: 'result' %}
+          <span>Results in 3 Days</span>
+        </div>
+        <div class="single-banner-icon-block">
+          {% render 'smile-all-icons', name: 'safe' %}
+          <span>Safe for Daily Use</span>
+        </div>
+      </div>
+      <a class="blue-button-1" href="{{ section.settings.button_url }}"> {{ section.settings.button_level }} </a>
+    </div>
+    {% unless section.settings.video == blank %}
+      <div class="video-wrapper">
+        {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false }}
+      </div>
+    {% endunless %}
+    {% unless section.settings.image == blank %}
+      <div class="image-wrapper">
+        {{ section.settings.image | img_url: 'master' | img_tag }}
+      </div>
+    {% endunless %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Smile Banner Product 2",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "caption",
+      "label": "Caption",
+      "default": "<p>good bye <span>yellow</span></p>"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "v34 Purple Color Correcting Toothpaste"
+    },
+    {
+      "type": "text",
+      "id": "content1",
+      "label": "content1",
+      "default": "$17.49"
+    },
+    {
+      "type": "text",
+      "id": "content2",
+      "label": "content2",
+      "default": "Subscribe & Save 30%"
+    },
+    {
+      "type": "text",
+      "id": "content3",
+      "label": "content3",
+      "default": "Introducing our purple toothpaste. Designed to brighten up your smile using color-correcting technology. "
+    },
+    {
+      "type": "text",
+      "id": "caption1",
+      "label": "caption1",
+      "default": "Conceal stains, improve brightness, neutralize yellow for a whiter smile "
+    },
+    {
+      "type": "text",
+      "id": "caption2",
+      "label": "caption2",
+      "default": "Combat yellow teeth with v34 color correcting purple tooth paste"
+    },
+
+    {
+      "type": "text",
+      "id": "button_level",
+      "label": "Button Level",
+      "default": "Add to Cart"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button Url"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video"
+    },
+    {
+      "type": "color",
+      "id": "background_color_1",
+      "label": "Primary Background Color ",
+      "default": "#CFCFF5"
+    },
+    {
+      "type": "range",
+      "id": "color_coverage",
+      "min": 50,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "label": "Primary Color Coverage",
+      "default": 50
+    },
+    {
+      "type": "color",
+      "id": "background_color_2",
+      "label": "Optional Background Color ",
+      "default": "#60DBD9"
+    },
+    {
+      "type": "header",
+      "content": "Desktop Spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Mobile Spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top (Mobile)",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom (Mobile)",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top  (Mobile)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom  (Mobile)",
+      "default": 20
+    }
+  ],
+  "presets": [
+    {
+      "name": "Smile Banner Product 2"
+    }
+  ]
+}
+{% endschema %}

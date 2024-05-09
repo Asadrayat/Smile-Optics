@@ -1,0 +1,274 @@
+{% assign id = section.id %}
+
+<style>
+    .custom__feedback{{ section.id }} {
+     margin-top: {{ section.settings.margin_top }}px;
+     margin-bottom: {{ section.settings.margin_bottom }}px;
+     padding-top: {{ section.settings.padding_top }}px;
+     padding-bottom: {{ section.settings.padding_bottom }}px;
+      background: #27B7AF;
+    }
+ .cf__container h2{
+    font-size: 29px;
+    color: #fff;
+    text-align: center;
+    line-height: 34px;
+    font-weight: 700;
+    margin: -1px;
+  }
+ .cf__container .cf__desc{
+    color: #fff;
+    font-size: 16px;
+    line-height: 22px;
+    /* font-weight: 700; */
+    letter-spacing: 4.8px;
+    text-align: center;
+  }
+.cf__content-wrapper {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    padding: 30px 0 50px 0;
+  }
+  .cf_-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+  }
+  .cf__content-wrapper .cf_-content:not(:first-child) {
+    border-left: 3px solid #0000004f;
+  }
+  .cf_-content h1{
+    margin: 0;
+    font-size: 80px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .cf_-content h3{
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 26px;
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 26px;
+    text-align: center;
+      margin: 0;
+  }
+  .cf__rte{
+    color: #fff;
+    line-height: 18.2px;
+    font-size: 13px;
+    text-align: center;
+  }
+  .cf__rte p{
+    max-width: 1005px;
+    margin: auto;
+  }
+@media screen and (max-width: 890px){
+ .custom__feedback{{ section.id }} {
+     margin-top: {{ section.settings.margin_top-m }}px;
+     margin-bottom: {{ section.settings.margin_bottom-m }}px;
+     padding-top: {{ section.settings.padding_top-m }}px;
+     padding-bottom: {{ section.settings.padding_bottom-padding_bottom-m }}px;
+  }
+  .cf__container h2{
+    font-size: 21px;
+    line-height: 25px;
+    letter-spacing: 0.63px;
+  }
+  .cf_-content{
+    gap: 10px;
+  }
+  .cf__content-wrapper {
+    grid-template-columns: repeat(2,1fr);
+    gap: 20px;
+  }
+  .cf_-content h1{
+    font-size: 36px;
+    color: #007D7D;
+    font-weight: 700;
+  }
+  .cf_-content h3{
+    font-size: 16px;
+    line-height: 22px;
+  }
+  .cf__container .cf__desc {
+    font-size: 10px;
+    line-height: 14px;
+  }
+  .cf__content-wrapper {
+    border-bottom: 1px solid #00000036;
+    margin-bottom: 20px; 
+    padding: 20px 0 20px 0;
+  }
+  .cf__content-wrapper .cf_-content:not(:first-child) {
+    border-left: unset;
+  }
+  .cf__rte {
+    font-size: 9px;
+    color: #afe9e8;
+    line-height: 11px;
+    font-weight: normal;
+  }
+}
+</style>
+
+<section class="custom__feedback{{ section.id }}">
+  <div class="cf__container page-width">
+    <h2>{{ section.settings.title }}</h2>
+    <p class="cf__desc">{{ section.settings.desc }}</p>
+    <div class="cf__content-wrapper">
+      {% for block in section.blocks %}
+      <div class="cf_-content" data-aos="fade-up" data-aos-duration="500" {% if forloop.index == 1 %}data-aos-delay="200"{% elsif forloop.index == 2 %}data-aos-delay="350"{% elsif forloop.index == 4 %}data-aos-delay="400"{% elsif forloop.index == 5 %}data-aos-delay="250"{% endif %}>
+        <h1>{{ block.settings.big_text }}</h1>
+        <h3>{{ block.settings.title }}</h3>
+      </div>
+      {% endfor %}
+    </div>
+    <small class="cf__rte">{{ section.settings.rte }}</small>
+  </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "Custom feedback",
+  "settings": [
+    {
+      "id": "title",
+      "type": "text",
+      "label": "Add Title"
+    },
+    {
+      "id": "desc",
+      "type": "text",
+      "label": "Add Description"
+    },
+    {
+      "id": "rte",
+      "type": "richtext",
+      "label": "Add caution"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 8
+    },
+
+    {
+      "type": "header",
+      "content": "Spacing (Mobile)"
+    },
+    {
+      "type": "range",
+      "id": "margin_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top  (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom  (Mobile)",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Text",
+      "type": "Text",
+      "settings": [
+          {
+            "id": "title",
+            "type": "text",
+            "label": "Add Hero title"
+          },
+          {
+            "id": "big_text",
+            "type": "text",
+            "label": "Add Percentage"
+          }     
+      ]
+    }
+  ],
+
+  "presets":[
+    {
+      "name": "Custom feedback"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

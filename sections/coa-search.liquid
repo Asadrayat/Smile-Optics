@@ -1,0 +1,277 @@
+{% assign id = section.id %}
+
+<style>
+    .search{{ id }} {
+     margin-top: {{ section.settings.margin_top }}px;
+     margin-bottom: {{ section.settings.margin_bottom }}px;
+     padding-top: {{ section.settings.padding_top }}px;
+     padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+    .tik-m{{ id }} svg{
+      width: 30px;
+      height: 25px;
+      margin-block: 20px;
+      display: none; 
+    }
+   .tik-{{ id }} {
+      display: block; 
+    }
+   .container-{{ id }} {
+      background-image: url("{{ section.settings.bg_img | image_url: width: section.settings.bg_img.width }}");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+   }
+   .wrapper-{{ id }} h2{
+      padding-block: 30px;
+      font-size: 43px;
+      color: #fff;
+      line-height: 43px;
+      text-align: center;
+   }
+    .search{{ id }} h5{
+      color: #1B0177; 
+      font-size: 16px;
+      letter-spacing: 2.4px;
+      line-height: 20px;
+      text-align: center;
+    }
+    .search-icon-{{ id }} {
+      position: absolute;
+      top: 50%;
+      right: 0px;
+      width: 13px;
+      transform: translate(-15px, -13px);
+    }
+    .search-icon-{{ id }} svg{
+      filter: opacity(0.5);
+    }
+    .search-form-{{ id }} {
+      position: relative;
+      max-width: 907px;
+      margin: auto;
+    }
+    .search-form-{{ id }} input{
+      width: 100%;
+      height: 45px;
+      border-radius: 20px;
+      border: 3px solid #01A6A5;
+      background: inherit;
+      padding-left: 15px;
+    }
+    .search-form-{{ id }} input::placeholder{
+      color: #008C8C;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 1px;
+    }
+    .search-form-{{ id }} input:focus{
+      background: #1B0177;
+    }
+    .search-form-{{ id }} input:hover{
+      border: 3px solid #fff;
+    }
+    .search-form-{{ id }}:hover svg{
+      filter: invert(1);
+    }
+    .tik-{{ id }} {
+      display: flex;
+      /* align-items: center; */
+      justify-content: center;
+    }
+    .tik-{{ id }} svg{
+      width: 55px;
+      height: 45px;
+      margin-block: 38px;
+      opacity: 12%;
+    }
+
+@media screen and (max-width: 890px){
+   
+   .search{{ id }} {
+     margin-top: {{ section.settings.margin_top-m }}px;
+     margin-bottom: {{ section.settings.margin_bottom-m }}px;
+     padding-top: {{ section.settings.padding_top-m }}px;
+     padding-bottom: {{ section.settings.padding_bottom-padding_bottom-m }}px;
+    }
+    .search-icon-{{ id }} {
+      position: absolute;
+      top: 24%;
+      right: 0px;
+      width: 13px;
+      transform: translate(-15px, -13px);
+    }
+    .tik-{{ id }} {
+      display: none; 
+    }
+    .tik-m{{ id }} svg{
+      display: block; 
+      width: 30px;
+      height: 25px;
+      margin: 20px auto;
+      opacity: 12%;
+    }
+   .wrapper-{{ id }} h2{
+      padding: 30px 0 0 0;
+      margin: 0;
+      font-size: 25px;
+      line-height: 30px;
+   }
+   .search-form-{{ id }} {
+      padding: 0 0 50px 0;
+    }
+
+  }
+</style>
+
+<section class="search{{ id }}">
+  <h5 data-aos="fade-up" data-aos-duration='500'>{{ section.settings.desc }}</h5>
+  <div class="container-{{ id }}">
+      <div class="wrapper-{{ id }} page-width">
+        <h2>{{ section.settings.title }}</h2>
+        <div class="tik-m{{ id }}">{{ section.settings.icon_sign }}</div>
+        <div class="search-form-{{ id }}">
+          <input type="text" class="search-input" id="searchInput" placeholder="{{ section.settings.btn_text }}">
+          <div class="search-icon-{{ id }}" onclick="search()">{{ section.settings.icon_search }}</div>
+        </div>
+        <div class="tik-{{ id }}">{{ section.settings.icon_sign }}</div>
+        </div>
+  </div> 
+</section>
+
+
+
+{% schema %}
+{
+  "name": "Coa Search",
+  "settings": [
+    {
+      "id": "desc",
+      "type": "textarea",
+      "label": "Add Section Title"
+    },
+    {
+      "id": "title",
+      "type": "textarea",
+      "label": "Add Input Title"
+    },
+    {
+      "id": "btn_text",
+      "type": "textarea",
+      "label": "Add placeholder text"
+    },
+    {
+      "id": "bg_img",
+      "type": "image_picker",
+      "label": "Add Image Background"
+    },
+    {
+      "id": "icon_sign",
+      "type": "html",
+      "label": "Add Icon Tik"
+    },
+    {
+      "id": "icon_search",
+      "type": "html",
+      "label": "Add Icon Search"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 8
+    },
+
+    {
+      "type": "header",
+      "content": "Spacing (Mobile)"
+    },
+    {
+      "type": "range",
+      "id": "margin_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top  (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom  (Mobile)",
+      "default": 0
+    }
+  ],
+  "blocks": [],
+  "presets":[
+    {
+      "name": "Coa Search"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

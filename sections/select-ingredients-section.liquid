@@ -1,0 +1,484 @@
+<style>
+  .ingredients--{{ section.id }}{
+    margin-top: {{ section.settings.margin_top }}px;
+    margin-bottom: {{ section.settings.margin_bottom }}px;
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  .sis__image{
+    font-size: 0;
+    line-height: 0;
+  }
+  .sis__image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+ 
+  .sis__certified a{
+    font-size: 12px;
+    line-height: 14px;
+    color: rgb(167, 242, 246);
+    text-decoration: none;
+    background-color: rgb(27, 1, 119);
+    padding: 5px 10px;
+    border-radius: 100px;
+    width: max-content;
+  }
+  .sis__text h2{
+    font-size: 36px;
+    line-height: 36px;
+    margin: 10px 0;
+    color: rgb(27, 1, 119);
+    font-weight: normal;
+  }
+  .sis__text h4{
+    font-size: 24px;
+    line-height: 24px;
+    color: rgb(27, 1, 119);
+    margin: 0;
+  }
+  .sis__text h4 span{
+    color: rgb(1, 166, 165);
+  }
+  .sis__infos{
+    margin: 50px 0 30px;
+  }
+  .sis__database-title{
+    font-size: 12px;
+    line-height: 14px;
+    color: rgb(89, 89, 89);
+    margin: 0;
+    position: relative;
+  }
+  .sis__database-title:after{
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    background-color: rgb(89, 89, 89);
+    height: 1px;
+    width: 100%;
+  }
+  .sis__infos .sis__info:not(:last-child){
+    margin: 0 0 20px;
+  }
+  .sis__info{
+    display: flex;
+    gap: 15px;
+  }
+  .sis__info svg{
+    min-width: 21px;
+    height: 17px;
+  }
+  .sis__info p{
+    font-size: 14px;
+    line-height: 17px;
+    color: rgb(27, 1, 119);
+    margin: 0;
+  }
+  
+
+  .sis__db-btns{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 20px 0 0;
+  }
+  .sis__db-select {
+    display: flex;
+    align-items: center;
+    background-color: #1B0177;
+    border-radius: 100px;
+    flex: 0 0 65%;
+  }
+  
+  .dropdown-wrapper {
+    position: relative;
+    width: 100%;
+    /* margin: 10px; */
+    /* padding: 12px 15px; */
+    background: #fff;
+    /* border-radius: 5px; */
+    cursor: pointer;
+    outline: none;
+    
+    border-radius: 100px;
+    transition: all 0.3s ease-out;
+  }
+  .dropdown-wrapper:after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    outline: 1px solid #1B0177;
+    border-radius: 100px;
+  }
+  .dropdown-wrapper a{
+    font-size: 10px;
+    line-height: 12px;
+    color: rgb(1, 166, 165);
+    position: absolute;
+    bottom: -20px;
+    left: 20px;
+  }
+  .dropdown-wrapper.is-active {
+    /* border-radius: 5px 5px 0 0; */
+    box-shadow: none;
+    border-bottom: none;
+  }
+  .dropdown__default-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+  }
+  .dropdown-wrapper svg{
+    transition: all 0.3s;
+  }
+  .dropdown-wrapper.is-active svg{
+    transform: rotate(180deg);
+  }
+  .dropdown-wrapper.is-active .dropdown-list {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    max-height: 250px;
+  }
+  
+  .dropdown-list {
+    /* Size & position */
+    position: absolute;
+    bottom: 50px;
+    left: 0;
+    right: 0;
+    /* Styles */
+    background: #fff;
+    border-radius: 10px;
+    overflow-y: auto;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-top: none;
+    border-bottom: none;
+    list-style: none;
+    transition: all 0.3s ease-out;
+    /* Hiding */
+    max-height: 0;
+    margin: 0;
+    padding: 0;
+    z-index: 9;
+  }
+  .dropdown-list li {
+    padding: 14px 10px;
+    cursor: pointer;
+    font-size: 12px;
+    line-height: 1;
+    color: #1B0177;
+    transition: all 0.3s;
+  }
+  .dropdown-list li:hover{
+    color: rgb(1, 166, 165);
+    background-color: #1B0177;
+  }
+
+  a#selected-link {
+    display: inline-block;
+    width: 30px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  .sis__db-more a{
+    width: 100%;
+    display: inline-block;
+    border: none;
+    box-shadow: none;
+    color: #1B0177;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 100px;
+    outline: 1px solid #1B0177;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .sis__db-more a:hover{
+    background-color: #1B0177;
+    color: #fff;
+  }
+  .sis__db-more a span{
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #1B0177;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  @media screen and (min-width: 991px){
+    .sis__wrapper{
+      display: grid;
+      grid-template-columns: minmax(0, 700px) minmax(0, 600px);
+      justify-content: space-between;
+    }
+  }
+  @media screen and (max-width: 990px){
+    .ingredients--{{ section.id }}{
+      margin-top: {{ section.settings.margin_top }}px;
+      margin-bottom: {{ section.settings.margin_bottom }}px;
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+    .sis__text h2 {
+      font-size: 26px;
+      line-height: 26px;
+    }
+    .sis__text h4 {
+      font-size: 13px;
+      line-height: 13px;
+    }
+    .sis__db-btns{
+      flex-direction: column;
+    }
+    .sis__db-select {
+      flex: 0 0 100%;
+      width: 100%;
+    }
+    .dropdown-wrapper a {
+      left: 50%;
+      transform: translateX(-50%);
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+    }
+    .sis__db-or {
+      margin: 14px 0 0;
+    }
+  }
+
+</style>
+<section class="ingredients--{{ section.id }}">
+  <div class="sis__wrapper page-width">
+    <div class="sis__image">
+      {% if section.settings.image %}
+        <img src="{{ section.settings.image | img_url: "master" }}" alt="{{ shop.name }}">
+      {% endif %}
+    </div>
+    <div class="sis__text">
+      <div class="sis__certified">
+        <a href="#">⭐Ingredient Glossary</a>
+      </div>
+      {% if section.settings.title != blank %}
+        <h2>{{ section.settings.title }}</h2>
+      {% endif %}
+      {% if section.settings.subtitle != blank %}
+        <h4>{{ section.settings.subtitle }}</h4>
+      {% endif %}
+      <div class="sis__infos">
+        {% for block in section.blocks %}
+          {% if block.type == "info" %}
+           <div class="sis__info">
+              {% render 'all-icons', name: "tik__blue" %}
+              {% if block.settings.title != blank %}
+                <p>{{ block.settings.title }}</p>
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <div class="sis__database">
+        <p class="sis__database-title">Search our Ingredient Database to learn more of each individual ingredient</p>
+         <div class="sis__db-btns">
+           <div class="sis__db-select">
+              <div id="dropdown-wrapper" class="dropdown-wrapper" tabindex="1">
+                  <span class="dropdown__default-wrapper"><span id="dropdown__default-text">Choose your User</span>{% render 'all-icons', name: "down__arrow" %}</span>
+                  <ul class="dropdown-list">
+                    {% for block in section.blocks %}
+                      {% if block.type == "ingredient" %}
+                        <li data-url="{{ block.settings.link }}">{{ block.settings.title }}</li>
+                      {% endif %}
+                    {% endfor %}
+                  </ul>
+                  <a href="#">Browse our CBD Ingredient Glossary</a href="#">
+              </div>
+              <a class="selected__link-disable" href="#" id="selected-link">></a>
+           </div>
+           <div class="sis__db-or">
+             or
+           </div>
+           <div class="sis__db-more">
+             <a href="#">Read More<span>{% render 'all-icons', name: "enter" %}</span></a>
+           </div>
+         </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  const dd = document.querySelector('#dropdown-wrapper');
+  const links = document.querySelectorAll('.dropdown-list li');
+  const span = document.querySelector('#dropdown__default-text');
+  const button = document.querySelector("#selected-link");
+  dd.addEventListener('click', function() {
+    this.classList.toggle('is-active');
+  });
+  
+  links.forEach((element) => {
+    element.addEventListener('click', function(evt) {
+      span.innerHTML = evt.currentTarget.textContent;
+      button.setAttribute('href', evt.currentTarget.getAttribute('data-url'));
+    })
+  })
+</script>
+{% schema %}
+{
+  "name": "Select Ingredients",
+  "settings": [
+    {
+       "type": "image_picker",
+       "id": "image",
+       "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Sub Title"
+    },
+    {
+      "type": "header",
+      "content": "Spacing (Desktop)"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Spacing (Mobile)"
+    },
+    {
+      "type": "range",
+      "id": "margin_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top (Mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom (Mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top  (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom  (Mobile)",
+      "default": 0
+    }
+  ],
+  "blocks": [
+     {
+       "name": "Info",
+       "type": "info",
+       "settings": [
+          {
+            "type": "textarea",
+            "id": "title",
+            "label": "Text"
+          }
+       ]
+     },
+     {
+       "name": "Ingredient",
+       "type": "ingredient",
+       "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Text"
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": "Link"
+          }
+       ]
+     }
+   ],
+  "presets": [
+    {
+      "name": "Select Ingredients"
+    }
+  ]
+}
+{% endschema %}

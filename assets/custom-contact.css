@@ -1,0 +1,10 @@
+.faq_wrapper-{{ id }} h2{
+    font-size: 33px;
+    line-height: normal;
+    color: rgb(92, 67, 154);
+}
+.faq-{{ id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}

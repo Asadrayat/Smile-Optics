@@ -1,0 +1,460 @@
+{% assign id = section.id %}
+
+<style>
+  .ing_organic--{{ id }} {
+     margin-top: {{ section.settings.margin_top }}px;
+     margin-bottom: {{ section.settings.margin_bottom }}px;
+     padding-top: {{ section.settings.padding_top }}px;
+     padding-bottom: {{ section.settings.padding_bottom }}px;
+     position: relative;
+  }
+  .desktop__only {
+    display: block;
+  }
+  .ing_organic--{{ id }}:after{
+    position: absolute;
+    content: "";
+    height: 5px;
+    width: 70%;
+    background: #4E397B;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    z-index: 5;
+  }
+
+  .card_container-{{ id }} {
+    position: absolute;
+    bottom: -18px;
+    right: 100px;
+    z-index: 6;
+  }
+  .ing__organic {
+    background: rgb(237, 240, 242);
+    padding-block: 30px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0 0 180px 180px;
+  }
+  .wrapper-{{ id }} h2{
+    color: #01A6A5;
+    font-size: 34px;
+    line-height: 41px;
+    font-weight: 700;
+    text-align: center;
+  }
+  .wrapper-{{ id }} p{
+    color: rgb(89, 89, 89);
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    text-align: justify;
+    letter-spacing: 0;
+    margin-inline: 12.76em;
+  }
+  .wrapper-{{ id }} p a span{
+    color: rgb(61, 155, 233);
+  }
+  .wrapper-{{ id }} h6{
+    color: #000;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 21px;
+    text-align: center;
+    letter-spacing: 0;
+  }
+  .wrapper-{{ id }} h1{
+    color: #C7C7C7;
+    font-weight: 700;
+    font-size: 70px;
+    line-height: 70px;
+    margin: 0;
+  }
+  .wrapper-{{ id }} h5{
+    color: rgb(27, 1, 119);
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 21px;
+  }
+  .bt__wrapper {
+    margin-left: 10rem;
+  }
+
+  /* style for card content starts here  */
+  .card-{{ id }} {
+    transition: all 0.4s ease-in-out 0s, visibility 0s; 
+    cursor: pointer;
+    width: 450px;
+    /* max-height: 311px; */
+    background-color: #fff;
+    border: 1px solid rgb(237, 240, 242);
+    border-radius: 5px;
+    box-shadow:  0 1px 4px rgba(0,0,0,.6);
+    padding-block: 18px; 
+    padding-inline: 15px;
+    position: relative;
+  }
+  .card-{{ id }}:hover {
+    transform: scale(1.05);
+  }
+  .img_wrapper-{{ id }} img{
+    height: 47px;
+    position: absolute;
+    bottom: 75px;
+    left: 0;
+    transform: translatex(-20px);
+  }
+  .card-content-{{ id }} {
+    position: relative;
+  }
+  .card-content-{{ id }} .logo{{ id }}{
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translateY(-14px);
+    
+  }
+  .btn-{{ id }} {
+    color: #fff;
+    font-size: 12px;
+    line-height: 17px;
+    background: #3D9BE9;
+    max-width: 120px;
+    padding-block: 4px;
+    padding-left: 11px;
+    padding-right: 21px;
+    border-radius: 20px;
+  }
+  .tube_img-{{ id }} {
+    margin-top: 75px;
+    display: flex;
+    justify-content: space-around;
+   }
+  .card-content-{{ id }} h3{
+    margin-bottom: 0;
+    color: #319DA9;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 16px;
+  }
+  .card-content-{{ id }} h4{
+    margin-block: 8px;
+    color: #4E397B;
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: 700;
+  }
+  .card-content-{{ id }} p{
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+    text-align: justify;
+    color: #000;
+    margin: 0;
+  }
+   .sub_cd {
+    color: #FF8A04;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+    text-align: justify;
+    margin: 0;
+    text-decoration: underline;
+  }
+   .sub_cd:hover {
+    color: #3D9BE9;
+  }
+@media screen and (max-width: 1500px){
+  .ing__organic {
+    border-radius: 0 0 140px 140px;
+  }
+  .wrapper-{{ id }} p {
+     margin-inline: 9.87rem;
+  }
+  .bt__wrapper{
+      margin-left: 25rem;
+  }
+}
+@media screen and (max-width: 890px){
+  .ing_organic--{{ id }} {
+     margin-top: {{ section.settings.margin_top-margin_top-m }}px;
+     margin-bottom: {{ section.settings.margin_bottom-m }}px;
+     padding-top: {{ section.settings.padding_top-m }}px;
+     padding-bottom: {{ section.settings.padding_bottom-m }}px;
+  }
+  .ing_organic--{{ id }}:after{
+    height: 3px;
+  }
+  .card-{{ id }} {
+    width: 100%;
+    padding-block: 5px; 
+    padding-inline: 5px;
+    margin: auto;
+  }
+  .bt__wrapper h5{
+    margin-block: 20px; 
+  }
+  .ing__organic {
+    border-radius: 0 0 50px 50px;
+    padding: 0;
+  }
+  .card_container-{{ id }} {
+    margin-top: 30px;
+    position: unset;
+    margin-inline: 24px;
+  }
+  .wrapper-{{ id }} p {
+     margin-inline: 0;
+  }
+  .bt__wrapper{
+    text-align: center;
+    margin-left: 0;
+  }
+  .wrapper-{{ id }} h1{
+    font-size: 30px;
+    letter-spacing: 2px;
+    text-wrap: nowrap;
+    line-height: 23px;
+    margin-top: 35px;
+  }
+  .wrapper-{{ id }} h1 br{
+    display: none;
+  }
+  .desktop__only {
+    display: none;
+  }
+  .wrapper-{{ id }} h2 {
+    font-size: 22px;
+    line-height: 26.8px;
+  }
+  .wrapper-{{ id }} p {
+     margin-inline: 0;
+  }
+  .img_wrapper-{{ id }} img{
+    width: 110%;
+    height: auto;
+    margin: auto;
+  }
+}
+
+</style>
+
+<section class="ing_organic--{{ id }}">
+ <div class="container-{{ id }}">
+  <div class="ing__organic">   
+      <div class="wrapper-{{ id }} page-width">
+        <h2>{{ section.settings.title }}</h2>
+        <p>{{ section.settings.rte }}</p>
+        <h6 class="desktop__only">{{ section.settings.secondary_title }}</h6>
+        <div class="bt__wrapper">
+          <h1>{{ section.settings.big_title }}</h1>
+          <h5 class="bt_sub-{{ id }}">{{ section.settings.bt_sub }}</h5>
+        </div>
+      </div>
+  </div>  
+ </div>
+  <div class="card_container-{{ id }}" data-aos="fade-left" data-aos-duration="1000">
+    <div class="card-{{ id }}">
+      <div class="card-content-{{ id }}">
+        <div class="btn-{{ id }} button-font">{{ section.settings.btn_text }}</div>
+        <h3>{{ section.settings.card_title }}</h3>
+        <h4>{{ section.settings.card_subtitle }}</h4>
+        <p>{{ section.settings.card_desc }}</p>
+        <a class="sub_cd">{{ section.settings.card_desc-anchor }}</a>
+        <div class="tube_img-{{ id }}">
+          {% for block in section.blocks%}
+            {% if block.settings.image_tube %}
+            <img  class="card_img-banner-{{ id }}" src="{{ block.settings.image_tube | img_url: "master" }}" alt="card_img">
+            {% endif %}
+          {% endfor %}
+        </div>
+        <img  class="logo{{ id }}" src="{{ section.settings.logo_img | img_url: "master" }}" alt="Money back">
+      </div>
+      <div class="img_wrapper-{{ id }}"><img  class="card_img-banner-{{ id }}" src="{{ section.settings.perameter | img_url: "master" }}" alt="Money back"></div>
+  </div>
+  </div> 
+</section>
+
+{% schema %}
+{
+  "name": "Custom Ingridient Organic",
+  "settings": [
+    {
+      "id": "title",
+      "type": "text",
+      "label": "Add Title"
+    },
+    {
+      "id": "secondary_title",
+      "type": "text",
+      "label": "Add Title 2"
+    },
+    {
+      "id": "big_title",
+      "type": "text",
+      "label": "Add Big Title"
+    },
+    {
+      "id": "bt_sub",
+      "type": "text",
+      "label": "Add Subtitle"
+    },
+    {
+      "id": "rte",
+      "type": "richtext",
+      "label": "Add description"
+    },
+    {
+      "type": "header",
+      "content": "Add Card Content"
+    },    
+    {
+      "id": "btn_text",
+      "type": "text",
+      "label": "Add Card Button Text"
+    },
+    {
+      "id": "card_title",
+      "type": "text",
+      "label": "Add Card title"
+    },
+    {
+      "id": "card_subtitle",
+      "type": "text",
+      "label": "Add Card Sub title"
+    },
+    {
+      "id": "card_desc",
+      "type": "richtext",
+      "label": "Add Card Description"
+    },
+    {
+      "id": "card_desc-anchor",
+      "type": "text",
+      "label": "Add Card Description Anchor"
+    },
+    {
+      "id": "logo_img",
+      "type": "image_picker",
+      "label": "Add Card logo"
+    },
+    {
+      "id": "perameter",
+      "type": "image_picker",
+      "label": "Add card Perameter"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 8
+    },
+
+    {
+      "type": "header",
+      "content": "Spacing (Mobile)"
+    },
+    {
+      "type": "range",
+      "id": "margin_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top  (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom  (Mobile)",
+      "default": 0
+    }
+  ],
+  
+  "blocks": [
+    {
+      "name": "Image",
+      
+      "type": "Text",
+      "settings": [
+          {
+            "id": "image_tube",
+            "type": "image_picker",
+            "label": "Add Tube Image Card"
+          }
+      ]
+    }
+  ],
+
+  "presets":[
+    {
+      "name": "Custom Ingridient Organic"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

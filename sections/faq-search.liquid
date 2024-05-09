@@ -1,0 +1,222 @@
+{% assign id = section.id %}
+
+<style>
+      .search{{ id }} {
+       margin-top: {{ section.settings.margin_top }}px;
+       margin-bottom: {{ section.settings.margin_bottom }}px;
+       padding-top: {{ section.settings.padding_top }}px;
+       padding-bottom: {{ section.settings.padding_bottom }}px;
+       background: #FFF6E9;
+      }
+       .container-{{ id }} {
+
+       }
+      .wrapper-{{ id }} h2{
+        font-size: 50px;
+        line-height: 50px;
+        color: rgb(27, 1, 119);
+        text-align: center;
+      }
+      .search-icon-{{ id }} {
+        position: absolute;
+        top: 50%;
+        right: 0px;
+        width: 13px;
+        transform: translate(-15px, -13px);
+      }
+      .search-icon-{{ id }} svg{
+        filter: opacity(1);
+      }
+      .search-form-{{ id }} {
+        position: relative;
+        max-width: 907px;
+        margin: auto;
+      }
+      .search-form-{{ id }} input{
+        width: 100%;
+        height: 45px;
+        border-radius: 20px;
+        border: none;
+        background: #FFFAF4;
+        padding-left: 15px;
+        box-shadow: 0 0 2px #0000002b;
+        /* color: #000; */
+      }
+      .search-form-{{ id }} input::placeholder{
+        color: #000;
+        font-size: 16px;
+        font-weight: 500;
+        opacity: 70%;
+        letter-spacing: 1px;
+      }
+      .search-form-{{ id }} input:focus{
+        background: #fff;
+      }
+      .search-form-{{ id }} input:hover{
+        border: none;
+        box-shadow: 0 0 3px #0000002b;
+      }
+      .search-form-{{ id }}:hover svg{
+        filter: invert(1);
+      }
+
+  @media screen and (max-width: 890px){
+
+     .search{{ id }} {
+       margin-top: {{ section.settings.margin_top_m }}px;
+       margin-bottom: {{ section.settings.margin_bottom_m }}px;
+       padding-top: {{ section.settings.padding_top_m }}px;
+       padding-bottom: {{ section.settings.padding_bottom_m }}px;
+      }
+      .wrapper-{{ id }} h2{
+        font-size: 27px;
+        line-height: normal;
+      }
+      .search-icon-{{ id }} {
+        position: absolute;
+        top: 24%;
+        right: 0px;
+        width: 13px;
+        transform: translate(-15px, -13px);
+      }
+     .search-form-{{ id }} {
+        padding: 0 0 50px 0;
+      }
+
+    }
+</style>
+
+<section class="search{{ id }}">
+  <div class="container-{{ id }}">
+    <div class="wrapper-{{ id }} page-width">
+      <h2>{{ section.settings.desc }}</h2>
+      <div class="search-form-{{ id }}">
+        <input type="text" class="search-input" id="searchInput" placeholder="{{ section.settings.placeholder }}">
+        <div class="search-icon-{{ id }}" onclick="search()">{{ section.settings.icon_search }}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FAQ Search",
+  "settings": [
+    {
+      "id": "desc",
+      "type": "textarea",
+      "label": "Add Section Title"
+    },
+    {
+      "id": "placeholder",
+      "type": "textarea",
+      "label": "Add Placeholder text"
+    },
+    {
+      "id": "icon_search",
+      "type": "html",
+      "label": "Add Icon Search"
+    },
+      {
+        "type": "header",
+        "content": "Section Spacing Desktop"
+      },
+      {
+        "type": "range",
+        "id": "margin_top",
+        "min": -200,
+        "max": 100,
+        "step": 10,
+        "unit": "px",
+        "label": "Margin Top",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "margin_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Margin Bottom",
+        "default": 24
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding Top",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding Bottom",
+        "default": 0
+      },
+      {
+        "type": "header",
+        "content": "Section Spacing Mobile"
+      },
+      {
+        "type": "range",
+        "id": "margin_top_m",
+        "min": -200,
+        "max": 100,
+        "step": 10,
+        "unit": "px",
+        "label": "Margin Top",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "margin_bottom_m",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Margin Bottom",
+        "default": 24
+      },
+      {
+        "type": "range",
+        "id": "padding_top_m",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding Top",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom_m",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding Bottom",
+        "default": 0
+      }
+  ],
+  "blocks": [],
+  "presets":[
+    {
+      "name": "FAQ Search"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

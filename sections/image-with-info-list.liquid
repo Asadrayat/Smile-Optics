@@ -1,0 +1,362 @@
+<style>
+  .image__with-info-list--{{ section.id }}{
+    margin-top: {{ section.settings.margin_top }}px;
+    margin-bottom: {{ section.settings.margin_bottom }}px;
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  .iwli__wrapper.page-width{
+    margin-right: 0;
+    max-width: 175rem;
+  }
+  .iwli__header h2{
+    font-size: 40px;
+    line-height: 44px;
+    color: rgb(27, 1, 119);
+    margin: 0;
+  }
+  .iwli__header h2 span{
+    color: rgb(1, 166, 165);
+    font-weight: 700;
+  }
+  .iwli__subtitle{
+    text-align: center;
+  }
+  
+  .iwli__subtitle p{
+    margin: 0;
+    color: rgb(201, 197, 196);
+    font-size: 10px;
+    line-height: 12px;
+  }
+  .iwli__items{
+    margin-top: 60px;
+  }
+  .iwli__items > div:not(:last-child){
+    margin: 0 0 30px;
+  }
+  .iwli__item {
+    display: flex;
+    gap: 5px;
+  }
+  .iwli__images .iwli__image:nth-of-type(2){
+    bottom: 0;
+    left: 12%;
+  }
+  .iwli__images .iwli__image:nth-of-type(3){
+    top: -12%;
+    right: 12%;
+  }
+  .iwli__image.iwli__small-image{
+    position: absolute;
+    max-width: 180px;
+  }
+  .iwli__image.iwli__small-image img{
+    border-radius: 20px;
+    border: 5px solid #fff;
+  }
+  .iwli__item-count{
+    min-width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgb(27, 1, 119);
+    font-size: 16px;
+    line-height: 19px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.4s;
+  }
+  .iwli__item-count:hover{
+    color: rgb(167, 242, 246);
+  }
+  .iwli__item-text h4{
+    font-size: 24px;
+    line-height: 26px;
+    color: rgb(27, 1, 119);
+    margin: 0 0 10px;
+  }
+  .iwli__item-text p{
+    font-size: 11px;
+    line-height: 13px;
+    color: rgb(94, 77, 153);
+    margin: 0;
+  }
+  .iwli__images{
+    position: relative;
+  }
+  .iwli__image{
+    font-size: 0;
+    line-height: 0;
+  }
+  .iwli__image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .iwli__big-image{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .iwli__big-image img{
+    width: 80%;
+    border-radius: 40px;
+  }
+
+  @media screen and (min-width: 769px){
+    .iwli__wrapper{
+      display: grid;
+      grid-template-columns: minmax(0, 600px) minmax(0, 650px);
+      grid-template-rows: minmax(0, auto) 1fr;
+      justify-content: space-between;
+      grid-column-gap: 100px;
+    }
+    .iwli__header{
+      grid-column: 1/2;
+      grid-row: 1/2;
+    }
+
+    .iwli__items{
+      grid-column: 1/2;
+      grid-row: 2/-1;
+    }
+    .iwli__images{
+      grid-column: 2/-1;
+      grid-row: 1/-1;
+      position: relative;
+    }
+  }
+  @media screen and (max-width: 768px){
+    .image__with-info-list--{{ section.id }}{
+      margin-top: {{ section.settings.margin_top-m }}px;
+      margin-bottom: {{ section.settings.margin_bottom-m }}px;
+      padding-top: {{ section.settings.padding_top-m }}px;
+      padding-bottom: {{ section.settings.padding_bottom-m }}px;
+    }
+    .iwli__wrapper{
+      display: flex;
+      flex-direction: column;
+      gap: 70px;
+    }
+    .iwli__header{
+      order: 1;
+    }
+    .iwli__header h2{
+      font-size: 23px;
+      line-height: 25px;
+    }
+    .iwli__items{
+      order: 3;
+      margin-top: 70px;
+    }
+    .iwli__images{
+      order: 2;
+    }
+    .iwli__images .iwli__image:nth-of-type(2) {
+      bottom: -22%;
+      left: 10%;
+    }
+    .iwli__images .iwli__image:nth-of-type(3) {
+      top: -15%;
+      right: 8%;
+    }
+    .iwli__big-image img {
+      width: 100%;
+      border-radius: 40px;
+    }
+  }
+</style>
+<section class="image__with-info-list--{{ section.id }}">
+  <div class="iwli__wrapper page-width">
+    <div class="iwli__header">
+      {% if section.settings.title %}
+        <h2>{{ section.settings.title }}</h2>
+      {% endif %}
+    </div>
+    <div class="iwli__items">
+      {% if section.settings.subtitle %}
+        <div class="iwli__subtitle">
+          <p>{{ section.settings.subtitle }}</p>
+        </div>
+      {% endif %}
+      {% for block in section.blocks %}
+        {% if block.type == "info" %}
+          <div class="iwli__item">
+            <div class="iwli__item-count">
+              {{ forloop.index }}
+            </div>
+            <div class="iwli__item-text">
+              {% if block.settings.title != blank %}
+                <h4>{{ block.settings.title }}</h4>
+              {% endif %}
+              {% if block.settings.text != blank %}
+                <p>{{ block.settings.text }}</p>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+    <div class="iwli__images">
+      {% for block in section.blocks %}
+        {% if block.type == "image" %}
+          <div class="iwli__image {% if block.settings.small %}iwli__small-image {% else %} iwli__big-image{% endif %}">
+            {% if block.settings.image %}
+              <img loading="lazy" width="100%" height="100%" src="{{ block.settings.image | img_url: "master" }}" alt="Image">
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Image with info list",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Sub Title"
+    },
+    {
+      "type": "header",
+      "content": "Spacing (Desktop)"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Spacing (Mobile)"
+    },
+    {
+      "type": "range",
+      "id": "margin_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top (Mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom (Mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top  (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom  (Mobile)",
+      "default": 0
+    }
+  ],
+  "blocks": [
+     {
+       "name": "Info",
+       "type": "info",
+       "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "textarea",
+            "id": "text",
+            "label": "Text"
+          }
+       ]
+     },
+     {
+       "name": "Image",
+       "type": "image",
+       "limit": 3,
+       "settings": [
+         {
+           "type": "image_picker",
+           "id": "image",
+           "label": "Image"
+         },
+         {
+            "type": "checkbox",
+            "id": "small",
+            "label": "Make Smaller Image",
+            "default": true
+          }
+
+       ]
+     }
+   ],
+  "presets": [
+    {
+      "name": "Image with info list"
+    }
+  ]
+}
+{% endschema %}

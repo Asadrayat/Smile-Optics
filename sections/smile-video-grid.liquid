@@ -1,0 +1,294 @@
+{% liquid
+  assign id = section.id
+%}
+
+<style>
+  #shopify-section-{{id}} {
+      box-sizing: border-box;
+      margin-top: {{section.settings.margin_top | append: 'px'}};
+      margin-bottom: {{section.settings.margin_bottom | append: 'px'}};
+      padding-top: {{section.settings.padding_top | append: 'px'}};
+      padding-bottom: {{section.settings.padding_bottom | append: 'px'}};
+      background : {{section.settings.bgcolor}} ;
+  }
+  .wrapper--{{ section.id }} {
+      display: grid;
+      gap: 10px;
+      /* grid-template-columns: repeat(4,1fr); */
+      grid-template-columns: repeat(4, minmax(0, 293px));
+      justify-content: space-between;
+  }
+   #shopify-section-{{id}} .grid-single-video {
+      position : relative;
+  }
+  #shopify-section-{{id}} video.grid-video {
+    width: 100%;
+  }
+  .btn-{{ id }} {
+      background: inherit;
+      color: rgb(92, 67, 154);
+      font-size: 12px;
+      text-decoration: none;
+      transition: all  0.5s ease-in-out;
+      padding: 8px 30px;
+      border-radius: 15px;
+      display: flex;
+      width: max-content;
+      margin: auto;
+  }
+  .btn-{{ id }}:hover {
+      background: rgb(92, 67, 154);
+      color: rgb(95, 199, 204);
+  }
+
+  #shopify-section-{{id}} .slider-slide-video {
+      width: 100%;
+      /* border-radius: 15px; */
+      border: 2px solid var(--White, #FFF);
+      box-sizing: border-box;
+  }
+  .vss-play-button-{{id}} {
+      position: absolute;
+      width: 48px;
+      height: 48px;
+      border: none;
+      border-radius: 50%;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+      cursor: pointer;
+  }
+
+  .grid-video.playing + .vss-play-button-{{id}} {
+      display: none;
+  }
+  #shopify-section-{{id}} video::playing {
+      border: 5px solid green;
+  }
+  @media(max-width: 768px) {
+  #shopify-section-{{id}} {
+      margin-top: {{section.settings.margin_top_m | append: 'px'}};
+      margin-bottom: {{section.settings.margin_bottom_m | append: 'px'}};
+      padding-top: {{section.settings.padding_top_m | append: 'px'}};
+      padding-bottom: {{section.settings.padding_bottom_m | append: 'px'}};
+  }
+  .wrapper--{{ section.id }} {
+      /* grid-template-columns: repeat(2,1fr); */
+      grid-template-columns: repeat(1,1fr);
+  }
+  .btn_m-{{ id }} {
+      background: #ffffff42;
+      color: rgb(92, 67, 154);
+      font-size: 12px;
+      text-decoration: none;
+      transition: all  0.5s ease-in-out;
+      padding: 8px 30px;
+      border-radius: 15px;
+      display: flex;
+      width: 90%;
+      text-align: center;
+      margin: auto;
+  }
+  .btn_m-{{ id }}:hover {
+      background: rgb(92, 67, 154);
+      color: rgb(95, 199, 204);
+  }
+    #shopify-section-{{id}} video.grid-video {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+}
+  }
+</style>
+
+<div class="container--{{ section.id }} page-width">
+  <div class="wrapper--{{ section.id }}">
+    {% for block in section.blocks %}
+      <div class="grid-single-video">
+        {% unless block.settings.video == blank %}
+          {{
+            block.settings.video
+            | video_tag:
+            image_size: '200x',
+            autoplay: false,
+            loop: true,
+            muted: false,
+            controls: false,
+            class: 'grid-video',
+            data-index: forloop.index
+          }}
+          <div class="vss-play-button-{{id}}">
+            {% render 'play-button' %}
+          </div>
+        {% endunless %}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+  if(document.querySelectorAll(".vss-play-button-{{id}}")) {
+    document.querySelectorAll(".vss-play-button-{{id}}").forEach(button => {
+      button.addEventListener("click", e => {
+        let video = button.closest(".grid-single-video").querySelector("video")
+        gridvideoControl(video)
+      })
+    })
+  }
+
+  if(document.querySelectorAll(" .grid-video")) {
+    document.querySelectorAll(".grid-video").forEach(video => {
+      video.addEventListener("click", e => {
+        gridvideoControl(video)
+      })
+    })
+  }
+
+  function gridvideoControl(video) {
+    document.querySelectorAll(".grid-video").forEach(v => {
+      if(v.dataset.index === video.dataset.index) {
+         if(v.paused) {
+          v.play()
+          v.classList.add("playing")
+        }
+        else {
+          v.pause()
+          v.classList.remove("playing")
+        }
+      } else {
+        v.pause()
+        v.classList.remove("playing")
+      }
+    })
+
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Smile Video Grid",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bgcolor",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing Desktop"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing Mobile"
+    },
+    {
+      "type": "range",
+      "id": "margin_top_m",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom_m",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_top_m",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_m",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video",
+      "name": "Video",
+      "settings": [
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Smile Video Grid"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

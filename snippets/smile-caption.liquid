@@ -1,0 +1,31 @@
+{% comment %}
+  {% render 'smile-caption',
+    title: block.settings.title,
+    content: block.settings.content,
+    caption_alignment: block.settings.caption_alignment,
+    position_from_top: block.settings.position_from_top,
+    position_from_left: block.settings.position_from_left,
+    serial: forloop.index
+  %}
+{% endcomment %}
+<div
+  class="single_caption single_caption_{{ serial }}"
+  {% if caption_alignment == 'left' %}
+    data-aos="fade-right"
+  {% elsif caption_alignment == 'right' %}
+    data-aos="fade-left"
+  {% endif %}
+  style="top : {{ position_from_top| append:'%' }}; left : {{ position_from_left| append:'%' }}; "
+>
+  <span class="caption-left-arrow {% if caption_alignment == 'left' %}hidden{% endif %}">
+    {%- render 'smile-all-icons', name: 'caption-right' -%}
+  </span>
+
+  <div class="single-caption-text-block">
+    <h4>{{ title }}</h4>
+    <div class="sc-content">{{ content }}</div>
+  </div>
+  <span class="caption-right-arrow {% if caption_alignment == 'right' %} hidden {% endif %}">
+    {%- render 'smile-all-icons', name: 'caption-left' -%}
+  </span>
+</div>

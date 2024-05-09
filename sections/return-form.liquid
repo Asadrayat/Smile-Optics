@@ -1,0 +1,411 @@
+{% assign id = section.id %}
+
+<style>
+    .custom_contact--{{ id }} {
+       margin-top: {{ section.settings.margin_top }}px;
+       margin-bottom: {{ section.settings.margin_bottom }}px;
+       padding-top: {{ section.settings.padding_top }}px;
+       padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+    .faq_form-{{ id }} {
+      max-width: 900px;
+      margin: auto;
+    }
+    .line-{{ id }} {
+      border-bottom: 1px solid #0000002b;
+      padding-bottom: 40px;
+    }
+  /* faq style starts here */
+    .faq_wrapper-{{ id }} h2,
+    .contact-{{ id }} h1{
+      font-size: 33px;
+      line-height: normal;
+      color: rgb(92, 67, 154);
+    }
+    .contact-{{ id }} {
+      max-width: 250px;
+      margin: 0 auto;
+    }
+    .contact_wrapper-{{ id }} h3{
+        margin: 10px 0;
+        font-size: 15px;
+        line-height: 20px;
+        color: rgb(150, 150, 150);
+    }
+    .faq-{{ id }} {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      width: 92%;
+      margin: auto;
+    }
+    .faq-btn-{{ id }}  {
+      background: #fff !important;
+      color: #000 !important;
+      border: 1px solid #000;
+      font-size: 14px;
+      line-height: 17px;
+    }
+
+    .faq-btn-{{ id }}:hover  {
+      background: #6f60e9 !important;
+      color: #fff !important;
+      border: none;
+    }
+    .navigation_text {
+      font-size: 12px;
+      line-height: 12px;
+      font-weight: normal;
+      color: rgb(61, 155, 233);
+      cursor: pointer;
+      text-decoration: underline;
+      text-align: right;
+    }
+  /* faq style ends here */
+    .c-top-{{ id }} {
+
+    }
+    .icon-{{ id }} svg{
+      width: 55px;
+      height: 44px;
+      filter: grayscale(1);
+    }
+    .wrapper-{{ id }} {
+      padding-bottom: 80px;
+    }
+  .wrapper-{{ id }} h2{
+    /* text-align: center; */
+    margin: 0;
+    font-size: 18px;
+    line-height: 21px;
+    color: #000;
+  }
+    .wrapper-{{ id }} p{
+      font-size: 12px;
+      line-height: 14px;
+      color: #000;
+      text-align: justify;
+      margin: 15px 0;
+    }
+    .wrapper-{{ id }} p a{
+      color: rgb(0, 166, 165);
+      text-decoration: none;
+    }
+    .container-{{ id }} {
+      max-width: 914px;
+      background: #fff;
+      border-radius: 30px;
+      margin: auto;
+      padding: 50px 50px;
+      box-shadow: 0px 0px 5px #e0cece;
+    }
+    .form-{{ id }} {
+      display: flex;
+      flex-direction: column;
+      width: 88%;
+      margin: auto;
+    }
+    .form-{{ id }} input{
+      height: 50px;
+      max-width: 100%;
+      border-radius: 25px;
+      border: none;
+      background: #F7F6F6;
+      padding: 0  0 0 20px;
+      font-size: 14px;
+      line-height: 20px;
+      color: #000;
+    }
+    .form-{{ id }} input:focus,
+    .form-{{ id }} textarea{
+      border: 1px solid #000;
+    }
+    .form-{{ id }} textarea{
+      font-size: 14px;
+      line-height: 20px;
+      height: 76px;
+      max-width: 100%;
+      border-radius: 20px;
+      border: none;
+      color: #000;
+      background: #F7F6F6;;
+      margin-top: 20px;
+      padding: 15px 0  0 20px;
+    }
+    .input-wp{{ id }} {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .checkbox-{{ id }} {
+      display: flex;
+    }
+    .checkbox-{{ id }} p{
+      font-size: 14px;
+      line-height: 26px;
+      color: rgb(83, 70, 130);
+      margin: 15px 15px;
+    }
+    .checkbox-{{ id }} p a{
+      text-decoration: underline;
+      color: inherit;
+    }
+   .btn_{{ id }}{
+      display: grid;
+    }
+    .btn_{{ id }} input{
+      justify-self: end;
+      width: 210px;
+      font-size: 16px;
+      text-decoration: none;
+      background: rgb(111,96,233);
+      letter-spacing: 1px;
+      height: 41px;
+      line-height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      border-radius: 30px;
+      transition: background .2s,color .2s;
+      cursor: pointer;
+      outline: none;
+    }
+    .btn_{{ id }} input:hover{
+      background: #fff;
+      color: #000;
+      border: 1px solid #000;
+    }
+  @media screen and (max-width: 890px){
+
+     .custom_contact--{{ id }} {
+       margin-top: {{ section.settings.margin_top-m }}px;
+       margin-bottom: {{ section.settings.margin_bottom-m }}px;
+       padding-top: {{ section.settings.padding_top-m }}px;
+       padding-bottom: {{ section.settings.padding_bottom-padding_bottom-m }}px;
+       display: flex;
+       flex-direction: column-reverse;
+      }
+      .black__btn {
+        width: 50%;
+        margin: auto;
+      }
+      .faq-{{ id }} {
+        width: 100%;
+      }
+      .faq-btn-{{ id }}  {
+        font-size: 10px;
+        line-height: 12px;
+        font-weight: bold !important;
+        padding: 15px 15px !important;
+        border-radius: 40px !important;
+      }
+      .contact-{{ id }} {
+        max-width: unset;
+      }
+      .container-{{ id }} {
+        padding: 20px 15px;
+        width: 90%;
+        margin: auto;
+      }
+     .wrapper-{{ id }} h2{
+        font-size: 18px;
+        line-height: 16px;
+        max-width: 90%;
+        margin: auto;
+      }
+      .wrapper-{{ id }} p{
+        font-size: 14px;
+        line-height: 22px;
+        padding: 0 15px;
+      }
+      .form-{{ id }} {
+        width: 100%;
+      }
+      .input-wp{{ id }} {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+     .checkbox-{{ id }} p{
+        font-size: 12px;
+        line-height: 16px;
+        padding: 0;
+        text-align: justify;
+     }
+    .btn_{{ id }} input{
+          width: 100%;
+     }
+  }
+</style>
+
+<section class="custom_contact--{{ id }} page-width">
+  <div class="faq_form-{{ id }}">
+    <!-- contact form ends here -->
+    <div class="wrapper-{{ id }}">
+      <div class="c-top-{{ id }}">
+        <h2>{{ section.settings.title }}</h2>
+      </div>
+      <p>{{ section.settings.desc }}</p>
+      <div class="container-{{ id }}">
+        {% render 'custom-contact-form', id: id %}
+      </div>
+    </div>
+    <!-- contact form ends here -->
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Return Form",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Contact (Form)"
+    },
+    {
+      "id": "title",
+      "type": "textarea",
+      "label": "Add Title"
+    },
+    {
+      "id": "desc",
+      "type": "richtext",
+      "label": "Add Description"
+    },
+    {
+      "id": "policy",
+      "type": "richtext",
+      "label": "Add Policy Text"
+    },
+    {
+      "id": "btn_text",
+      "type": "textarea",
+      "label": "Add Button text"
+    },
+    {
+      "type": "header",
+      "content": "Contact Us"
+    },
+    {
+      "id": "title_contact",
+      "type": "textarea",
+      "label": "Add Title",
+      "default":"Contact Us"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 8
+    },
+
+    {
+      "type": "header",
+      "content": "Spacing (Mobile)"
+    },
+    {
+      "type": "range",
+      "id": "margin_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top  (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom  (Mobile)",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+        "type": "text",
+        "name": "Faq",
+        "settings": [
+          {
+            "type": "textarea",
+            "id": "fp_btntext",
+            "label": "Add faq Title"
+          },
+          {
+            "type": "url",
+            "id": "fp_url",
+            "label": "Add Faq Url"
+          }
+        ]
+      }
+  ],
+  "presets":[
+    {
+      "name": "Return Form"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

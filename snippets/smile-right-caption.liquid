@@ -1,0 +1,22 @@
+{% comment %}
+  {% render 'smile-right-caption',
+    title: block.settings.title,
+    content: block.settings.content,
+    position_from_top: block.settings.position_from_top,
+    position_from_right: block.settings.position_from_right,
+    serial: forloop.index
+  %}
+{% endcomment %}
+<div
+  class="single_caption single_caption_{{ serial }}"  data-aos="fade-right" 
+  style="top : {{ position_from_top| append:'%' }}; right : {{ position_from_right| append:'%' }}; "
+>
+  <span class="caption-left-arrow ">
+    {%- render 'smile-all-icons', name: 'caption-right' -%}
+  </span>
+
+  <div class="single-caption-text-block">
+    <h4>{{ title }}</h4>
+    <p>{{ content }}</p>
+  </div>
+</div>

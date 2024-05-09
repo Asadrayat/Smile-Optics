@@ -1,0 +1,377 @@
+<style>
+  .section-container--{{ section.id }}{
+      margin-top: {{ section.settings.margin_top | append:'px' }};
+      margin-bottom: {{ section.settings.margin_bottom | append:'px' }};
+      padding-top: {{ section.settings.padding_top | append:'px' }};
+      padding-bottom: {{ section.settings.padding_bottom | append:'px' }};
+      /* overflow: hidden; */
+      position : relative;
+      transition : 0.5s;
+  }
+  .section-container--{{ section.id }}:hover {
+      /* transform : scale3d(1.05,1.05,1.05); */
+      transform : scale(1.05);
+  }
+ 
+  .section-wrapper--{{ section.id }} {
+      text-align: center;
+      background: #01A6A5;
+      padding: 30px 0 0 0;
+      border-radius: 30px;
+      width: 60%;
+      margin: auto;
+      position: relative;
+  }
+  .section-wrapper--{{ section.id }} .text-contents {
+      width: 80%;
+      margin: auto;
+  }
+  .section-wrapper--{{ section.id }} .text-contents h2 {
+      font-size: 55px;
+      color: #AFE9E8;
+      text-shadow: #00000066 0px 4px 5px;
+      line-height: 0;
+
+  }
+  .section-wrapper--{{ section.id }} .text-contents h5 {
+      color: #FFFFFF;
+      font-size: 20px;
+      letter-spacing: 0;
+      font-weight: 700;
+      line-height: 0;
+  }
+  .section-wrapper--{{ section.id }} .text-contents p {
+      font-size: 14px;
+      color: #ffffff;
+      line-height: 16.8px;
+  }
+  .section-wrapper--{{ section.id }} .text-contents p span {
+      text-decoration: none;
+      color: #ffffff;
+      font-weight: 700;
+  }
+  .section-wrapper--{{ section.id }} .notice-wrapper {
+      width: 80%;
+      margin: auto;
+      transform: translateY(25px);
+  }
+  .section-wrapper--{{ section.id }} .single-notice{
+      transition: 0.5s;
+  }
+  .section-wrapper--{{ section.id }} .single-notice:hover {
+      transform: scale3d(1.05, 1.05, 1.05);
+  }
+  .section-wrapper--{{ section.id }} .single-notice {
+      display: flex;
+      gap: 10px;
+      background-color: #270e7e;
+      border-radius: 20px;
+      padding: 5px 10px;
+  }
+
+  .section-wrapper--{{ section.id }} h3.notice-title {
+      min-width: max-content;
+      padding: 10px;
+      font-size: 13px;
+      color: #ffffff;
+      background-color: #3d9be9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 15px;
+  }
+  .section-wrapper--{{ section.id }} p.notice-content {
+      font-size: 11px;
+      line-height: 1em;
+      text-align: justify;
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      justify-content: center;
+      color: #C9C8FB;
+  }
+  .section-wrapper--{{ section.id }} p.notice-content a {
+      color: #C9C8FB;
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 14px;
+  }
+.button-wrapper{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    letter-spacing: .1em;
+    line-height: 1em;
+    text-align: center;
+    /* border-bottom: 1px solid #c7c7c7; */
+    z-index: 2;
+    position: relative;
+}
+a.button-metadata-data {
+    text-decoration: none;
+    color: #afe9e8;
+    background: #1b0177;
+    font-size: 10px;
+    /* border: 2px solid #1b0177; */
+    padding: 5px 20px;
+    border-radius: 20px;
+    margin-top: 5px;
+}
+a.faq-anchor {
+    text-decoration: none;
+    font-size: 10px;
+    color: #ffffff;
+    transition : 0.5s ease;
+    position: relative;
+}  
+a.faq-anchor:hover {
+    color: #1b0177;
+}  
+  @media screen and (max-width: 768px){
+
+.section-container--{{ section.id }}{
+    margin-top: {{ section.settings.margin_top_mobile | append:'px' }};
+    margin-bottom: {{ section.settings.margin_bottom_mobile | append:'px'  }};
+    padding-top: {{ section.settings.padding_top_mobile | append:'px' }};
+    padding-bottom: {{ section.settings.padding_bottom_mobile | append:'px' }};
+    
+}
+.section-wrapper--{{ section.id }} .text-contents {
+    width: 80%;
+    margin: auto;
+}
+.section-wrapper--{{ section.id }} .text-contents h2 {
+    font-size: 36px;
+    line-height: 36px;
+}
+.section-wrapper--{{ section.id }} {
+    padding: 30px 0 50px;
+    border-radius: 30px;
+}
+.button-wrapper {
+    flex-direction: column;
+    width: 60%;
+    margin: auto;
+}
+.section-wrapper--{{ section.id }} .notice-wrapper {
+    width: 90%;
+}
+.section-wrapper--{{ section.id }} .single-notice {
+    align-items: center;
+    position: relative;
+    display: block;
+    min-height: 120px;
+    transition: 0.5s;
+}
+.section-wrapper--{{ section.id }} .single-notice:hover {
+    transform: scale3d(1.05, 1.05, 1.05);
+}
+.section-wrapper--{{ section.id }} h3.notice-title {
+    position: absolute;
+    left: -25px;
+    top: 50%;
+    transform: translateY(-50%) rotate(-90deg);
+    padding: 2px 5px;
+    margin: 0;
+}
+.section-wrapper--{{ section.id }} h3.notice-title {
+    /* transform: translateY(0);
+    transform: rotate(-90deg);
+    height: 15px; */
+}
+p.notice-content {
+    box-sizing: border-box;
+    padding-left: 40px;
+}
+a.button-metadata-data {
+    font-size: 14px;
+    padding: 15px 20px;
+}
+}
+</style>
+
+
+
+<section class="section-container--{{ section.id }} page-width">
+  <div class="section-wrapper--{{ section.id }}">
+    <div class="animated-bar top-shape"></div>
+    <div class="text-contents">
+      <h2>{{ section.settings.title }}</h2>
+      <h5>• {{ section.settings.subtitle }} •</h5>
+      <p>{{ section.settings.content }}</p>
+    </div>
+
+    <div class="button-wrapper">
+        <a class="button-metadata-data" href="#">View Policy</a>
+        <a class="button-metadata-data" href="#">Testimonials</a>
+        <a class="button-metadata-data" href="#">Contact Support</a>
+    </div>
+    <a class="faq-anchor" href="#"> Frequently Asked Questions > </a>
+    {% if section.blocks %}
+      <div class="notice-wrapper">
+        {% for block in section.blocks %}
+          <div class="single-notice">
+            <h3 class="notice-title">⭐ Helpful Tip</h3>
+            <p class="notice-content">
+              {{ block.settings.content }}
+              <a href="{{ block.settings.url }}">Start Shopping > </a>
+            </p>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+  <!-- </div> -->
+</section>
+{% comment %}
+  <script>
+    const observer2 = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('w-100');
+          observer.unobserve(entry.target)
+        }
+      });
+    });
+
+    const topShape2 = document.querySelector('.top-shape');
+    observer2.observe(topShape2);
+  </script>
+{% endcomment %}
+{% schema %}
+{
+  "name": "Organna Satisfaction",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type": "textarea",
+      "id": "content",
+      "label": "Content",
+      "default": "Welcome to my Organna!"
+    },
+
+    {
+      "type": "header",
+      "content": "Desktop Spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Mobile Spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top (Mobile)",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom (Mobile)",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top  (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom  (Mobile)",
+      "default": 0
+    }
+  ],
+  "blocks": [
+     {
+       "name" : "Notice",
+       "type":  "notice",
+       "limit": 1,
+       "settings": [
+
+         {
+           "type": "textarea",
+           "id" : "content",
+           "label": "Content"
+         },
+         {
+           "type": "url",
+           "id" : "url",
+           "label": "Url"
+         }
+       ]
+     }
+   ],
+  "presets": [
+    {
+      "name": "Organna Satisfaction"
+    }
+  ]
+}
+{% endschema %}

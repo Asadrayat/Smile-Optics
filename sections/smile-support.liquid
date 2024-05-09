@@ -1,0 +1,329 @@
+<style>
+  .section-container--{{ section.id }}{
+    margin-top: {{ section.settings.margin_top | append:'px' }};
+    margin-bottom: {{ section.settings.margin_bottom | append:'px' }};
+    padding-top: {{ section.settings.padding_top | append:'px' }};
+    padding-bottom: {{ section.settings.padding_bottom | append:'px' }};
+    overflow: hidden;
+    position : relative;
+  }
+  .section-wrapper--{{ section.id }} {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-block: 100px;
+    grid-gap: 60px;
+
+  }
+
+  .section-container--{{ section.id }} .left-column, .section-container--{{ section.id }}  .right-column {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  }
+  .section-container--{{ section.id }} .left-column img {
+  /* width:100%; */
+  z-index: 3;
+  /* max-width: 500px; */
+  width: 491px;
+  height: 397px;
+  object-fit: fill;
+  }
+  .section-container--{{ section.id }}  .support-text-block {
+  max-width: 452px;
+  }
+  .section-container--{{ section.id }}  p.support-icon-banner {
+  display: flex;
+  align-items: center;
+  line-height: 0;
+  }
+  .section-container--{{ section.id }}  p.support-icon-banner span {
+  margin-right: 10px;
+  color: #1b0177;
+  font-size: 20px;
+  line-height: 20px;
+  text-transform: uppercase;
+  }
+  .section-container--{{ section.id }} .section-container--{{ section.id }} h2.support-title.organna-title {
+  margin-block: 40px;
+  }
+  .section-container--{{ section.id }} .icon-block-wrapper {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  }
+  .section-container--{{ section.id }} p.support-content {
+  color: #323232;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: justify;
+  margin-block: 30px;
+  }
+  .icon-block-wrapper.icon-block-wrapper-mobile{
+    display: none;
+  }
+  .section-container--{{ section.id }} .icon-block-wrapper  a.icon-block {
+  display: flex;
+  font-size: 16px;
+  font-weight: 600;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  text-decoration: none;
+  padding: 5px 15px;
+  background: #5fc7cc;
+  border-radius: 20px;
+  width: max-content;
+  color: #ffffff;
+  transition: 0.5s ease;
+
+  }
+  .section-container--{{ section.id }} .icon-block-wrapper  a.icon-block:hover {
+  background: #5C439A;
+  }
+
+  .section-container--{{ section.id }} .icon-block svg {
+  max-width: 25px;
+  max-height: 25px;
+  transition: 0.5s ease;
+  }
+
+  .section-container--{{ section.id }} .icon-block-wrapper  a.icon-block:hover svg {
+  transform : scale(1.1);
+  }
+  @media screen and (max-width: 768px){
+  .section-container--{{ section.id }}{
+  margin-top: {{ section.settings.margin_top_mobile | append:'px' }};
+  margin-bottom: {{ section.settings.margin_bottom_mobile | append:'px'  }};
+  padding-top: {{ section.settings.padding_top_mobile | append:'px' }};
+  padding-bottom: {{ section.settings.padding_bottom_mobile | append:'px' }};
+  }
+  .section-wrapper--{{ section.id }} {
+  grid-template-columns: 1fr;
+  margin-block: 10px;
+  grid-gap: 0px;
+  }
+
+  .section-container--{{ section.id }}          .right-column {
+  grid-row: 1/2;
+  }
+  .section-container--{{ section.id }} .left-column img {
+  width: 320px;
+  height: 249px;
+  }
+  .section-container--{{ section.id }}          .icon-block-wrapper  a.icon-block {
+  font-size: 15px;
+  gap: 5px;
+  padding: 2px 12px;
+  }
+  .section-container--{{ section.id }}            .icon-block svg {
+  max-width: 20px;
+  max-height: 20px;
+  }
+  .section-container--{{ section.id }}  h2.support-title.organna-title {
+      font-size: 31px;
+  }
+  .section-container--{{ section.id }} p.support-content {
+  margin-block: 10px;
+  }
+  .icon-block-wrapper.icon-block-wrapper-desktop {
+      display: none;
+  }
+  .icon-block-wrapper.icon-block-wrapper-mobile{
+    display: flex;
+  }
+  .icon-block-wrapper.icon-block-wrapper-mobile a.icon-block {
+    width: 70%;
+    justify-content: center;
+    margin: auto;
+  }
+  .section-container--{{ section.id }} .left-column{
+    flex-direction: row;
+    width: 100%;
+    transform: translateX(-66px) scale(1.5);
+    margin: 40px 0 0 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    gap: 0px;
+  }
+  .section-container--{{ section.id }} .left-column img {
+      width: 80%;
+      height: 80%;
+  }
+  }
+</style>
+<section class="section-container--{{ section.id }}">
+  <div class="page-width">
+    <div class="section-wrapper--{{ section.id }}">
+      <div class="left-column ">
+        {{ section.settings.image | img_url: 'master' | img_tag }}
+        <div class="icon-block-wrapper icon-block-wrapper-mobile">
+          {% for block in section.blocks %}
+            <a class="icon-block" href="{{ block.settings.url }}">
+              {{ block.settings.icon }}
+              {{ block.settings.title }}
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="right-column">
+        <div class="support-text-block">
+          <p class="support-icon-banner">
+            <span>{% render 'smile-all-icons', name: 'support' %}</span>
+            <span>Support</span>
+          </p>
+          <h2 class="support-title organna-title">{{ section.settings.title }}</h2>
+          <p class="support-content">{{ section.settings.content }}</p>
+        </div>
+        <div class="icon-block-wrapper icon-block-wrapper-desktop">
+          {% for block in section.blocks %}
+            <a class="icon-block" href="{{ block.settings.url }}">
+              {{ block.settings.icon }}
+              {{ block.settings.title }}
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Smile Support",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "content",
+      "label": "Content",
+      "default": "Welcome to my Organna!"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Desktop Spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Mobile Spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top (Mobile)",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom (Mobile)",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top  (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom  (Mobile)",
+      "default": 0
+    }
+  ],
+  "blocks": [
+     {
+       "name" : "Support",
+       "type":  "support",
+       "limit": 4,
+       "settings": [
+         {
+           "type": "text",
+           "id" : "title",
+           "label": "Title"
+         },
+         {
+           "type": "url",
+           "id" : "url",
+           "label": "Url"
+         },
+         {
+           "type": "html",
+           "id" : "icon",
+           "label": "Icon"
+         }
+       ]
+     }
+   ],
+  "presets": [
+    {
+      "name": "Smile Support"
+    }
+  ]
+}
+{% endschema %}

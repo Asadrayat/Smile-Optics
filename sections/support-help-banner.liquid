@@ -1,0 +1,346 @@
+{% assign id = section.id %}
+
+<style>
+      .search{{ id }} {
+       margin-top: {{ section.settings.margin_top }}px;
+       margin-bottom: {{ section.settings.margin_bottom }}px;
+       padding-top: {{ section.settings.padding_top }}px;
+       padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+      .wrapper-{{ id }} {
+        width: 90%;
+        margin: auto;
+      }
+      .tik-m{{ id }} svg{
+        width: 30px;
+        height: 25px;
+        margin-block: 20px;
+        display: none;
+      }
+     .tik-{{ id }} {
+        display: block;
+      }
+     .container-{{ id }} {
+        background-image: url("{{ section.settings.bg_img | image_url: width: section.settings.bg_img.width }}");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-color: rgb(95 199 204 / 73%);
+     }
+    .icon-{{ id }}{
+        /* text-align: center; */
+        /* margin: 0; */
+        display: flex;
+        justify-content: center;
+    }
+    .icon-{{ id }} svg{
+        height: 120px;
+        width: 94px;
+        filter: brightness(6.5);
+        rotate: 90deg;
+    }
+     .wrapper-{{ id }} h2{
+        padding-block: 5px 30px;
+        margin: 0;
+        font-size: 55px;
+        color: #fff;
+        line-height: 55px;
+        text-align: center;
+     }
+      .search{{ id }} h5{
+        color: #1B0177;
+        font-size: 16px;
+        letter-spacing: 2.4px;
+        line-height: 20px;
+        text-align: center;
+      }
+      .search-icon-{{ id }} {
+        position: absolute;
+        top: 50%;
+        right: 0px;
+        width: 13px;
+        transform: translate(-15px, -13px);
+      }
+      .search-icon-{{ id }} svg{
+        filter: brightness(0.5);
+      }
+      .search-form-{{ id }} {
+        position: relative;
+        max-width: 924px;
+        margin: auto;
+      }
+      .search-form-{{ id }} input{
+        width: 100%;
+        height: 59px;
+        border-radius: 30px;
+        border: none;
+        background: #ffffff80;
+        padding-left: 25px;
+      }
+      .search-form-{{ id }} input::placeholder{
+        color: #008C8C;
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 1px;
+      }
+      .search-form-{{ id }} input:focus{
+        background: #fff;
+      }
+      .search-form-{{ id }} input:hover{
+        background: #fff;
+      }
+      .search-form-{{ id }}:hover svg{
+        filter: brightness(0.5);
+      }
+      .bottom-{{ id }} {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+      }
+      .bottom-{{ id }} p,
+      .bottom-{{ id }} p a{
+        font-size: 16px;
+        line-height: 16px;
+        color: #fff;
+      }
+      .tik-{{ id }} {
+        display: flex;
+        /* align-items: center; */
+        justify-content: center;
+      }
+      .tik-{{ id }} svg{
+        width: 26px;
+        height: 21px;
+        margin-block: 38px;
+        filter: brightness(80.5);
+      }
+
+
+  @media screen and (max-width: 890px){
+
+     .search{{ id }} {
+       margin-top: {{ section.settings.margin_top-m }}px;
+       margin-bottom: {{ section.settings.margin_bottom-m }}px;
+       padding-top: {{ section.settings.padding_top-m }}px;
+       padding-bottom: {{ section.settings.padding_bottom-padding_bottom-m }}px;
+      }
+      .top-{{ id }} {
+        display: flex;
+        gap: 20px;
+        align-items: flex-end;
+      }
+      .search-icon-{{ id }} {
+        position: absolute;
+        top: 50%;
+        right: 0px;
+        width: 13px;
+        transform: translate(-15px, -13px);
+      }
+      .tik-m{{ id }} svg{
+        display: block;
+        width: 30px;
+        height: 25px;
+        margin: 20px auto;
+        opacity: 12%;
+      }
+     .wrapper-{{ id }} h2{
+        padding: 20px 0 0 0;
+        margin: 0;
+        font-size: 32px;
+        line-height: 1.1em;
+     }
+     .search-form-{{ id }} {
+        margin: 15px 0 0 0;
+      }
+     .search-form-{{ id }} input{
+        height: unset;
+         padding-block: 18px;
+      }
+      .search-form-{{ id }} input::placeholder{
+        color: #ffffff;
+        font-size: 20px;
+        line-height: 1;
+        font-weight: 600;
+        letter-spacing: 1px;
+
+      }
+      .icon-{{ id }} svg{
+          height: 48px;
+          width: 37px;
+          filter: brightness(6.5);
+          rotate: 370deg;
+      }
+    .tik-{{ id }} svg{
+        margin-block: 0px;
+      }
+      .bottom-{{ id }} {
+        max-width: 275px;
+        margin: auto;
+      }
+      .bottom-{{ id }} p {
+        font-size: 14px;
+        line-height: 1;
+        font-weight: 600;
+        max-width: 210px;
+        }
+      .bottom-{{ id }} p  a {
+         font-size: 14px;
+        font-weight: 500;
+        }
+    }
+</style>
+
+<section class="search{{ id }}">
+  <div class="container-{{ id }}">
+    <div class="wrapper-{{ id }} page-width">
+      <div class="top-{{ id }}">
+        <div class="icon-{{ id }}">{% render 'all-icons', name: 'suppor-help-star' %}</div>
+        <h2>{{ section.settings.title }}</h2>
+      </div>
+      <div class="search-form-{{ id }}">
+        <input type="text" class="search-input" id="searchInput" placeholder="{{ section.settings.btn_text }}">
+        <div class="search-icon-{{ id }}" onclick="search()">{{ section.settings.icon_search }}</div>
+      </div>
+      <div class="bottom-{{ id }}">
+        {% if section.settings.icon_sign %}
+          <div class="tik-{{ id }}">{{ section.settings.icon_sign }}</div>
+        {% endif %}
+        {% if section.settings.desc %}
+          <p>{{ section.settings.desc }}</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Support help banner",
+  "settings": [
+    {
+      "id": "title",
+      "type": "textarea",
+      "label": "Add Input Title",
+      "default":"Help is here."
+    },
+    {
+      "id": "btn_text",
+      "type": "textarea",
+      "label": "Add placeholder text"
+    },
+    {
+      "id": "desc",
+      "type": "richtext",
+      "label": "Add Section Route Text"
+    },
+    {
+      "id": "icon_sign",
+      "type": "html",
+      "label": "Add Icon Tik"
+    },
+    {
+      "id": "icon_search",
+      "type": "html",
+      "label": "Add Icon Search"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 8
+    },
+
+    {
+      "type": "header",
+      "content": "Spacing (Mobile)"
+    },
+    {
+      "type": "range",
+      "id": "margin_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top  (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom  (Mobile)",
+      "default": 0
+    }
+  ],
+  "blocks": [],
+  "presets":[
+    {
+      "name": "Support help banner"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

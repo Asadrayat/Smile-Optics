@@ -1,0 +1,62 @@
+<style>
+  #collection__style .facets__heading--vertical{
+    font-size: 18px;
+  }
+  .facets-vertical .facets__summary{
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .mobile__filter-btn, .drawer__close-btn{
+    font-size: 0;
+    line-height: 0;
+  }
+  @media screen and (min-width: 750px){
+    .mobile__filter-btn, .drawer__close-btn{
+      display: none;
+    }
+    #collection__style .facets__form-vertical {
+      width: 30rem;
+    }
+  }
+  @media screen and (max-width: 749px){
+    #collection__style .facets__heading--vertical{
+      margin: 0;
+    }
+    .drawer__close-btn{
+      display: flex;
+      justify-content: flex-end;
+    }
+    .active-facets.active-facets-desktop, #collection__style .facets__display-vertical{
+      margin: 0 0 20px;
+    }
+    #collection__style .facets-vertical-sort{
+      display: flex;
+      justify-content: space-between;
+    }
+    #main-collection-filters{
+      position: fixed;
+      width: 90%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      overflow-y: auto;
+      background: #fff;
+      z-index: 99;
+      padding: 40px 20px;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      transform: translateX(-100%);
+      transition: all 0.4s;
+    }
+    #main-collection-filters.open-drawer{
+      transform: translateX(0);
+    }
+    #FacetSortForm{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+    .product-count-vertical{
+      margin: 16px 0 0;
+    }
+  }
+</style>

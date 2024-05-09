@@ -1,0 +1,505 @@
+{% liquid
+  assign id = section.id
+  assign settings = section.settings
+  assign blocks = section.blocks
+%}
+
+<style>
+  #shopify-section-{{id}} {
+    box-sizing: border-box;
+    margin-top: {{section.settings.margin_top | append: 'px'}};
+    margin-bottom: {{section.settings.margin_bottom | append: 'px'}};
+    /* padding-top: {{section.settings.padding_top | append: 'px'}};
+    padding-bottom: {{section.settings.padding_bottom | append: 'px'}}; */
+  }
+
+  @media(max-width: 768px) {
+    #shopify-section-{{id}} {
+      margin-top: {{section.settings.margin_top_m | append: 'px'}};
+      margin-bottom: {{section.settings.margin_bottom_m | append: 'px'}};
+      /* padding-top: {{section.settings.padding_top_m | append: 'px'}};
+      padding-bottom: {{section.settings.padding_bottom_m | append: 'px'}}; */
+    }
+  }
+  .wrapper-{{ id }} {
+    box-sizing: border-box;
+    position: relative;
+    padding-top: {{section.settings.padding_top | append: 'px'}};
+    padding-bottom: {{section.settings.padding_bottom | append: 'px'}};
+  }
+
+  .img-wrapper-{{ id }} {
+    font-size: 0;
+    line-height: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+  }
+  .img-wrapper-{{ id }} img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .info-{{ id }} {
+    position: relative;
+    z-index: 5;
+  }
+  .heading-{{ id }} {}
+  .heading-{{ id }} h1{
+    margin: 0 0 5px 0;
+    color: rgb(27, 1, 119);
+    font-size: 56px;
+    line-height: 1;
+  }
+  .heading-{{ id }} h2{
+    margin: 0 0 60px 0;
+    color: rgb(1, 166, 165);
+    font-size: 24px;
+    line-height: 1;
+  }
+  .text-{{ id }} {
+    max-width: 495px;
+  }
+  .text-{{ id }} p{
+    margin: 0 0 0 0;
+    color: rgb(27, 1, 119);
+    font-size: 13px;
+    line-height: 17px;
+    text-align: justify;
+  }
+  .icon-text-{{ id }} {
+    max-width: 495px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 50px 0 35px 0;
+  }
+  .icon-text-{{ id }} p{
+    margin: 0 0 0 0;
+    color: rgb(1, 166, 165);
+    font-size: 10px;
+    line-height: 12px;
+    text-align: center;
+  }
+  .icon-text-{{ id }} small{
+    margin: 3px 0 15px 0;
+    color: rgb(89, 89, 89);
+    font-size: 8px;
+    line-height: 9px;
+    text-align: center;
+    font-style: italic;
+    letter-spacing: 0px;
+  }
+  .icons-{{ id }} {
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    grid-gap: 12px;
+    max-width: 530px;
+  }
+  .icon-{{ id }} {
+    background: white;
+    border-radius: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 5px 10px 7px 10px;
+    text-decoration: none;
+  }
+  .icon-{{ id }} img{
+    width: 68px;
+    height: auto;
+    object-fit: cover;
+  }
+  .icon-{{ id }} span{
+    font-size: 8px;
+    line-height: 11px;
+    color: rgb(1, 166, 165);
+    margin: 0;
+    text-align: center;
+  }
+  .buttons-{{id}} {
+    max-width: 495px;
+    display: flex;
+    gap: 25px;
+    align-items: center;
+    justify-content: center;
+  }
+  .buttons-{{ id }} a{
+    height: 40px;
+    line-height: 40px;
+    border-radius: 20px;
+    border: 1px solid rgb(27 1 119 / 58%);
+    color: rgb(27, 1, 119);
+    font-size: 14px;
+    transition: .3s;
+    display: inline-block;
+    text-decoration: none;
+    box-sizing: border-box;
+    padding: 0 20px;
+  }
+  .buttons-{{ id }} a:hover{
+    background: rgb(27, 1, 119);
+    color: white;
+  }
+  
+  @media(min-width: 769px) {
+    .mobile-info-{{ id }} {
+      display: none;
+    }
+  }
+    
+  @media(max-width: 768px) {
+    .wrapper-{{id}} {
+      padding-top: {{section.settings.padding_top_m | append: 'px'}};
+      padding-bottom: {{section.settings.padding_bottom_m | append: 'px'}};
+    }
+    .heading-{{ id }} h2,
+    .text-{{ id }},
+    .icon-text-{{ id }},
+    .buttons-{{ id }} .second{
+      display: none;
+    }
+    .heading-{{id}} h1 {
+      font-size: 35px;
+      max-width: 305px;
+      line-height: 44px;
+    }
+    .buttons-{{id}} {
+      justify-content: flex-start;
+      margin-top: 45px;
+    }
+    .buttons-{{id}} a {
+      height: 45px;
+      line-height: 45px;
+      font-size: 15px;
+    }
+    .mobile-info-{{ id }} {
+      background: #dff0f3;
+      box-sizing: border-box;
+      padding: 25px 25px;
+    }
+    .text-mobile-{{ id }} h2{
+      font-size: 20px;
+      line-height: 20px;
+      color: rgb(1,166,165);
+      margin: 0 0 10px 0;
+      text-align: center;
+    }
+    .text-mobile-{{ id }} p{
+      font-size: 12px;
+      line-height: 15px;
+      color: rgb(27,1,119);
+      margin: 0 0 0 0;
+      text-align: justify;
+    }
+    .icon-text-mobile-{{ id }} {
+      max-width: 495px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      margin: 50px 0 35px 0;
+    }
+    .icon-text-mobile-{{ id }} p{
+      margin: 0 0 0 0;
+      color: rgb(1 166 165 / 85%);
+      font-size: 13px;
+      line-height: 12px;
+      text-align: center;
+      letter-spacing: -1px;
+      font-weight: 600;
+    }
+    .icon-text-mobile-{{ id }} small{
+      margin: 3px 0 15px 0;
+      color: rgb(89, 89, 89);
+      font-size: 11px;
+      line-height: 14px;
+      text-align: center;
+      font-style: italic;
+      letter-spacing: 0px;
+    }
+    .icons-mobile-{{ id }} {
+      display: grid;
+      grid-template-columns: repeat(5,1fr);
+      grid-gap: 12px;
+      max-width: 530px;
+    }
+    .icon-mobile-{{ id }} {
+      background: white;
+      border-radius: 14px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      box-sizing: border-box;
+      padding: 5px 10px 7px 10px;
+      text-decoration: none;
+    }
+    .icon-mobile-{{ id }} img{
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+    .icon-mobile-{{ id }} span{
+      font-size: 8px;
+      line-height: 11px;
+      color: rgb(1, 166, 165);
+      margin: 0;
+      text-align: center;
+    }
+  }
+</style>
+
+
+<div class="sec-{{ id }}">
+  <div class="{% unless section.settings.full_width %}page-width{% endunless %}">
+    <div class="wrapper-{{ id }}">
+      <div class="img-wrapper-{{ id }}">
+        {% unless section.settings.image == blank %}
+          {{ section.settings.image | image_url: width: section.settings.image.width | image_tag: loading: 'lazy' }}
+        {% endunless %}
+      </div>
+      <div class="info-{{ id }}">
+        <div class="page-width">
+           <div class="heading-{{ id }}">
+            <h1>{{ section.settings.heading }}</h1>
+            <h2>{{ section.settings.sub_heading }}</h2>
+          </div>
+          <div class="text-{{ id }}">
+            <p>{{ section.settings.text }}</p>
+          </div>
+          <div class="icon-text-{{ id }}">
+            <p class="">Our Testing Partners</p>
+            <small>The below organizations are not affiliated with nor do they endorse or sponsor Organna CBD or its products</small>
+            <div class="icons-{{ id }}">
+              {% for block in section.blocks %}
+                <a href="{{ block.settings.url }}" class="icon-{{ id }}">
+                  {% unless block.settings.image == blank %}
+                    {{ block.settings.image | image_url: width: block.settings.image.width | image_tag: loading: 'lazy' }}
+                  {% endunless %}
+                  <span>{{ block.settings.text }}</span>
+                </a>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="buttons-{{ id }}">
+            <a class="button-font" href="{{ section.settings.button_url_1 }}">{{ section.settings.button_text_1 }} > </a>
+            <a class="button-font second" href="{{ section.settings.button_url_2 }}">{{ section.settings.button_text_2 }} > </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mobile-info-{{ id }}">
+      <div class="text-mobile-{{ id }}">
+        <h2>{{ section.settings.sub_heading }}</h2>
+        <p>{{ section.settings.text }}</p>
+      </div>
+       <div class="icon-text-mobile-{{ id }}">
+          <p class="">Our Testing Partners</p>
+          <small>The below organizations are not affiliated with nor do they endorse or sponsor Organna CBD or its products</small>
+          <div class="icons-mobile-{{ id }}">
+            {% for block in section.blocks %}
+              <a href="{{ block.settings.url }}" class="icon-mobile-{{ id }}">
+                {% unless block.settings.image == blank %}
+                  {{ block.settings.image | image_url: width: block.settings.image.width | image_tag: loading: 'lazy' }}
+                {% endunless %}
+                <span>{{ block.settings.text }}</span>
+              </a>
+            {% endfor %}
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Labtest Banner",
+    "templates": ["page"],
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "full_width",
+        "label": "Full Width Section",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Select Image"
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "heading",
+        "default": "certificate of analysis"
+      },
+      {
+        "type": "textarea",
+        "id": "sub_heading",
+        "label": "Sub heading",
+        "default": "Our Laboratory Test Results."
+      },
+      {
+        "type": "textarea",
+        "id": "text",
+        "label": "Text",
+        "default": "Organna CBD tests all product batches at 3rd party ISO-accredited labs for full transparency and quality control. These labs provide us with a Certificate of Analysis, or COA, which we make available to you. Each product will have it's own COA page.  Use the information below to find the COA for any product you’ve purchased or review the latest product batch lab results before you purchase."
+      },
+      {
+        "type": "header",
+        "content": "Button"
+      },
+      {
+        "type": "text",
+        "id": "button_text_1",
+        "label": "Button 1 Text",
+        "default": "Find Your Lab Results"
+      },
+      {
+        "type": "url",
+        "id": "button_url_1",
+        "label": "Button 1 URL"
+      },
+      {
+        "type": "text",
+        "id": "button_text_2",
+        "label": "Button 2 Text",
+        "default": "Our Ingredients"
+      },
+      {
+        "type": "url",
+        "id": "button_url_2",
+        "label": "Button 2 URL"
+      },
+      {
+        "type": "header",
+        "content": "Section Spacing Desktop"
+      },
+      {
+        "type": "range",
+        "id": "margin_top",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Margin Top",
+        "default": 24
+      },
+      {
+        "type": "range",
+        "id": "margin_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Margin Bottom",
+        "default": 24
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding Top",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding Bottom",
+        "default": 0
+      },
+      {
+        "type": "header",
+        "content": "Section Spacing Mobile"
+      },
+      {
+        "type": "range",
+        "id": "margin_top_m",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Margin Top",
+        "default": 24
+      },
+      {
+        "type": "range",
+        "id": "margin_bottom_m",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Margin Bottom",
+        "default": 24
+      },
+      {
+        "type": "range",
+        "id": "padding_top_m",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding Top",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom_m",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding Bottom",
+        "default": 0
+      }
+    ],
+    "blocks": [
+      {
+        "type": "image",
+        "name": "Image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "text",
+            "label": "Label"
+          },
+          {
+            "type": "url",
+            "id": "url",
+            "label": "URL"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Labtest Banner"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

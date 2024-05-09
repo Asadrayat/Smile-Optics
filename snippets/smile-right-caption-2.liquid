@@ -1,0 +1,36 @@
+{% comment %}
+  {% render 'smile-right-caption-2',
+    title: block.settings.title,
+    content: block.settings.content,
+    position_from_top: block.settings.position_from_top,
+    position_from_right: block.settings.position_from_right,
+    position_from_top_mobile: block.settings.position_from_top_mobile,
+    position_from_right_mobile: block.settings.position_from_right_mobile,
+    serial: forloop.index,
+    id: section.id
+  %}
+{% endcomment %}
+<style>
+.single_caption_{{ serial }}_{{ id }} {
+  top : {{ position_from_top| append:'px' }}; 
+  right : {{ position_from_right| append:'px' }};
+}
+@media screen and (max-width: 768px){
+.single_caption_{{ serial }}_{{ id }} {
+  top : {{ position_from_top_mobile| append:'px' }}; 
+  right : {{ position_from_right_mobile| append:'px' }};
+}
+}
+</style>
+<div
+  class="single_caption single_caption_{{ serial }}_{{ id }}"  data-aos="fade-right" 
+>
+  <span class="caption-left-arrow ">
+    {%- render 'smile-all-icons', name: 'caption-right' -%}
+  </span>
+
+  <div class="single-caption-text-block">
+    <h4>{{ title }}</h4>
+    <p>{{ content }}</p>
+  </div>
+</div>

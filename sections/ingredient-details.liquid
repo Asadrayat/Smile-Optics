@@ -1,0 +1,613 @@
+{% liquid
+  assign id = section.id
+  assign settings = section.settings
+  assign blocks = section.blocks
+%}
+
+<style>
+  #shopify-section-{{id}} {
+    box-sizing: border-box;
+    margin-top: {{section.settings.margin_top | append: 'px'}};
+    margin-bottom: {{section.settings.margin_bottom | append: 'px'}};
+    padding-top: {{section.settings.padding_top | append: 'px'}};
+    padding-bottom: {{section.settings.padding_bottom | append: 'px'}};
+    background: #edeff6;
+    background: #fafafa;
+  }
+  .wrapper-{{id}} {
+    box-sizing: border-box;
+    background: white;
+    padding: 35px 35px;
+  }
+  .heading-{{id}} {
+    background: #262660;
+    min-height: 100px;
+    padding: 50px 55px 25px 55px;
+    box-sizing: border-box;
+    border-radius: 115px  115px 0 0;
+  }
+  .heading-{{id}} h1{
+    font-size: 28px;
+    line-height: 28px;
+    color: white;
+    margin: 0 0 15px 0;
+  }
+  .heading-{{id}} p{
+    font-size: 14px;
+    line-height: 14px;
+    color: rgb(178, 166,221);
+    margin: 0;
+    font-weight: 500;
+    letter-spacing: 0px;
+  }
+  .terms-{{ id }} {
+    background: #f1f1f1;
+    box-sizing: border-box;
+    border-radius: 20px;
+    padding: 20px 20px;
+    margin-bottom: 25px;
+  }
+  .terms-title {
+    font-size: 16px;
+    line-height: 20px;
+    color: rgb(78, 57, 123);
+    margin: 0 0 6px 0;
+    font-weight: 600;
+    letter-spacing: 0px;
+  }
+  .terms-text {
+    font-size: 16px;
+    line-height: 19px;
+    color: rgb(51, 51, 51);
+    margin: 0 0 0 0;
+    letter-spacing: 0px;
+  }
+  .image-info-{{id}} {
+    display: grid;
+    grid-template-columns: 1fr 1.7fr;
+    grid-gap: 25px;
+    align-items: center;
+  }
+  .image1-{{id}} {
+    display: flex;
+  }
+  .image1-{{id}} img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .icon1-text-{{id}} {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 15px;
+    margin-bottom: 25px;
+  }
+  .icon1-text-{{id}} p{
+    font-size: 13px;
+    line-height: 18px;
+    color: rgb(89, 89, 89);
+    font-weight: 600;
+    text-align: justify;
+    margin: 0;
+  }
+  .icon234-{{ id }} {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 15px;
+  }
+  .icon234-{{ id }} img{
+    width: 100%;
+    height: auto;
+  }
+  .icon1-{{id}} {
+    background: #e6e7e9;
+    height: max-content;
+    border-radius: 10px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+  }
+  .icon1-{{id}} img{
+    width: 100%;
+    height: auto;
+  }
+  .info1-{{ id }} h2{
+    font-size: 19px;
+    line-height: 35px;
+    color: rgb(27, 1, 119);
+    margin: 0 0 17px 0;
+    position: relative;
+  }
+  .info1-{{ id }} h2:after{
+    position: absolute;
+    content: "";
+    background: rgb(27, 1, 119);
+    height: 3.5px;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+  }
+  .dive-deeper-{{ id }} {
+    margin-top: 20px;
+    box-sizing: border-box;
+    padding-left: 25px;
+  }
+  .dive-deeper-{{ id }} h2{
+    color: rgb(27, 1, 119);
+    font-size: 27px;
+    lien-height: 27px;
+    margin: 0 0 0 0;
+  }
+  .dive1-{{ id }}{
+    font-size: 16px;
+    line-height: 20px;
+    color: rgb(0, 0, 0);
+    margin: 0;
+    text-align: justify;
+    position: relative;
+    box-sizing: border-box;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+  }
+  .dive1-{{ id }}:after{
+    position: absolute;
+    content: "";
+    background: rgb(27, 1, 119);
+    height: 3.5px;
+    width: 70%;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .dive2-{{ id }}{
+    font-size: 16px;
+    line-height: 22px;
+    color: rgb(0, 0, 0);
+    margin: 0;
+    text-align: justify;
+    position: relative;
+    box-sizing: border-box;
+    margin-bottom: 45px;
+  }
+  .main-image-{{ id }} {
+    font-size: 0;
+    line-height: 0;
+    display: block;
+    text-decoration none;
+  }
+  .main-image-{{ id }} img{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  .details-{{ id }} {
+    font-size: 16px;
+    line-height: 24px;
+    color: rgb(0, 0, 0);
+    font-weight: 500;
+    text-align: justify;
+    margin: 50px 0 0 0;
+  }
+  .details-{{ id }} a{
+    color: rgb(191, 173, 128);
+  }
+  .footer1-{{id}} {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+    margin: 55px 0 50px 0;
+  }
+  .footer1-{{id}} p{
+    font-size: 14px;
+    line-height: 15px;
+    color: rgb(1 166 165);
+    margin: 0 0 0 0;
+    text-align: center;
+  }
+  .footer1-{{id}} img{
+    width: 93px;
+    height: auto;
+    object-fit: cover
+  }
+  .footer2-{{id}} {
+    background: #e9e9f0;
+    min-height: 100px;
+    padding: 50px 55px;
+    box-sizing: border-box;
+    border-radius: 115px  115px 0 0;
+  }
+  .footer2-{{id}} h2{
+    margin: 0 auto;
+    font-size: 20px;
+    line-height: 20px;
+    color: rgb(27, 1, 119);
+    text-align: center;
+  }
+  .footer2-{{id}} h1{
+    margin: 15px 0 0 0;
+    font-size: 30px;
+    line-height: 30px;
+    color: rgb(27, 1, 119);
+    text-align: center;
+  }
+  @media(max-width: 768px) {
+    #shopify-section-{{id}} {
+      margin-top: {{section.settings.margin_top_m | append: 'px'}};
+      margin-bottom: {{section.settings.margin_bottom_m | append: 'px'}};
+      padding-top: {{section.settings.padding_top_m | append: 'px'}};
+      padding-bottom: {{section.settings.padding_bottom_m | append: 'px'}};
+    }
+  .heading-{{id}} {
+    border-radius: 50px  50px 0 0;
+    padding: 30px 20px 30px 20px;
+  }
+  .image-info-{{ id }} {
+    display: flex;
+    flex-direction: column;
+  }  
+  .wrapper-{{ id }}{
+    padding: 35px 15px;
+  }
+  .icon1-text-{{ id }} {
+    grid-template-columns: 1fr 1fr;
+  }
+  .icon1-text-{{ id }} p{
+    font-size: 9px;
+    line-height: 10px;
+  }
+  .footer2-{{ id }} {
+    padding: 30px 30px;
+    border-radius: 50px  50px 0 0;
+  }
+ }  
+</style>
+
+
+<div class="sec-{{ id }}">
+  <div class="{% unless section.settings.full_width %}page-width{% endunless %}">
+    <div class="heading-{{ id }}">
+      <h1>{{ section.settings.heading }}</h1>
+      <p>{{ section.settings.text }}</p>
+    </div>
+    <div class="wrapper-{{ id }}">
+      <div class="terms-{{ id }}">
+        <p class="terms-title">in simple terms,</p>
+        <p class="terms-text">{{ section.settings.terms }}</p>
+      </div>
+      <div class="image-info-{{ id }}">
+        {% unless section.settings.image1 == blank %}
+          <div class="image1-{{ id }}">
+            {{ section.settings.image1 | image_url: width: section.settings.image1.width | image_tag: loading: 'lazy' }}
+          </div>
+        {% endunless %}
+        <div class="info1-{{ id }}">
+          <h2>{{ section.settings.title1 }}</h2>
+          <div class="icon1-text-{{ id }}">
+            <p>{{ section.settings.text1 }}</p>
+            {% unless section.settings.icon1 == blank %}
+              <div class="icon1-{{ id }}">
+                {{ section.settings.icon1 | image_url: width: section.settings.icon1.width | image_tag: loading: 'lazy' }}
+              </div>
+            {% endunless %}
+          </div>
+          <div class="icon234-{{ id }}">
+            {% unless section.settings.icon2 == blank %}
+              {{ section.settings.icon2 | image_url: width: section.settings.icon2.width | image_tag: loading: 'lazy' }}
+            {% endunless %}
+            {% unless section.settings.icon3 == blank %}
+              {{ section.settings.icon3 | image_url: width: section.settings.icon3.width | image_tag: loading: 'lazy' }}
+            {% endunless %}
+            {% unless section.settings.icon4 == blank %}
+              {{ section.settings.icon4 | image_url: width: section.settings.icon4.width | image_tag: loading: 'lazy' }}
+            {% endunless %}
+          </div>
+        </div>
+      </div>
+      <div class="dive-deeper-{{ id }}">
+        <h2>Let's dive a little deeper...</h2>
+        <div class="dive1-{{ id }}">{{ section.settings.dive_deeper }}</div>
+      </div>
+      <div class="dive2-{{ id }}">
+        {{ section.settings.dive_deeper2 }}
+      </div>
+      <a href="{{ section.settings.main_url }}" class="main-image-{{ id }}">
+        {% unless section.settings.main_image == blank %}
+          {{ section.settings.main_image | image_url: width: section.settings.main_image.width | image_tag: loading: 'lazy' }}
+        {% endunless %}
+      </a>
+      <ul class="details-{{ id }}">
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'details' %}
+              {% unless block.settings.textarea == blank %}
+                <li><p>{{ block.settings.textarea }}</p></li>
+              {% endunless %}
+              {% unless block.settings.richtext == blank %}
+                <li>{{ block.settings.richtext }}</li>
+              {% endunless %}
+          {% endcase %}
+        {% endfor %}
+      </ul>
+      <div class="details-{{ id }}">
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'richtext' %}
+              {% unless block.settings.richtext == blank %}
+                <div>{{ block.settings.richtext }}</div>
+              {% endunless %}
+          {% endcase %}
+        {% endfor %}
+      </div>
+    </div>
+    <div class="footer1-{{ id }}">
+      {% unless section.settings.footer_image == blank %}
+        {{ section.settings.footer_image | image_url: width: section.settings.footer_image.width | image_tag: loading: 'lazy' }}
+      {% endunless %}
+      <p>{{ section.settings.footer_text }}</p>
+    </div>
+  </div>
+  <div class="footer2-{{ id }}">
+    <h2>Checkout some of our products containing</h2>
+    <h1>{{ section.settings.footer_text2 }}</h1>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Ingredients Details",
+    "templates": ["page"],
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "full_width",
+        "label": "Full Width Section",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Select Image"
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "heading"
+      },
+      {
+        "type": "textarea",
+        "id": "text",
+        "label": "Text"
+      },
+      {
+        "type": "header",
+        "content": "Simple Terms"
+      },
+      {
+        "type": "textarea",
+        "id": "terms",
+        "label": "Terms",
+        "default": "Acetyl hexapeptide-8 is a synthetic anti-wrinkle cosmetics ingredient. Don't worry, it's 100% safe!"
+      },
+       {
+        "type": "header",
+        "content": "Image And Text Info"
+      },
+      {
+        "type": "image_picker",
+        "id": "image1",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "title1",
+        "label": "Title",
+        "default": "How safe is ..."
+      },
+      {
+        "type": "textarea",
+        "id": "text1",
+        "label": "Text",
+        "default": "Hemp Extract rated a 4 out of 10. This ingredient is considered moderate hazard. Organna CBD only uses All-Natural ingredients in the formulation of our products."
+      },
+      {
+        "type": "image_picker",
+        "id": "icon1",
+        "label": "Icon Image 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "icon2",
+        "label": "Icon Image 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "icon3",
+        "label": "Icon Image 3"
+      },
+      {
+        "type": "image_picker",
+        "id": "icon4",
+        "label": "Icon Image 4"
+      },
+      {
+        "type": "header",
+        "content": "Dive Deeper"
+      },
+      {
+        "type": "richtext",
+        "id": "dive_deeper",
+        "label": "Dive Deeper"
+      },
+      {
+        "type": "richtext",
+        "id": "dive_deeper2",
+        "label": "Dive Deeper Bottom Text"
+      },
+      {
+        "type": "header",
+        "content": "Main Image With Link"
+      },
+      {
+        "type": "image_picker",
+        "id": "main_image",
+        "label": "Select Image"
+      },
+      {
+        "type": "url",
+        "id": "main_url",
+        "label": "Image Hyperlink"
+      },
+      {
+        "type": "header",
+        "content": "Footer Content"
+      },
+      {
+        "type": "image_picker",
+        "id": "footer_image",
+        "label": "Image"
+      },
+      {
+        "type": "textarea",
+        "id": "footer_text",
+        "label": "Image Label"
+      },
+      {
+        "type": "text",
+        "id": "footer_text2",
+        "label": "Text",
+        "info": "Checkout some of our products containing",
+        "default": "Hemp Extract"
+      },
+      {
+        "type": "header",
+        "content": "Section Spacing Desktop"
+      },
+      {
+        "type": "range",
+        "id": "margin_top",
+        "min": 0,
+        "max": 200,
+        "step": 4,
+        "unit": "px",
+        "label": "Margin Top",
+        "default": 160
+      },
+      {
+        "type": "range",
+        "id": "margin_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Margin Bottom",
+        "default": 24
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding Top",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding Bottom",
+        "default": 0
+      },
+      {
+        "type": "header",
+        "content": "Section Spacing Mobile"
+      },
+      {
+        "type": "range",
+        "id": "margin_top_m",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Margin Top",
+        "default": 24
+      },
+      {
+        "type": "range",
+        "id": "margin_bottom_m",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Margin Bottom",
+        "default": 24
+      },
+      {
+        "type": "range",
+        "id": "padding_top_m",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding Top",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom_m",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding Bottom",
+        "default": 0
+      }
+    ],
+    "blocks": [
+      {
+        "type": "details",
+        "name": "Details",
+        "settings": [
+          {
+            "type": "richtext",
+            "id": "richtext",
+            "label": "Richtext"
+          },
+          {
+            "type": "textarea",
+            "id": "textarea",
+            "label": "Textarea"
+          }
+        ]
+      },
+      {
+        "type": "richtext",
+        "name": "Richtext",
+        "settings": [
+          {
+            "type": "richtext",
+            "id": "richtext",
+            "label": "Richtext"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Ingredients Details"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

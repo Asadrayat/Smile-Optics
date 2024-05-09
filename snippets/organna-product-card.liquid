@@ -1,0 +1,46 @@
+{% comment %}
+  {% render 'organna-product-card', product: product, section.id : section.id %}
+  {{ 'organna-product-card.css' | asset_url | stylesheet_tag }}
+{% endcomment %}
+
+<div class="product-card-wrapper">
+  <a href="{{ product.url }}" class="absolute-link"> </a>
+  <div class="product-image-wrapper">
+    {{ product.featured_image | img_url: 'master' | img_tag }}
+  </div>
+  <div class="product-info-block">
+    <div class="product-title">
+      {{ product.title | truncatewords: 2, '*' }}
+    </div>
+    <div class="product-meta">
+      {{ product.title | truncatewords: 3 }}
+    </div>
+    <div class="product-review">
+      <div class="jdgm-widget jdgm-preview-badge">
+        {{ product.metafields.judgeme.badge }}
+      </div>
+    </div>
+    <div class="product-price">
+      {% if product.selected_or_first_available_variant.price
+          < product.selected_or_first_available_variant.compare_at_price
+      %}
+        <p>
+          <span class="actual-price">{{ product.selected_or_first_available_variant.price | money }}</span>
+          <span class="compare-at-price">
+            {{- product.selected_or_first_available_variant.compare_at_price | money -}}
+          </span>
+        </p>
+      {% else %}
+        <p class="actual-price">{{ product.selected_or_first_available_variant.price | money }}</p>
+      {% endif %}
+    </div>
+    <div class="product-add-to-cart">
+      <a class="buttton add-to-cart-button" href="#"> Add to cart </a>
+      {% comment %}
+        {% form 'product', product, data-productid: product.id %}
+          <a class="buttton add-to-cart-button"> Add to cart </a>
+        {% endform %}
+      {% endcomment %}
+    </div>
+  </div>
+</div>

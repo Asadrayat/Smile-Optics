@@ -1,0 +1,550 @@
+<style>
+    .section-container--{{ section.id }}{
+      margin-top: {{ section.settings.margin_top | append:'px' }};
+      margin-bottom: {{ section.settings.margin_bottom | append:'px' }};
+      padding-top: {{ section.settings.padding_top | append:'px' }};
+      padding-bottom: {{ section.settings.padding_bottom | append:'px' }};
+      overflow: hidden;
+      background-color: #b4acf4;
+    }
+    .section-wrapper--{{ section.id }} {
+      width : 60%;
+    }
+    .faq-title span {
+      color: #5c439a;
+      font-size: 18px;
+      font-weight: 600;
+      margin-inline: 10px;
+    }
+    ul.smile-faq-title-block {
+      display: flex;
+      list-style-type: none;
+      padding-left: 0;
+      background-color: #6059d4;
+      color: #ffffff;
+      font-size: 12px;
+      margin-block: 0;
+      flex-wrap: wrap;
+    }
+    ul.smile-faq-title-block li:not(:last-child){
+      border-right: 1px solid #FFF;
+    }
+    li.smile-faq-title.active-title {
+      /* position: relative; */
+      background-color: #1b1759;
+    }
+    li.smile-faq-title {
+      cursor: pointer;
+      padding-block: 10px;
+      padding-inline: 20px;
+      transition: 0.2s ease;
+    }
+    li.smile-faq-title:hover {
+      background: #60DBD9;
+    }
+    .smile-faq-content-wrapper {
+      background: #eeedfe;
+      padding: 20px;
+    }
+    .smile-faq-tab-content {
+      display: none;
+    }
+    .smile-faq-tab-content.active-title {
+      display: block;
+      font-size: 14px;
+    }
+    .smile-faq-tab-content.active-title p {
+      color: #333232;
+      line-height: 1.3em;
+    }
+    .smile-faq-tab-content.active-title a {
+      color: #333232;
+    }
+    .smile-faq-tab-content.active-title p strong {
+      width: 100%;
+      display: block;
+      border-radius: 5px;
+    }
+  @media screen and (max-width: 768px){
+  .section-container--{{ section.id }}{
+      margin-top: {{ section.settings.margin_top_mobile | append:'px' }};
+      margin-bottom: {{ section.settings.margin_bottom_mobile | append:'px'  }};
+      padding-top: {{ section.settings.padding_top_mobile | append:'px' }};
+      padding-bottom: {{ section.settings.padding_bottom_mobile | append:'px' }};
+  }
+  .section-wrapper--{{ section.id }} {
+      width : 100%;
+  }
+    .section-wrapper--{{ section.id }}.page-width {
+      padding: 0;
+    }
+ul.smile-faq-title-block {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+}
+li.smile-faq-title {
+    min-width: max-content;
+    font-size: 14px;
+    padding-block: 15px;
+    padding-inline: 20px;
+    border-right: 1px solid #ffffff;
+}
+}
+</style>
+<section class="section-container--{{ section.id }} ">
+  <div class="section-wrapper--{{ section.id }} page-width">
+    {% comment %} {{ section.settings.title }} {% endcomment %}
+    <ul class="smile-faq-title-block">
+      {% for block in section.blocks %}
+        {% unless block.settings.content == blank %}
+          <li
+            class="smile-faq-title title-{{ section.id }} {% if forloop.first %} active-title {% endif %}"
+            data-target="faq-{{ forloop.index }}"
+            data-title="{{ block.settings.title }}"
+          >
+            {{ block.settings.title }}
+          </li>
+        {% endunless %}
+      {% endfor %}
+    </ul>
+    <div class="smile-faq-content-wrapper">
+      {% for block in section.blocks %}
+        <div
+          class="smile-faq-tab-content content-{{ section.id }} {% if forloop.first %} active-title {% endif %}"
+          data-target="faq-{{ forloop.index }}"
+          data-title="{{ block.settings.title }}"
+        >
+          {{ block.settings.content }}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<script>
+  let titleEls = document.querySelectorAll(".title-{{ section.id }}")
+  let contentEls = document.querySelectorAll(".content-{{ section.id }}")
+
+  titleEls.forEach(title => {
+    title.addEventListener("click", e => {
+      handleCustomTab(title)
+    })
+  })
+  function handleCustomTab(title) {
+    titleEls.forEach(t => {
+      if(title.dataset.title === t.dataset.title) t.classList.add("active-title")
+      else t.classList.remove("active-title")
+    })
+    contentEls.forEach(t => {
+      if(title.dataset.title === t.dataset.title) t.classList.add("active-title")
+      else t.classList.remove("active-title")
+    })
+  }
+</script>
+{% comment %}
+  <!-- Mobile Version Start -->
+  <style>
+    .custom__faq--{{ section.id }}{
+      margin-top: {{ section.settings.margin_top }}px;
+      margin-bottom: {{ section.settings.margin_bottom }}px;
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+      overflow: hidden;
+    }
+    .custom__faq-wrapper{
+      /* display: grid; */
+      grid-template-columns: repeat(2,1fr);
+      grid-gap: 85px;
+      align-items: center;
+    }
+    .custom__faq-container h2{
+      color: var(--Black, #0B0F0E);
+      font-size: 40px;
+      line-height: 55px; /* 137.5% */
+      text-transform: uppercase;
+      margin: 0 0 24px;
+    }
+    .custom__faq-image{
+      font-size: 0;
+      line-height: 0;
+      overflow: hidden;
+    }
+    .custom__faq-image img{
+      width: 100%;
+      height: 100%;
+    }
+
+    .accordion__intro {
+      position: relative;
+      padding: 16px 0;
+      cursor: pointer;
+    }
+    .accordion__intro h4{
+      color: var(--Black, #0B0F0E);
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 24px;
+      margin: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .accordion__content {
+      max-height: 0;
+      overflow: hidden;
+      will-change: max-height;
+      transition: all 0.25s ease-out;
+      opacity: 0;
+    }
+    .accordion__content p{
+      color: #303030;
+      font-size: 14px;
+      line-height: 24px; /* 150% */
+      margin: 0;
+    }
+    .accordion__icons{
+      font-size: 0;
+      line-height: 0;
+      position: relative;
+    }
+    .accordion__icons svg:nth-of-type(1){
+      opacity: 1;
+      transform: rotate(0);
+      transition: all 0.4s ease-in-out;
+    }
+    .accordion.accordion__active .accordion__icons svg:nth-of-type(1){
+      opacity: 0;
+      transform: rotate(180deg);
+    }
+    .accordion.accordion__active .accordion__icons svg:nth-of-type(2){
+      opacity: 1;
+      transform: rotate(180deg);
+    }
+    .accordion__icons svg:nth-of-type(2){
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transform: rotate(0);
+      transition: all 0.4s ease-in-out;
+    }
+    .accordion.accordion__active .accordion__icons svg:nth-of-type(2){
+      opacity: 1;
+      transform: rotate(180deg);
+    }
+    .accordion__active .accordion__content {
+    	opacity: 1;
+    }
+
+    @media screen and (min-width: 768px){
+      .custom__faq-wrapper.page-width{
+        padding-left: 0;
+        margin-left: 0;
+        max-width: 200rem;
+      }
+    }
+    @media screen and (max-width: 768px){
+      .custom__faq--{{ section.id }}{
+        margin-top: {{ section.settings.margin_top-m }}px;
+        margin-bottom: {{ section.settings.margin_bottom-m }}px;
+        padding-top: {{ section.settings.padding_top-m }}px;
+        padding-bottom: {{ section.settings.padding_bottom-m }}px;
+      }
+
+      .custom__faq-wrapper{
+          grid-template-columns: 1fr;
+          grid-gap: 24px;
+        }
+       .custom__faq-container h2{
+          font-size: 24px;
+          line-height: 30px; /* 137.5% */
+          margin: 0 0 16px;
+        }
+        .accordion__intro{
+          padding: 12px 0;
+        }
+        .accordion__intro h4{
+          font-size: 14px;
+          line-height: 14px;
+        }
+        .accordion__content p{
+          font-size: 10px;
+          line-height: 14px; /* 150% */
+        }
+        .accordion__icons svg{
+          width: 16px;
+          height: 16px;
+        }
+    }
+  </style>
+  <style>
+      .accordion {
+          text-align: center;
+          width: 80%;
+          margin: auto;
+          /* border-bottom: 1px solid #c7c7c7; */
+          border-top: unset;
+      }
+      .accordion__intro  {
+          font-size: 18px;
+          font-weight: 600;
+          line-height: 22px;
+          font-weight: 700;
+          margin-block: 10px;
+          color: #5c439a;
+      }
+
+      .accordion__content {
+          color: #303030;
+          font-size: 15px;
+          line-height: 22px;
+          margin: 0;
+      }
+      .accordion__active .accordion__content {
+          opacity: 1;
+          margin-top: 0;
+          margin-bottom : 15px;
+          /* margin-block: 30px; */
+      }
+      .accordion__active .accordion__content ul ,
+      .accordion__active .accordion__content ol {
+        text-align: left;
+        font-size: 14px;
+
+      }
+      .accordion__icons {
+          font-size: 0;
+          line-height: 0;
+          position: relative;
+          position: absolute;
+          right: 20px;
+      }
+    .smile-faq-tab-content.active-title {
+        display: block;
+      }
+      .accordion__active .accordion__content p {
+        font-size: 15px;
+        color: #333232;
+        text-align: left;
+      }
+      .accordion__active .accordion__content a {
+        color: #333232;
+      }
+      .accordion__active .accordion__content p strong {
+          background-color: #fff6e9;
+          width: 100%;
+          display: block;
+          padding: 5px 10px;
+          border-radius: 5px;
+      }
+      @media screen and (max-width: 768px){
+        .accordion {
+          width: 90%;
+        }
+        .accordion__intro {
+          font-size: 18px;
+          line-height: 16px;
+          font-weight: 700;
+          margin-block: 20px;
+        }
+        .custom__faq--{{ section.id }}    .accordion__content p {
+          font-size: 14px;
+          line-height: 20px;
+          text-align: justify;
+        }
+        .custom__faq--{{ section.id }}    .accordion__content ul {
+          font-size: 14px;
+        }
+      }
+  </style>
+  <section class="custom__faq--{{ section.id }} {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %} mobile-only ">
+    <div class="custom__faq-wrapper page-width">
+      <div class="custom__faq-container">
+        {% comment %}
+          <h2>{{ section.settings.title }}</h2>
+        {% endcomment %}
+
+        <div class="custom__faq-inner-wrapper">
+          {% for block in section.blocks %}
+            {% if block.type == 'faq' %}
+              {% unless block.settings.content == blank %}
+                <div
+                  data-aos="fade-up"
+                  class="accordion {% comment %}{% if forloop.first %}accordion__active{% endif %}{% endcomment %}"
+                >
+                  <h4 class="accordion__intro">
+                    <span>{{ block.settings.title }}</span
+                    ><span class="accordion__icons">
+                      {%- render 'all-icons', name: 'faq-plus' -%}
+                      {%- render 'all-icons', name: 'faq-minus' -%}
+                    </span>
+                  </h4>
+                  <div class="accordion__content">
+                    {{ block.settings.content }}
+                  </div>
+                </div>
+              {% endunless %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </section>
+  <script>
+    const accordions = document.querySelectorAll(".accordion");
+
+    const openAccordion = (accordion) => {
+      const content = accordion.querySelector(".accordion__content");
+      accordion.classList.add("accordion__active");
+      content.style.maxHeight = content.scrollHeight + "px";
+    };
+
+    const closeAccordion = (accordion) => {
+      const content = accordion.querySelector(".accordion__content");
+      accordion.classList.remove("accordion__active");
+      content.style.maxHeight = null;
+    };
+
+    accordions.forEach((accordion) => {
+      const intro = accordion.querySelector(".accordion__intro");
+      const content = accordion.querySelector(".accordion__content");
+
+      if (intro && content) {
+        intro.onclick = () => {
+          if (content.style.maxHeight) {
+            closeAccordion(accordion);
+          } else {
+            accordions.forEach((accordion) => closeAccordion(accordion));
+            openAccordion(accordion);
+          }
+        };
+      } else {
+        console.error("Accordion header or content not found.");
+      }
+    });
+  </script>
+  <!-- Mobile Version End -->
+{% endcomment %}
+{% schema %}
+{
+  "name": "Smile Product FAQ 2",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "header",
+      "content": "Desktop Spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Mobile Spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top (Mobile)",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom (Mobile)",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top  (Mobile)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom  (Mobile)",
+      "default": 20
+    }
+  ],
+  "blocks": [
+    {
+      "name": "FAQ",
+      "type": "faq",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Smile Product FAQ 2"
+    }
+  ]
+}
+{% endschema %}

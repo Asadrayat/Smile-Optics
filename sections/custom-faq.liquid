@@ -1,0 +1,487 @@
+{% assign id = section.id %}
+<style>
+    .custom__faq--{{ section.id }}{
+      margin-top: {{ section.settings.margin_top }}px;
+      margin-bottom: {{ section.settings.margin_bottom }}px;
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+      overflow: hidden;
+    }
+    .icons-{{ id }}{
+      display: flex;
+      gap: 20px;
+      justify-content: flex-start;
+    }
+    .icons-{{ id }} img{
+      width: 20px;
+      height: 20px;
+      filter: brightness(0.5);
+    }
+    .heading__faq{
+      display: flex;
+      flex-direction: column;
+      max-width: 90%;
+      margin: auto;
+    }
+    .heading__faq h2{
+      color: #000000;
+      font-size: 27px;
+      line-height: 30px;
+      text-align: center;
+    }
+    .heading__faq p{
+      color: rgb(255, 196, 130);
+      font-size: 14px;
+      line-height: 18px;
+      font-weight: 700;
+    }
+
+    .custom__faq-wrapper{{section.id}}{
+      max-width: 90%;
+      margin: auto;
+    }
+
+    .accordion__intro {
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 5px 0;
+      box-sizing: border-box;
+    }
+    .accordion__intro h1{
+      color: #000000;
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 30px;
+      padding: 0  36px;
+      height: 105px;
+      margin: 0;
+      display: flex;
+      background: #F7FCFC;
+      width: 100%;
+      align-items: center;
+    }
+    .accordion__intro .number-{{ id }} {
+      background: #E8F6F7;
+      font-size: 30px;
+      font-weight: 600;
+      color: #000;
+      margin: 0;
+      text-align: center;
+      /* padding: 15px 55px; */
+      height: 105px;
+      width: 150px;
+      /* text-align: center; */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: .4s ease-in-out;
+    }
+
+    .accordion__intro .number-{{ id }}:hover {
+      background: #01A6A5;
+    }
+
+    .accordion__content {
+      color: #000;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      letter-spacing: 0;
+      max-height: 0;
+      overflow: hidden;
+      /* will-change: max-height; */
+      transition: all 0.25s ease-out;
+      opacity: 0;
+      width: 80%;
+      margin: 0px auto;
+  }
+    .accordion__content ul{
+      color: #fff;
+    }
+    .accordion__content p{
+      color: #000;
+      font-size: 14px;
+      line-height: 20px;
+      text-align: justify;
+    }
+    .accordion__icons{
+      font-size: 0;
+      line-height: 0;
+      position: relative;
+    }
+
+    .custom__faq-inner-wrapper .accordion__faq{
+      border-top: none;
+      border-color: #CCB2E5;
+    }
+    .custom__faq-inner-wrapper .accordion__faq {
+      margin: 0;
+    }
+    .accordion__intro-text{
+      color: #000;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      letter-spacing: 1.6px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .accordion__active-faq .accordion__content {
+    	opacity: 1;
+      boz-sizing: border-box;
+      padding-block: 30px;
+    }
+
+    .custom-faq-nav {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      margin-bottom: 20px;
+      justify-content: start;
+    }
+    .custom-faq-nav li{
+      color: #000;
+      cursor: pointer;
+      font-size: 12px;
+    }
+    .custom-faq-nav li.active{
+      color: rgb(95, 199, 204);
+    }
+    @media screen and (min-width: 768px){
+      .custom__faq-wrapper{{section.id}}.page-width{
+        padding: 0;
+      }
+    }
+    @media screen and (max-width: 768px){
+      .custom__faq--{{ section.id }}{
+        margin-top: {{ section.settings.margin_top-m }}px;
+        margin-bottom: {{ section.settings.margin_bottom-m }}px;
+        padding-top: {{ section.settings.padding_top-m }}px;
+        padding-bottom: {{ section.settings.padding_bottom-m }}px;
+      }
+      .heading__faq h2{
+        font-size: 22px;
+        line-height: normal;
+      }
+      .icons-{{ id }}{
+          display: flex;
+          gap: 20px;
+          padding: 20px 40px;
+          justify-content: flex-start;
+        }
+      .accordion__intro {
+        flex-direction: column;
+      }
+      .accordion__intro h1{
+        font-size: 16px;
+      }
+    .accordion__intro .number-{{ id }} {
+      padding: 14px 30px;
+      justify-content: start;
+    }
+      .accordion__intro .number-{{ id }} {
+        width: 100%;
+      }
+      .custom__faq-wrapper{{section.id}} {
+        max-width: 100%;
+      }
+      .accordion__intro{
+        padding: 12px 0;
+      }
+      .accordion__intro h4{
+        font-size: 14px;
+        line-height: 14px;
+      }
+      .accordion__content p{
+        font-size: 14px;
+        line-height: 14px; /* 150% */
+      }
+      .nav_color {
+        color: #000;
+      }
+    }
+</style>
+
+{% liquid
+  assign general = section.blocks | where: 'type', 'general'
+  assign science = section.blocks | where: 'type', 'science'
+  assign others = section.blocks | where: 'type', 'orders'
+%}
+
+<section class="custom__faq--{{ section.id }}">
+  <div class="container-{{ id }} page-width">
+    <div class="heading__faq">
+      <h2>{{ section.settings.title }}</h2>
+      <p>{{ section.settings.label }}</p>
+    </div>
+    <div class="custom__faq-wrapper{{section.id}}">
+      <div class="custom__faq-container">
+        <ul class="custom-faq-nav">
+          <li class="active" data-type="general">general</li>
+          <li data-type="science">the science</li>
+          <li data-type="orders">orders & returns</li>
+        </ul>
+        <div class="custom__faq-inner-wrapper">
+          {% for block in general %}
+            {% render 'custom-faq', section: section, block: block, id: id, index: forloop.index, type: 'general' %}
+          {% endfor %}
+          {% for block in science %}
+            {% render 'custom-faq', section: section, block: block, id: id, index: forloop.index, type: 'science' %}
+          {% endfor %}
+          {% for block in others %}
+            {% render 'custom-faq', section: section, block: block, id: id, index: forloop.index, type: 'orders' %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  var accordionsFaq = document.querySelectorAll(".accordion__faq");
+  accordionsFaq.forEach(ac => console.log("height: ", ac.clientHeight))
+
+  var openAccordionFaq = (accordion) => {
+  	var content = accordion.querySelector(".accordion__content");
+  	accordion.classList.add("accordion__active-faq");
+  	content.style.maxHeight = content.scrollHeight + 100 + "px";
+  };
+
+  var closeAccordionFaq = (accordion) => {
+  	var content = accordion.querySelector(".accordion__content");
+  	accordion.classList.remove("accordion__active-faq");
+  	content.style.maxHeight = null;
+  };
+
+  accordionsFaq.forEach((accordion) => {
+  	var intro = accordion.querySelector(".accordion__intro");
+  	var content = accordion.querySelector(".accordion__content");
+
+  	intro.onclick = () => {
+  		if (content.style.maxHeight) {
+  			closeAccordionFaq(accordion);
+  		} else {
+  			accordionsFaq.forEach((accordion) => closeAccordionFaq(accordion));
+  			openAccordionFaq(accordion);
+  		}
+  	};
+  });
+
+  let navLists = document.querySelectorAll(".custom-faq-nav li")
+  navLists.forEach(list => list.addEventListener("click", e => {
+    navLists.forEach(l => {
+      if(l.dataset.type === list.dataset.type) l.classList.add("active")
+      else l.classList.remove("active")
+    })
+    accordionsFaq.forEach(faq => {
+      if(faq.dataset.type === list.dataset.type) {
+        faq.classList.remove("hidden")
+      } else {
+        faq.classList.add("hidden")
+      }
+    })
+  }))
+</script>
+{% schema %}
+{
+  "name": "Custom Faq",
+  "settings": [
+    {
+      "type": "select",
+      "id": "faq_type",
+      "label": "FAQ Type",
+      "options": [
+        {
+          "value": "general",
+          "label": "General FAQ"
+        },
+        {
+          "value": "science",
+          "label": "Science FAQ"
+        },
+        {
+          "value": "others",
+          "label": "orders & returns FAQ"
+        }
+      ],
+      "default": "general"
+    },
+    {
+      "type": "header",
+      "content": "Spacing (Desktop)"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Add Label"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "image_picker",
+      "id": "facebook",
+      "label": "Facebook Icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "twitter",
+      "label": "Twitter Icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "linkdn",
+      "label": "Linkdn Icon"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Spacing (Mobile)"
+    },
+    {
+      "type": "range",
+      "id": "margin_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top (Mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom (Mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top  (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom  (Mobile)",
+      "default": 0
+    }
+  ],
+  "blocks": [
+     {
+       "name": "General FAQ",
+       "type": "general",
+       "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text"
+          }
+       ]
+     },
+     {
+       "name": "Science FAQ",
+       "type": "science",
+       "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text"
+          }
+       ]
+     },
+     {
+       "name": "orders & returns FAQ",
+       "type": "orders",
+       "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text"
+          }
+       ]
+     }
+   ],
+  "presets": [
+    {
+      "name": "Custom Faq"
+    }
+  ]
+}
+{% endschema %}

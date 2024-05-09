@@ -1,0 +1,32 @@
+<div class="analysis-card-wrapper">
+  <div class="analysis-card-top-row">
+    <a href="/pages/certified-product-details/?handle={{ product.handle }}" class="absolute-link"> </a>
+    <p class="analysis-card-sku">SKU# {{ product.selected_or_first_available_variant.sku }}</p>
+    <p class="analysis-card-title">{{ product.title | truncatewords: 3, ' ' }}</p>
+    <p class="analysis-card-ingredients">{{ product.metafields.custom.ingredients }}</p>
+  </div>
+  <div class="analysis-card-image-wrapper">
+    <a href="/pages/certified-product-details/?handle={{ product.handle }}" class="absolute-link"> </a>
+    {{ product.featured_image | img_url: 'master' | img_tag }}
+  </div>
+  <div class="analysis-card-metadata-wrapper">
+    <div class=" analysis-single-metadata ">
+      <p class="analysis-single-metadata-label">potency</p>
+      <p class="analysis-single-metadata-data">{{ product.metafields.custom.potency }}</p>
+    </div>
+    <div class="analysis-single-metadata ">
+      <p class="analysis-single-metadata-label">volume</p>
+      <p class="analysis-single-metadata-data">{{ product.metafields.custom.volume }}</p>
+    </div>
+    <div class="analysis-single-metadata ">
+      <p class="analysis-single-metadata-label">flavor</p>
+      <p class="analysis-single-metadata-data">{{ product.metafields.custom.flavor }}</p>
+    </div>
+  </div>
+  <div class="analysis-card-batch-wrapper">
+    <p class="analysis-card-batch-id">
+      Batch id : <span>{{ product.metafields.custom.batch_id }}</span>
+    </p>
+    <a href="/pages/certified-product-details/?handle={{ product.handle }}"> {% render 'all-icons', name: 'blog-card-arrow' %} </a>
+  </div>
+</div>

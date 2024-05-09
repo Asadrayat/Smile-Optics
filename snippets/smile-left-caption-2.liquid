@@ -1,0 +1,83 @@
+{% comment %}
+  {% render 'smile-left-caption-2',
+    title: block.settings.title,
+    content: block.settings.content,
+    position_from_top: block.settings.position_from_top,
+    position_from_left: block.settings.position_from_left,
+    position_from_top_mobile: block.settings.position_from_top_mobile,
+    position_from_left_mobile: block.settings.position_from_left_mobile,
+    serial: forloop.index,
+    id: section.id
+  %}
+  {% endcomment %}
+<style>
+.single_caption_{{ serial }}_{{ id }} {
+  top : {{ position_from_top| append:'%' }}; 
+  left : {{ position_from_left| append:'%' }};
+}
+.single_caption_{{ serial }}_{{ id }}  span.caption-left-arrow {
+    transform: translate(-20px);
+}
+.single_caption_{{ serial }}_{{ id }} .single-caption-text-block p {
+    max-width: 250px;
+}
+@media screen and (max-width: 768px){
+.single_caption_{{ serial }}_{{ id }} {
+  top : {{ position_from_top_mobile | append:'px' }}; 
+  left : {{ position_from_left_mobile | append:'px' }};
+}
+.single_caption_{{ serial }}_{{ id }} .single-caption-text-block p {
+    max-width: 150px;
+}
+}
+</style>
+<div
+  class="single_caption single_caption_{{ serial }}_{{ id }}"
+  data-aos="fade-left"
+>
+  <div class="single-caption-text-block">
+    <h4>{{ title }}</h4>
+    <p>{{ content }}</p>
+  </div>
+  <span class="caption-left-arrow ">
+    {%- render 'smile-all-icons', name: 'caption-left' -%}
+  </span>
+</div>
+
+{% comment %}
+  {% render 'smile-left-caption-2',
+    title: block.settings.title,
+    content: block.settings.content,
+    position_from_top: block.settings.position_from_top,
+    position_from_left: block.settings.position_from_left,
+    position_from_top_mobile: block.settings.position_from_top_mobile,
+    position_from_left_mobile: block.settings.position_from_left_mobile,
+    serial: forloop.index,
+    id: section.id
+  %}
+
+<style>
+.single_caption_{{ serial }}_{{ id }} {
+  top : {{ position_from_top| append:'px' }}; 
+  left : {{ position_from_left| append:'px' }};
+}
+@media screen and (max-width: 768px){
+.single_caption_{{ serial }}_{{ id }} {
+  top : {{ position_from_top_mobile| append:'px' }}; 
+  left : {{ position_from_left_mobile| append:'px' }};
+}
+}
+</style>
+<div
+  class="single_caption single_caption_{{ serial }}_{{ id }}"  data-aos="fade-left" 
+>
+  <span class="caption-left-arrow ">
+    {%- render 'smile-all-icons', name: 'caption-left' -%}
+  </span>
+
+  <div class="single-caption-text-block">
+    <h4>{{ title }}</h4>
+    <p>{{ content }}</p>
+  </div>
+</div>
+{% endcomment %}

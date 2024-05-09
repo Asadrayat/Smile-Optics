@@ -1,0 +1,250 @@
+{{ 'organna-product-card.css' | asset_url | stylesheet_tag }}
+{% comment %}
+  <script src="{{ 'sheeth_product_card_1.js' | asset_url }}" defer="defer"></script>
+{% endcomment %}
+<style>
+    .row-container--{{ section.id }}{
+      padding-top : {{ section.settings.padding_top }}px;
+      padding-bottom : {{ section.settings.padding_bottom }}px;
+      margin-top: {{ section.settings.margin-top }}px;
+      margin-bottom: {{ section.settings.margin-bottom }}px;
+      background:  {{ section.settings.section-bg-color }};
+      overflow: hidden;
+      /* max-width: 100vw; */
+    }
+    .row-container--{{ section.id }} .prodSwiper {
+      overflow : visible;
+    }
+    .swiper-button-prev.parent-prev:after,.swiper-button-next.parent-next:after {
+      content: none!important;
+    }
+
+    .swiper-button-prev.child-prev:after, .swiper-button-next.child-next:after {
+      content: none!important;
+    }
+  .row-container--{{ section.id }} .slider-titles {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .row-container--{{ section.id }} .slider_title{
+      /* color: #1b0177;
+      font-size: 26px;
+      margin: 0;
+      text-align: left;
+      font-weight: 700;
+      text-transform: capitalize; */
+    }
+
+    .row-container--{{ section.id }} .featured_collection_slides {
+      text-align: center;
+      font-size: 16px;
+      background: red;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .row-container--{{ section.id }} .slider-title-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      /* width: max-content; */
+      margin: 10px auto;
+      text-align: center;
+      gap: 30px;
+      padding-bottom: 20px;
+    }
+    .row-container--{{ section.id }} .slider-title-wrapper  h3 {
+        margin: 0;
+    }
+    .row-container--{{ section.id }} .slider-title-wrapper a{
+      color : #000000;
+      font-size : 16px;
+      font-weight : 500;
+    }
+    .row-container--{{ section.id }} .featured-collection-prev, .featured-collection-next{
+      cursor: pointer;
+    }
+    .row-container--{{ section.id }} .swiper-button-disabled{
+      opacity: 0.3;
+    }
+    .swiper-slide.parentSlide {
+      /* flex: 1; */
+      transition : .3s;
+      display : flex
+    }
+    .swiper-slide.parentSlide:hover {
+      transform: scale3d(1.05, 1.05, 1.05);
+    }
+    .row-container--{{ section.id }} .feature-collection-pagination{
+      margin-top: 10px;
+      width: 100%;
+      max-width : 100%;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 5px;
+      border-radius: 8px;
+    }
+    .row-container--{{ section.id }} .feature-collection-pagination .swiper-pagination-bullet{
+      background-color: #1b0177;
+      width: 8px;
+      height: 6px;
+      margin: 0;
+      border-radius: 9999px;
+      transition-property: all;
+      transition-duration: .35s;
+    }
+    .row-container--{{ section.id }} .feature-collection-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active{
+      background-color: #1b0177;
+      width: 16px;
+    }
+    .prodSwiper {
+      /* overflow: visible; */
+    }
+    @media only screen and (max-width: 890px) {
+      .row-container--{{ section.id }} .slider-title-wrapper {
+        width: 100%;
+      }
+      .row-container--{{ section.id }} .slider_title {
+        font-size: 22px;
+        font-weight: 700;
+      }
+    }
+</style>
+<div class="row-container--{{ section.id }} page-width">
+  <div class="swiper prodSwiper">
+    <div class="slider-title-wrapper">
+      <div class="featured-collection-prev hidden">
+        {% render 'all-icons', name: 'icon-prev' %}
+      </div>
+      <div class="slider-titles">
+        {% if section.settings.title != blank %}
+          <h1 class="slider_title organna-title">{{ section.settings.title }}</h1>
+        {% else %}
+          <h1 class="slider_title organna-title">{{ section.settings.collection.title }}</h1>
+        {% endif %}
+       
+          <a class="button-font" href="{{ section.settings.collection.url }}"> View All</a>
+      </div>
+      <div class="featured-collection-next hidden">
+        {% render 'all-icons', name: 'icon-next' %}
+      </div>
+    </div>
+    <div class="swiper-wrapper">
+      {% for product in section.settings.collection.products %}
+        <div class="swiper-slide parentSlide">
+          {% render 'organna-product-card', product: product, section.id : section.id %}
+        </div>
+      {% endfor %}
+    </div>
+    <div class="feature-collection-pagination"></div>
+  </div>
+
+  <script>
+    new Swiper('.prodSwiper', {
+      slidesPerView: 1.5,
+      loop: false,
+      spaceBetween: 20,
+      pagination: {
+        el: '.feature-collection-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.featured-collection-next',
+        prevEl: '.featured-collection-prev',
+      },
+      breakpoints: {
+        1024: {
+          slidesPerView: 4,
+          spaceBetween: 50,
+        },
+      },
+    });
+  </script>
+</div>
+
+{% schema %}
+{
+  "name": "Organna Collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show Vendor",
+      "default": false
+    },
+    {
+      "type": "color_background",
+      "id": "section-bg-color",
+      "label": "Section Background",
+      "default": "#F5F5FD"
+    },
+
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "margin-top",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "margin-bottom",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 10
+    }
+  ],
+  "presets": [
+    {
+      "name": "Organna Collection"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

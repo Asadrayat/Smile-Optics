@@ -1,0 +1,572 @@
+{% assign id = section.id %}
+
+<style>
+      .section--{{ id }} {
+       margin-top: {{ section.settings.margin_top }}px;
+       margin-bottom: {{ section.settings.margin_bottom }}px;
+       padding-top: {{ section.settings.padding_top }}px;
+       padding-bottom: {{ section.settings.padding_bottom }}px;
+       max-width: 98%;
+       margin: auto;
+       overflow: hidden;
+      }
+      .container-{{ id }} {
+        display: grid;
+        grid-template-columns: 1.3fr 1fr;
+        margin: 60px 0px;
+        position: relative;
+      }
+      .content-{{ id }} {
+       background: rgb(96,219,217);
+      }
+      .wrapper-{{ id }} {
+        display: grid;
+        /* padding: 0px 0 0 0; */
+        width: 75%;
+        margin: 35px auto;
+      }
+      .content-{{ id }} h1{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 40px;
+        line-height: 40px;
+        color: #fff;
+        margin: 0;
+      }
+      .content-{{ id }} h1 span img{
+        width: 53px;
+        height: 53px;
+      }
+      .content-{{ id }} p{
+        font-size: 14px;
+        line-height: 19px;
+        font-weight: 700;
+        max-width: 385px;
+        color: #5c439a;
+        text-align: center;
+      }
+      .content-{{ id }} h6{
+        font-size: 10px;
+        line-height: 14px;
+        font-weight: 500;
+        color: #000;
+        /* opacity: 100%; */
+      }
+      .model-{{ id }} {
+        background: rgb(255,214,85);
+        position: relative;
+      }
+      .model-{{ id }} img{
+        width: auto;
+        height: 490px;
+        object-fit: cover;
+        position: absolute;
+        transform: translate(-95px, -89px);
+        top: 0;
+      }
+      .info-{{ id }} {
+        display: flex;
+        flex-direction: row-reverse;
+      }
+      .box1-{{ id }} {
+        position: absolute;
+        top: 20%;
+        left: 0;
+        transform: translate(-275px, 20px);
+      }
+      .box3-{{ id }} {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        transform: translate(-259px, -45px);
+      }
+      .info-2{{ id }} {
+        display: flex;
+        flex-direction: row;
+        position: absolute;
+        bottom: 50%;
+        left: 0;
+        transform: translate(260px, 100px);
+      }
+      .info-2{{ id }} img{
+        rotate: 180deg;
+      }
+      .info-{{ id }} img{
+        width: 81px;
+        height: 42px;
+        object-fit: cover;
+        position: unset;
+        transform: none;
+      }
+      .box-{{ id }} {
+        background: #fff;
+        border: 1px solid #0000009e;
+        font-size: 12px;
+        line-height: 17px;
+        color: #000;
+        text-align: justify;
+        padding: 5px 15px;
+        border-radius: 15px;
+        letter-spacing: 0px;
+        width: max-content;
+      }
+      .box-{{ id }} p{
+        margin: 0;
+      }
+      .review-{{ id }} {
+        padding: 0 0 0 45px;
+        justify-self: start;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 25px 0;
+      }
+      .review-{{id}} img{
+        max-width: 93px;
+        height: auto;
+        /* filter: brightness(6.5);         */
+      }
+      .review-{{id}} h2{
+        margin: 5px 0 0 0;
+        font-size: 10px;
+        line-height: 12px;
+        color: rgb(92, 67, 154);
+        font-weight: 500;
+      }
+      .review-{{id}} h3{
+        margin: 5px 0;
+        font-size: 20px;
+        line-height: 24px;
+        color: #000;
+      }
+      .review-{{id}} p{
+        margin: 0;
+        font-size: 10px;
+        line-height: 12px;
+        color: #3899ec;
+        text-decoration: underline;
+        font-weight: 400;
+      }
+      .btn-{{ id }} {
+        padding: 5px 30px !important;
+        cursor: pointer;
+      }
+      .risk_free-btn {
+        background: #6f60e9;
+        border-radius: 10px;
+        color: #ffffff;
+        transition: 0.5s ease;
+        font-weight: 600;
+        text-decoration: none;
+        width: max-content;
+        padding: 0px 30px;
+        text-align: center;
+      }
+      .risk_free-btn button{
+        background-color: inherit;
+      }
+      .risk_free-btn .shopify-payment-button__button--unbranded:hover, .shopify-payment-button__button--unbranded:hover:not([disabled]) {
+          background-color: inherit;
+      }
+      .risk_free-btn:hover {
+        background: #1b0177;
+        color: #5fc7cc;
+      }
+  @media only screen and (min-width: 890px) and (max-width: 1440px){
+      .wrapper-{{ id }} {
+        margin: 35px 30px;
+      }
+  }
+  @media screen and (max-width: 890px){
+      .section--{{ id }} {
+       margin-top: {{ section.settings.margin_top-m}}px;
+       margin-bottom: {{ section.settings.margin_bottom-m }}px;
+       padding-top: {{ section.settings.padding_top-m }}px;
+       padding-bottom: {{ section.settings.padding_bottom-m }}px;
+      }
+      .container-{{ id }} {
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+      }
+      .model-{{ id }}{
+        z-index: 5;
+      }
+      .model-{{ id }}:after{
+        position: absolute;
+        content: "";
+        width: 100%;
+        height: 50%;
+        top: 0;
+        left: 0;
+        background: rgb(96,219,217);
+        z-index: 5;
+      }
+      .model-{{ id }} img{
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        position: unset;
+        transform: translate(96px, 8px);
+        position: relative;
+        z-index: 9;
+      }
+      .wrapper-{{ id }} {
+        width: 90%;
+        margin: 35px auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .content-{{ id }} h1{
+        font-size: 33px;
+        line-height: 1;
+        gap: 0px;
+      }
+      .content-{{ id }} h6{
+        font-size: 11px;
+        width: 48%;
+        margin: 5px auto;
+        text-align: center;
+      }
+      .content-{{ id }} h1 span img{
+        width: 40px;
+        height: 40px;
+      }
+      .content-{{ id }} p{
+        font-size: 17px;
+        line-height: 24px;
+        font-weight: 700;
+        max-width: 100%;
+        color: #5c439a;
+        text-align: center;
+      }
+      .review-{{ id }} {
+        padding: 0;
+        margin: 15px 0;
+      }
+      .review-{{id}} img{
+        max-width: 135px;
+      }
+      .review-{{ id }} h2 {
+        font-size: 15px;
+        line-height: 18px;
+        font-weight: 600;
+      }
+      .review-{{ id }} p{
+        font-size: 14px;
+        line-height: 18px;
+        font-weight: 400;
+      }
+      .box1-{{ id }} {
+        transform: none;
+        z-index: 10;
+      }
+      .info-2{{ id }} {
+        display: flex;
+        flex-direction: row-reverse;
+        position: absolute;
+        bottom: 50%;
+        left: 0;
+        transform: none;
+        z-index: 10;
+      }
+      .info-2{{ id }} img{
+        rotate: 0deg;
+      }
+      .box3-{{id}} {
+        bottom: 40px;
+        left: 20px;
+        transform: none;
+        z-index: 10;
+      }
+      .btn-{{ id }}.risk_free-btn {
+        padding: 7px 25px !important;
+        font-size: 12px;
+      }
+      .info-{{ id }} img{
+        width: 66px;
+        height: auto;
+        transform: unset;
+      }
+
+    }
+</style>
+
+<section class="section--{{ id }}">
+  <div class="container-{{ id }}">
+    <div class="content-{{ id }}">
+      <div class="wrapper-{{ id }}">
+        <h1>
+          {{ section.settings.title -}}
+          <span>
+            {% unless section.settings.image_title == blank %}
+              {{
+                section.settings.image_title
+                | image_url: width: section.settings.image_title.width
+                | image_tag: loading: 'lazy'
+              }}
+            {% endunless -%}
+          </span>
+        </h1>
+        <p>{{ section.settings.desc }}</p>
+        <div class="review-{{ id }} ">
+          {% unless section.settings.image == blank %}
+            {{ section.settings.image | image_url: width: section.settings.image.width | image_tag: loading: 'lazy' }}
+          {% endunless %}
+          <h2>{{ section.settings.text }}</h2>
+          <p>{{ section.settings.small_text }}</p>
+        </div>
+        {% if section.settings.show_button %}
+          {% form 'product', product, class: 'risk_free-btn' %}
+            <input
+              type="hidden"
+              name="qunatity"
+              value="1"
+            >
+            <input
+              type="hidden"
+              name="id"
+              value="{{ product.selected_or_first_available_variant.id }}"
+            >
+
+            <!-- {{ form | payment_button }} -->
+            <div class="btn-{{ id }} open-popup blue-button-1 risk_free-btn">{{ section.settings.btn_text }}</div>
+          {% endform %}
+        {% else %}
+          <div class="btn-{{ id }} open-popup blue-button-1 risk_free-btn">{{ section.settings.btn_text }}</div>
+        {% endif %}
+        <h6>{{ section.settings.policy }}</h6>
+      </div>
+    </div>
+    <div class="model-{{ id }}">
+      {% unless section.settings.model == blank %}
+        {{ section.settings.model | image_url: width: section.settings.model.width | image_tag: loading: 'lazy' }}
+      {% endunless %}
+      <div class="info-{{ id }} box1-{{ id }}">
+        {% unless section.settings.model == blank %}
+          {{
+            section.settings.right_star
+            | image_url: width: section.settings.model.width
+            | image_tag: loading: 'lazy'
+          }}
+        {% endunless %}
+        <div class="box-{{ id }}">{{ section.settings.highlight1 }}</div>
+      </div>
+      <div class="info-2{{ id }} info-{{ id }}">
+        {% unless section.settings.model == blank %}
+          {{
+            section.settings.right_star
+            | image_url: width: section.settings.model.width
+            | image_tag: loading: 'lazy'
+          }}
+        {% endunless %}
+        <div class="box-{{ id }}">{{ section.settings.highlight2 }}</div>
+      </div>
+      <div class="info-{{ id }} box3-{{ id }}">
+        {% unless section.settings.model == blank %}
+          {{
+            section.settings.right_star
+            | image_url: width: section.settings.model.width
+            | image_tag: loading: 'lazy'
+          }}
+        {% endunless %}
+        <div class="box-{{ id }}">{{ section.settings.highlight3 }}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Risk Free",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_button",
+      "label": "Show Checkout Button",
+      "default": true
+    },
+    {
+      "id": "title",
+      "type": "text",
+      "label": "Add Title"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_title",
+      "label": "Add title Image"
+    },
+    {
+      "id": "desc",
+      "type": "textarea",
+      "label": "Add Description"
+    },
+    {
+      "type":"header",
+      "content":"Review"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Star Image"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "1000+ 5-Star Reviews"
+    },
+    {
+      "type": "text",
+      "id": "small_text",
+      "label": "Small Text",
+      "default": "Kudobuzz™ Verified Reviews"
+    },
+    {
+      "id": "btn_text",
+      "type": "text",
+      "label": "Add Button text"
+    },
+    {
+      "id": "btn_url",
+      "type": "url",
+      "label": "Add Button Url"
+    },
+    {
+      "id": "model",
+      "type": "image_picker",
+      "label": "Add Model Image"
+    },
+    {
+      "id": "right_star",
+      "type": "image_picker",
+      "label": "Add Image Star Right"
+    },
+    {
+      "id": "policy",
+      "type": "textarea",
+      "label": "Add Policy Text",
+      "default": "*please read our policy to see what qualifies our Satisfaction Guarantee"
+    },
+    {
+      "type":"header",
+      "content":"Highlight"
+    },
+    {
+      "type": "richtext",
+      "id": "highlight1",
+      "label": "Add Highlight Text 1"
+    },
+    {
+      "type": "richtext",
+      "id": "highlight2",
+      "label": "Add Highlight Text 2"
+    },
+    {
+      "type": "richtext",
+      "id": "highlight3",
+      "label": "Add Highlight Text 3"
+    },
+
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 8
+    },
+
+    {
+      "type": "header",
+      "content": "Spacing (Mobile)"
+    },
+    {
+      "type": "range",
+      "id": "margin_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top  (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom  (Mobile)",
+      "default": 0
+    }
+  ],
+  "blocks": [],
+  "presets":[
+    {
+      "name": "Risk Free"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

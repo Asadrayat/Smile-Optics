@@ -1,0 +1,27 @@
+{% comment %}
+  {% render 'organna-article-card', article: block.settings.article, custom_image: block.settings.image %}
+{% endcomment %}
+<div class="article-card-wrapper">
+  <a class="absolute-link" href="{{ article.url }}">    </a>
+  <div class="article-badge custom-button">{{ article.tags[0] }}</div>
+  <div class="article-image-wrapper">
+    {% if custom_image %}
+      {{ custom_image | img_url: 'master' | img_tag }}
+    {% else %}
+      {{ article.image | img_url: 'master' | img_tag }}
+    {% endif %}
+  </div>
+  <div class="article-content-wrapper">
+    <h2 class="article-title ">{{ article.title | truncatewords: 7 | escape }}</h2>
+    <p class="article-contents">
+      {%- if article.excerpt.size > 0 -%}
+        {{ article.excerpt | strip_html | truncatewords: 30 }}
+      {%- else -%}
+        {{ article.content | strip_html | truncatewords: 30 }}
+      {%- endif -%}
+    </p>
+    <a class="custom-button article-card-button" href="{{ article.url }}">
+      Read More {% render 'all-icons', name: 'blog-card-arrow' %}
+    </a>
+  </div>
+</div>

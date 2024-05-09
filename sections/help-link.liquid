@@ -1,0 +1,284 @@
+{% assign id = section.id %}
+
+<style>
+      .coa_contact--{{ id }} {
+       margin-top: {{ section.settings.margin_top }}px;
+       margin-bottom: {{ section.settings.margin_bottom }}px;
+       padding-top: {{ section.settings.padding_top }}px;
+       padding-bottom: {{ section.settings.padding_bottom }}px;
+       max-width: 100vw;
+       overflow: hidden;
+      }
+    .container-{{ id }} h1{
+        margin: 0;
+        font-size: 33px;
+        text-align: center;
+      }
+    .info-{{ id }}{
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+    .container-{{ id }} p{
+        font-size: 13px;
+        line-height: 18px;
+        text-align: center;
+        color: #000;
+      }
+     .wrapper-{{ id }} {
+       justify-self: center;
+        max-width: 300px;
+        height: auto;
+        background: #F6F6F6;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 10px;
+        border-radius: 20px;
+       transition: all .4s ease-in-out;
+     }
+     .wrapper-{{ id }}:hover {
+        transform: scale(1.1);
+     }
+     .wrapper-{{ id }} h2{
+      font-size: 18px;
+      line-height: 24px;
+      color: #000;
+      font-weight: bold;
+      text-align: center;
+      max-width: 162px;
+     }
+
+     .wrapper-{{ id }} h4{
+      font-size: 12px;
+      line-height: 14px;
+      font-weight: normal;
+      text-align: center;
+      color: rgb(89, 89, 89);
+      margin-top: 0;
+      padding-top: 15px;
+      border-top: 1px solid #00000026;
+     }
+    .icon-{{ id }} {
+      width: 46px;
+      height: 43px;
+     }
+    .icon-{{ id }} img{
+      width: 100%;
+      height:100%;
+     }
+    .btn-{{ id }} {
+      padding: 10px 30px !important;
+      font-size: 12px;
+      line-height: 10px;
+      width: 240px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+
+  @media screen and (max-width: 890px){
+
+     .coa_contact--{{ id }} {
+       margin-top: {{ section.settings.margin_top-m }}px;
+       margin-bottom: {{ section.settings.margin_bottom-m }}px;
+       padding-top: {{ section.settings.padding_top-m }}px;
+       padding-bottom: {{ section.settings.padding_bottom-padding_bottom-m }}px;
+      }
+    .info-{{ id }}{
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      width: 96%;
+      margin: auto;
+    }
+     .wrapper-{{ id }} h2{
+      font-size: 11px;
+      line-height: 12px;
+      max-width: 101px;
+     }
+     .wrapper-{{ id }} h4{
+      font-size: 8px;
+      line-height: 10px;
+      color: rgb(89,89,89);
+     }
+    .btn-{{ id }} {
+      font-size: 8px;
+      line-height: 10px;
+      width: 100%;
+      padding: 10px 20px !important;
+    }
+    }
+</style>
+
+<section class="coa_contact--{{ id }}">
+  <div class="container-{{ id }}">
+    <h1>{{ section.settings.title }}</h1>
+    <p>{{ section.settings.desc }}</p>
+
+    <div class="info-{{ id }}">
+      {% for block in section.blocks %}
+        <div class="wrapper-{{ id }}">
+          <div class="icon-{{ id }}">
+            {% if block.settings.icon %}
+              {{ block.settings.icon | image_url: width: block.settings.icon.width | image_tag: loading: 'lazy' }}
+            {% endif %}
+          </div>
+          <h2>{{ block.settings.card_title }}</h2>
+          <h4>{{ block.settings.card_desc }}</h4>
+          <a class="blue-button-1 btn-{{ id }}" href="{{ block.settings.url }}">{{ block.settings.btn_text }}</a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Help Link",
+  "settings": [
+    {
+      "id": "title",
+      "type": "textarea",
+      "label": "Add Title",
+      "default":"Quick Help Link"
+    },
+    {
+      "id": "desc",
+      "type": "textarea",
+      "label": "Add Description",
+      "default":"Check out our self-service tools to get help fast. Or reach out to our customer support team above"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 8
+    },
+
+    {
+      "type": "header",
+      "content": "Spacing (Mobile)"
+    },
+    {
+      "type": "range",
+      "id": "margin_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top  (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom  (Mobile)",
+      "default": 0
+    }
+  ],
+  "blocks": [
+   {
+      "name": "Add Card",
+      "type": "Text",
+      "settings": [
+          {
+            "id": "icon",
+            "type": "image_picker",
+            "label": "Add Card Icon"
+          },
+          {
+            "id": "card_title",
+            "type": "text",
+            "label": "Add Card Title",
+            "default":"Issues With Your Order?"
+          },
+          {
+            "id": "card_desc",
+            "type": "textarea",
+            "label": "Add Card Description",
+            "default": "Our Support team is available Monday - Friday from 7am to 7pm. Call, email, or live chat with an specialist."
+          },
+          {
+            "id": "btn_text",
+            "type": "text",
+            "label": "Add Button Text"
+          },
+          {
+            "id": "url",
+            "type": "url",
+            "label": "Add Button Url"
+          }
+      ]
+    }
+  ],
+  "presets":[
+    {
+      "name": "Help Link"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

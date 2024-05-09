@@ -1,0 +1,22 @@
+<div
+  data-aos="fade-up"
+  class="accordion__faq {% unless block.type == 'general' %}hidden nav_color{% endunless %}"
+  data-aos-delay="{{ index | times: 50 }}"
+  data-type="{{ type }}"
+>
+  <div class="accordion__intro">
+    <div class="number-{{ id }}">
+      {% if index < 10 %}0{% endif -%}
+      {{- index }}
+    </div>
+    <h1 class="faq_title-{{ id }}">{{ block.settings.title }}</h1>
+  </div>
+  <div class="accordion__content">
+    <p>{{ block.settings.text }}</p>
+    <div class="icons-{{ id }}">
+      <img class="" src="{{ section.settings.facebook| img_url: "master" }}" alt="{{ shop.name }}">
+      <img class="" src="{{ section.settings.twitter | img_url: "master" }}" alt="{{ shop.name }}">
+      <img class="" src="{{ section.settings.linkdn | img_url: "master" }}" alt="{{ shop.name }}">
+    </div>
+  </div>
+</div>

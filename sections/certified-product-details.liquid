@@ -1,0 +1,239 @@
+<style>
+    .section-container--{{ section.id }}{
+      margin-top: {{ section.settings.margin_top | append:'px' }};
+      margin-bottom: {{ section.settings.margin_bottom | append:'px' }};
+      padding-top: {{ section.settings.padding_top | append:'px' }};
+      padding-bottom: {{ section.settings.padding_bottom | append:'px' }};
+      overflow: hidden;
+    }
+  .section-wrapper--{{ section.id }}.page-width{
+      display :flex;
+  }
+  .section-container--{{ section.id }}  .analysis-card-wrapper {
+      width: 45%;
+      margin: auto;
+      height: auto;
+  }
+  .section-container--{{ section.id }}  .right-column-bottom-row ,
+  .section-container--{{ section.id }}  .left-column-bottom-row {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      text-align: center;
+      width: 45%;
+      margin: 10px auto;
+  }
+  .section-container--{{ section.id }}  a.custom-button {
+      color: #a7f2f6;
+      background: #1b0177;
+      font-size: 12px;
+      font-weight: 600;
+  }
+  .section-container--{{ section.id }}  a.custom-button.custom-buy-now-button {
+      background: #01a6a5;
+      border-color: #01a6a5;
+      transition : 0.5s ease;
+  }
+  .section-container--{{ section.id }} .right-column-bottom-row a.custom-button.custom-buy-now-button {
+      background: #1b0177;
+      border-color: #1b0177;
+      transition : 0.5s ease;
+  }
+  .section-container--{{ section.id }}  a.custom-button.custom-buy-now-button:hover {
+      background: #007d7d;
+      border-color: #007d7d;
+  }
+
+  .section-container--{{ section.id }} .certified-image-wrapper {
+      border: 5px solid #fef7ea;
+      border-radius: 30px;
+      overflow: hidden;
+  }
+  .section-container--{{ section.id }} .certified-image-wrapper  img {
+      width: 100%;
+  }
+    @media screen and (max-width: 768px){
+  .section-container--{{ section.id }}{
+      margin-top: {{ section.settings.margin_top_mobile | append:'px' }};
+      margin-bottom: {{ section.settings.margin_bottom_mobile | append:'px'  }};
+      padding-top: {{ section.settings.padding_top_mobile | append:'px' }};
+      padding-bottom: {{ section.settings.padding_bottom_mobile | append:'px' }};
+  }
+  .section-wrapper--{{ section.id }}.page-width{
+      flex-direction: column;
+  }
+  .section-container--{{ section.id }}  .analysis-card-wrapper {
+      width: 100%;
+  }
+  .section-container--{{ section.id }}   .left-column-bottom-row ,
+  .section-container--{{ section.id }}   .right-column-bottom-row {
+      width: 100%;
+      flex-direction: row;
+      justify-content: space-around;
+  }
+  }
+</style>
+
+{% assign productHandle = canonical_url | split: 'handle=' | last %}
+{% assign product = all_products[productHandle] %}
+
+<section class="section-container--{{ section.id }}">
+  <div class="section-wrapper--{{ section.id }} page-width">
+    <div class="certified-product-left-column">
+      <div class="analysis-card-wrapper">
+        <div class="analysis-card-top-row">
+          <a href="/pages/certified-product-details/?handle={{ product.handle }}" class="absolute-link"> </a>
+          <p class="analysis-card-sku">SKU# {{ product.selected_or_first_available_variant.sku }}</p>
+          <p class="analysis-card-title">{{ product.title | truncatewords: 3, ' ' }}</p>
+          <p class="analysis-card-ingredients">{{ product.metafields.custom.ingredients }}</p>
+        </div>
+        <div class="analysis-card-image-wrapper">
+          {{ product.featured_image | img_url: 'master' | img_tag }}
+        </div>
+        <div class="analysis-card-metadata-wrapper">
+          <div class=" analysis-single-metadata ">
+            <p class="analysis-single-metadata-label">potency</p>
+            <p class="analysis-single-metadata-data">{{ product.metafields.custom.potency }}</p>
+          </div>
+          <div class="analysis-single-metadata ">
+            <p class="analysis-single-metadata-label">volume</p>
+            <p class="analysis-single-metadata-data">{{ product.metafields.custom.volume }}</p>
+          </div>
+          <div class="analysis-single-metadata ">
+            <p class="analysis-single-metadata-label">flavor</p>
+            <p class="analysis-single-metadata-data">{{ product.metafields.custom.flavor }}</p>
+          </div>
+        </div>
+        <div class="analysis-card-batch-wrapper">
+          <p class="analysis-card-batch-id">
+            Batch id : <span>{{ product.metafields.custom.batch_id }}</span>
+          </p>
+          <a href="/pages/certified-product-details/?handle={{ product.handle }}">
+            {% render 'all-icons', name: 'blog-card-arrow' %}
+          </a>
+        </div>
+      </div>
+      <div class="left-column-bottom-row">
+        <a class="custom-button" href="{{ product.metafields.custom.pdf | file_url}}"> ⭐ DOWNLOAD ⭐ </a>
+        <a class="custom-button custom-buy-now-button" href="{{ product.url }}"> BUY NOW </a>
+      </div>
+    </div>
+
+    <div class="certified-product-right-column">
+      <div class="certified-image-wrapper">
+        {{ product.metafields.custom.pdf_thumbnail | img_url: 'master' | img_tag }}
+      </div>
+      <div class="right-column-bottom-row">
+        <a class="custom-button custom-buy-now-button" href="{{ product.url }}"> DOWNLOAD NOW </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Organna Certified Product",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+
+    {
+      "type": "header",
+      "content": "Desktop Spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Mobile Spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top (Mobile)",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom (Mobile)",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top  (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom  (Mobile)",
+      "default": 0
+    }
+  ],
+
+  "presets": [
+    {
+      "name": "Organna Certified Product"
+    }
+  ]
+}
+{% endschema %}

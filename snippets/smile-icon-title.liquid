@@ -1,0 +1,14 @@
+{% comment %} {%  render 'smile-icon-title', image: section.settings.image, title: section.settings.title, subtitle: section.settings.subtitle, content: section.settings.content  %} {% endcomment %}
+<div class="icon-title-snippet text-block">
+  {% unless image == null %}
+    {{ image | img_url: 'master' | img_tag }}
+  {% endunless %}
+  {% unless subtitle == null %}
+    <p class="text-block--subtitle">{{ subtitle }}</p>
+  {% endunless %}
+  <h2 class="text-block-title " >{{ title }}</h2>
+
+  {% unless content == null %}
+    <p class="text-block--content">{{ content }}</p>
+  {% endunless %}
+</div>

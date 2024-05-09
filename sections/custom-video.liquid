@@ -1,0 +1,418 @@
+{% liquid
+  assign id = section.id
+  assign settings = section.settings
+  assign blocks = section.blocks
+%}
+
+<style>
+    #shopify-section-{{id}} {
+      box-sizing: border-box;
+      margin-top: {{section.settings.margin_top | append: 'px'}};
+      margin-bottom: {{section.settings.margin_bottom | append: 'px'}};
+      padding-top: {{section.settings.padding_top | append: 'px'}};
+      padding-bottom: {{section.settings.padding_bottom | append: 'px'}};
+    }
+    .top-{{ id }} {
+    }
+    .wrapper-{{ id }} {
+      padding: 0 30px 20px 30px;
+    }
+    .desktop__only {
+      display: block;
+    }
+    .mobile__only {
+      display: none !important;
+    }
+     .container-{{ id }} {
+      background-image: url("{{ section.settings.bg_img | image_url: width: section.settings.bg_img.width }}");
+      background-repeat: no-repeat;
+      background-position: center -73px;
+      box-sizing: border-box;
+      background-color: #80D2D6;
+     }
+
+    .icon-{{ id }} {
+      text-align: center;
+    }
+    .heading-{{ id }} {
+      font-size: 40px;
+      line-height: 48px;
+      font-weight: 600;
+      color: rgb(92, 67, 154);
+      margin: 0 0 32px 0;
+      text-align: center;
+    }
+    .sub_heading-{{ id }} {
+      font-size: 14px;
+      color: rgb(135, 135, 135);
+      line-height: 14px;
+      text-align: center;
+      margin: 0;
+    }
+    .btn-{{ id }} {
+      background: inherit;
+      color: rgb(92, 67, 154);
+      font-size: 12px;
+      text-decoration: none;
+      transition: all  0.5s ease-in-out;
+      padding: 3px 30px;
+      border-radius: 15px;
+      display: flex;
+      width: max-content;
+      margin: 10px auto;
+    }
+    .btn-{{ id }}:hover {
+      background: rgb(92, 67, 154);
+      color: rgb(95, 199, 204);
+    }
+    .chevron-{{ id }} {
+      color: powderblue;
+    }
+    .slider-slide-video {
+      width: 100%;
+      border-radius: 15px;
+      border: 2px solid var(--White, #FFF);
+      box-sizing: border-box;
+    }
+    .vss-play-button-{{id}} {
+      position: absolute;
+      width: 48px;
+      height: 48px;
+      border: none;
+      border-radius: 50%;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    #next--{{ section.id }} svg{
+      rotate: 180deg;
+    }
+    .slider-slide-video.playing + .vss-play-button-{{id}} {
+      display: none;
+    }
+    video::playing {
+      border: 5px solid green;
+    }
+    @media(max-width: 768px) {
+    #shopify-section-{{id}} {
+      margin-top: {{section.settings.margin_top_m | append: 'px'}};
+      margin-bottom: {{section.settings.margin_bottom_m | append: 'px'}};
+      padding-top: {{section.settings.padding_top_m | append: 'px'}};
+      padding-bottom: {{section.settings.padding_bottom_m | append: 'px'}};
+    }
+     .container-{{ id }} {
+      background-position-x: center;
+      /* background-position-y: -190px;   */
+      background-position-y: -150px;
+      background-color: #80D2D6;
+      padding-bottom: 20px;
+     }
+    .wrapper-{{ id }} {
+      padding: 0 10px 20px 10px;
+      background: unset;
+    }
+    .heading-{{ id }} {
+      font-size: 26px;
+      line-height: 1.3em;
+      margin: 0 0 40px 0;
+
+    }
+    .desktop__only {
+      display: none;
+    }
+    .mobile__only {
+      display: block !important;
+    }
+    .btn_m-{{ id }} {
+      background: #ffffff42;
+      color: rgb(92, 67, 154);
+      font-size: 12px;
+      text-decoration: none;
+      transition: all  0.5s ease-in-out;
+      padding: 8px 30px;
+      border-radius: 15px;
+      display: flex;
+      width: 90%;
+      text-align: center;
+      margin: auto;
+    }
+    .btn_m-{{ id }}:hover {
+      background: rgb(92, 67, 154);
+      color: rgb(95, 199, 204);
+    }
+      
+  }
+</style>
+
+<div class="sec-{{ id }}">
+  <div class="container-{{ id }} {% unless section.settings.full_width %}page-width {% endunless %}">
+    <div class="top-{{ id }}">
+      <div class="icon-{{ id }}">{% render 'all-icons', name: 'diamond' %}</div>
+      {% unless section.settings.heading == blank %}
+        <h2 class="heading-{{ id }}">{{ section.settings.heading }}</h2>
+        <p class="sub_heading-{{ id }} desktop__only">{{ section.settings.desc }}</p>
+        <a href="{{ section.settings.url }}" class="btn-{{ id }} desktop__only button-font">
+          {{- section.settings.btn_text }} ></a
+        >
+      {% endunless %}
+    </div>
+    <div class="wrapper-{{ id }}">
+      <div class="swiper video-swiper-{{ id }}">
+        <div class="swiper-wrapper">
+          {% for block in section.blocks %}
+            <div class="swiper-slide video-slide-{{ id }}">
+              {% unless block.settings.video == blank %}
+                {{
+                  block.settings.video
+                  | video_tag:
+                    image_size: '200x',
+                    autoplay: false,
+                    loop: true,
+                    muted: false,
+                    controls: false,
+                    class: 'slider-slide-video',
+                    data-index: forloop.index
+                }}
+                <div class="vss-play-button-{{id}}">
+                  {% render 'play-button' %}
+                </div>
+              {% endunless %}
+            </div>
+          {% endfor %}
+        </div>
+        <div id="prev--{{ section.id }}" class="swiper-button-prev chevron-{{ id }}">
+          {% render 'all-icons', name: 'swiper-btn' %}
+        </div>
+        <div id="next--{{ section.id }}" class="swiper-button-next chevron-{{ id }}">
+          {% render 'all-icons', name: 'swiper-btn' %}
+        </div>
+      </div>
+    </div>
+    <a href="{{ section.settings.link }}" class="btn_m-{{ id }} mobile__only button-font">
+      {{- section.settings.btn_text }} ></a
+    >
+  </div>
+</div>
+
+<script>
+  new Swiper(".video-swiper-{{ id }}", {
+    slidesPerView: 5,
+    spaceBetween: 15,
+    breakpoints: {
+      300: {
+        slidesPerView: 1.7,
+        spaceBetween: 10,
+      },
+      560: {
+        slidesPerView: 2,
+        spaceBetween: 10,
+      },
+      769: {
+        slidesPerView: 4,
+        spaceBetween: 15,
+      },
+      1500: {
+        slidesPerView: 5,
+        spaceBetween: 15,
+      }
+    },
+    navigation: {
+      nextEl: "#next--{{ section.id }}",
+      prevEl: "#prev--{{ section.id }}",
+    },
+  })
+
+  if(document.querySelectorAll(".vss-play-button-{{id}}")) {
+    document.querySelectorAll(".vss-play-button-{{id}}").forEach(button => {
+      button.addEventListener("click", e => {
+        let video = button.closest(".swiper-slide").querySelector("video")
+        videoControl(video)
+      })
+    })
+  }
+
+  if(document.querySelectorAll(".video-slide-{{ id }} .slider-slide-video")) {
+    document.querySelectorAll(".video-slide-{{ id }} .slider-slide-video").forEach(video => {
+      video.addEventListener("click", e => {
+        videoControl(video)
+      })
+    })
+  }
+
+  function videoControl(video) {
+    document.querySelectorAll(".video-slide-{{ id }} .slider-slide-video").forEach(v => {
+      if(v.dataset.index === video.dataset.index) {
+         if(v.paused) {
+          v.play()
+          v.classList.add("playing")
+        }
+        else {
+          v.pause()
+          v.classList.remove("playing")
+        }
+      } else {
+        v.pause()
+        v.classList.remove("playing")
+      }
+    })
+
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Custom Video ",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full Width Section",
+      "default": true
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "heading",
+      "default": "real results by people just like you!"
+    },
+    {
+      "type": "textarea",
+      "id": "desc",
+      "label": "Description",
+      "default": "Hover over any user testimonial below to watch"
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Add Button Text",
+      "default": "View Results"
+    },
+    {
+      "type": "url",
+      "id": "url",
+      "label": "Add Button Link"
+    },
+    {
+      "id": "bg_img",
+      "type": "image_picker",
+      "label": "Add Image Background"
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing Desktop"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing Mobile"
+    },
+    {
+      "type": "range",
+      "id": "margin_top_m",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom_m",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_top_m",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_m",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "text",
+      "settings": [
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Video "
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,117 @@
+/* img.motion-reduce:hover {
+    transform: scale3d(1.5, 1.5, 1.5);
+} */
+.card__heading a:after {
+  content: none;
+}
+.card:hover .media.media--hover-effect > img:first-child:only-child,
+.card-wrapper:hover .media.media--hover-effect > img:first-child:only-child {
+  transform: scale(1.15);
+}
+.quick-view-button {
+  background: #ffffffc7;
+  text-decoration: none;
+  bottom: -50px;
+  position: absolute;
+  width: 100%;
+  font-size: 14px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
+  transition: 0.5s ease;
+  z-index: 2;
+}
+
+.quick-view-button modal-opener {
+  width: 100%;
+}
+.quick-view-button button#-submit {
+  background: #ffffffc7;
+  border: unset;
+  width: 100%;
+  height: 40px;
+  cursor: pointer;
+}
+
+.product-card-wrapper:hover .quick-view-button {
+  bottom: 0;
+}
+.card__information {
+  background: #ffffff;
+  z-index: 3;
+}
+.card__information .full-unstyled-link {
+  text-decoration: none;
+  color: currentColor;
+  display: block;
+  font-size: 16px;
+  line-height: 19px;
+  font-weight: 400;
+}
+h5.product-card-meta {
+  font-size: 14px;
+  line-height: 19px;
+  font-weight: 400;
+  color: #ffffff;
+  /* background-color: #ff8a04; */
+  background-color: #f77fe1;
+  width: max-content;
+  margin: 10px auto;
+  padding: 2px 12px;
+  border-radius: 30px;
+}
+.card-information .price__container {
+  color: #01a6a5;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+button.quick-add__submit.button.button--full-width.button--secondary {
+  font-size: 15px;
+  line-height: 22px;
+  background-color: #000;
+  color: #fff;
+}
+
+.card-wrapper.product-card-wrapper .quick-add.no-js-hidden {
+  opacity: 0;
+  transition: 0.5s ease;
+}
+.product-card-wrapper:hover .quick-add.no-js-hidden {
+  opacity: 1;
+}
+
+.quick-view-button .loading__spin{
+  visibility: hidden;
+}
+/* Trial Start */
+.card-wrapper {
+    color: inherit;
+    height: 100%;
+    position: relative;
+    text-decoration: none;
+    position: relative;
+    padding: 10px;
+    border: 1px solid #1b017712;
+    border-radius: 12px;
+    flex: 1;
+}
+/* button.quick-add__submit.button.button--full-width.button--secondary {
+    font-size: 15px;
+    line-height: 22px;
+    background-color: #000;
+    color: #fff;
+    display: none;
+} */
+.quick-add.no-js-hidden {
+    display: none;
+}
+/* Trial End */
+@media only screen and (max-width: 700px) {
+  .product-card-wrapper:hover .quick-add.no-js-hidden {
+    display: none;
+  }
+}

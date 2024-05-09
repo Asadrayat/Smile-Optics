@@ -1,0 +1,308 @@
+<style>
+  .custom__collection-lists--{{ section.id }}{
+    margin-top: {{ section.settings.margin_top }}px;
+    margin-bottom: {{ section.settings.margin_bottom }}px;
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    overflow: hidden;
+  }
+  .ccl__header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 0 20px;
+  }
+  .ccl__header h2{
+    font-size: 35px;
+    line-height: 42px;
+    color: #1b0177;
+    margin: 0;
+  }
+  .ccl__header a{
+    font-size: 16px;
+    line-height: 29px;
+    color: #000;
+  }
+  .ccl__slider--{{ section.id }} .swiper{
+    overflow: visible;
+    width: 100%;
+  }
+  .ccl__slider--{{ section.id }} .swiper-slide{
+    font-size: 0;
+    line-height: 0;
+    height: auto;
+    position: relative;
+    background: #fef7ea;
+    border-radius: 12px;
+    transition: 0.3s;
+  }
+  .ccl__slider--{{ section.id }} .swiper-slide:hover {
+    transform: scale3d(1.05, 1.05, 1.05);
+    
+  }
+  
+  .ccl__slider--{{ section.id }} .swiper-slide a{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+  }
+  .ccl__slider--{{ section.id }} .swiper-slide img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+  .ccl__count{
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 12px;
+    font-size: 14px;
+    line-height: 14px;
+    color: #1b0177;
+    text-align: center;
+    /* --tw-backdrop-blur: blur(60px);
+    -webkit-backdrop-filter: blur(60px);
+    backdrop-filter: blur(60px); */
+    background-color: hsl(0deg 0% 100% / .64);
+    border-radius: 8px;
+  }
+  .ccl__title{
+    position: absolute;
+    color: #1b0177;
+    text-transform: capitalize;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 85%;
+    padding: 16px 12px;
+    font-size: 16px;
+    line-height: 16px;
+    text-align: center;
+    --tw-backdrop-blur: blur(60px);
+    -webkit-backdrop-filter: blur(60px);
+    backdrop-filter: blur(60px);
+    background-color: rgba(255, 255, 255, .9);
+    border-radius: 8px;
+  }
+  .ccl__slider--{{ section.id }} .swiper-pagination{
+      margin-top: 20px;
+      width: 100%;
+      max-width : 100%;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 5px;
+      border-radius: 8px;
+      position: static;
+    }
+    .ccl__slider--{{ section.id }} .swiper-pagination .swiper-pagination-bullet{
+      background-color: #1b0177;
+      width: 8px;
+      height: 6px;
+      margin: 0;
+      border-radius: 9999px;
+      transition-property: all;
+      transition-duration: .35s;
+    }
+    .ccl__slider--{{ section.id }} .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active{
+      background-color: #1b0177;
+      width: 16px;
+    }
+  @media screen and (max-width: 768px){
+    .custom__collection-lists--{{ section.id }}{
+      margin-top: {{ section.settings.margin_top-m }}px;
+      margin-bottom: {{ section.settings.margin_bottom-m }}px;
+      padding-top: {{ section.settings.padding_top-m }}px;
+      padding-bottom: {{ section.settings.padding_bottom-m }}px;
+    }
+    .ccl__header h2{
+      font-size: 22px;
+      line-height: 29px;
+    }
+  }
+</style>
+<section class="custom__collection-lists--{{ section.id }}">
+  <div class="ccl__wrapper page-width">
+    <div class="ccl__header">
+      <h2>{{ section.settings.title }}</h2>
+      <a  class="button-font " href="collections/all">View All</a>
+    </div>
+    <div class="ccl__slider--{{ section.id }}">
+      <div class="swiper">
+        <div class="swiper-wrapper">
+          {% for block in section.blocks %}
+            {% if block.type == "collection" %}
+              <div class="swiper-slide">
+                {% if block.settings.image %}
+                  <img src="{{ block.settings.image | img_url: "master" }}" alt="{{ block.settings.collection.title }}">
+                {% elsif block.settings.collection.image %}
+                  <img src="{{ block.settings.collection.image | img_url: "master" }}" alt="{{ block.settings.collection.title }}">
+                {% endif %}
+                <div class="ccl__count">{{ block.settings.collection.all_products_count }} items</div>
+                <div class="h2 ccl__title">{{ block.settings.collection.title }}</div>
+                <a href="{{ block.settings.collection.url }}"></a>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <div id="pagination__{{ section.id }}" class="swiper-pagination"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  var swiper = new Swiper(".ccl__slider--{{ section.id }} .swiper", {
+    slidesPerView: 1.2,
+    spaceBetween: 12,
+    speed: 500,
+    pagination: {
+      el: "#pagination__{{ section.id }}",
+      clickable: true,
+    },
+    breakpoints: {
+      640: {
+        slidesPerView: 2.1,
+        spaceBetween: 30,
+      },
+      768: {
+        slidesPerView: 3,
+        spaceBetween: 30,
+      },
+      1200: {
+        slidesPerView: 3,
+        spaceBetween: 30,
+      },
+    },
+  });
+</script>
+  
+{% schema %}
+{
+  "name": "Organna Collection Lists",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "header",
+      "content": "Spacing (Desktop)"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Spacing (Mobile)"
+    },
+    {
+      "type": "range",
+      "id": "margin_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top (Mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom (Mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top  (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom  (Mobile)",
+      "default": 0
+    }
+  ],
+  "blocks": [
+     {
+       "name": "Collection",
+       "type": "collection",
+       "settings": [
+         {
+            "type": "collection",
+            "id": "collection",
+            "label": "Collection"
+         },
+         {
+           "type": "image_picker",
+           "id": "image",
+           "label": "Image"
+         }
+       ]
+     }
+   ],
+  "presets": [
+    {
+      "name": "Organa Collection Lists"
+    }
+  ]
+}
+{% endschema %}

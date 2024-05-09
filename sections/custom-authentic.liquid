@@ -1,0 +1,177 @@
+{% assign id = section.id %}
+
+<style>
+    .custom__authentic-{{ section.id }} {
+     margin-top: {{ section.settings.margin_top }}px;
+     margin-bottom: {{ section.settings.margin_bottom }}px;
+     padding-top: {{ section.settings.padding_top }}px;
+     padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  
+@media screen and (max-width: 890px){
+ .custom__authentic-{{ section.id }} {
+     margin-top: {{ section.settings.margin_top-m }}px;
+     margin-bottom: {{ section.settings.margin_bottom-m }}px;
+     padding-top: {{ section.settings.padding_top-m }}px;
+     padding-bottom: {{ section.settings.padding_bottom-padding_bottom-m }}px;
+  }
+}
+</style>
+  
+{{ 'authentic-style.css' | asset_url | stylesheet_tag }}
+  
+<section class="custom__authentic-{{ section.id }}">
+  <div class="ch__container">
+    <h1>{{  }}</h1>
+    <div class="ch__wrapper-{{ id }}">
+    </div>
+  </div>  
+</section>
+
+{% schema %}
+{
+  "name": "Custom Authentic",
+  "settings": [
+    {
+      "id": "title",
+      "type": "text",
+      "label": "Add Section title"
+    },
+    {
+      "id": "desc",
+      "type": "richtext",
+      "label": "Add Section description"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 8
+    },
+
+    {
+      "type": "header",
+      "content": "Spacing (Mobile)"
+    },
+    {
+      "type": "range",
+      "id": "margin_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top  (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom  (Mobile)",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Image",
+      "type": "Text",
+      "settings": [
+          {
+            "id": "title",
+            "type": "text",
+            "label": "Add Hero title"
+          },
+          {
+            "id": "image_rating",
+            "type": "image_picker",
+            "label": "Add Image Rating"
+          },
+          {
+            "id": "text_rating",
+            "type": "text",
+            "label": "Add Rating Text"
+          },
+          {
+            "id": "desc_text",
+            "type": "richtext",
+            "label": "Add description"
+          },
+          {
+            "id": "user__info",
+            "type": "text",
+            "label": "Add User Info"
+          }
+      ]
+    }
+  ],
+
+  "presets":[
+    {
+      "name": "Custom Authentic"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

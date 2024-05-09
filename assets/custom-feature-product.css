@@ -1,0 +1,102 @@
+.feature_title-mobile{
+  display: block;
+}
+.feature-section__soptics .collection__title.title-wrapper {
+    text-align: center;
+}
+.feature-section__soptics .collection__title.title-wrapper h2{
+    color: rgb(95,199,204);
+    font-size: 40px;
+    line-height: 48px;
+}
+
+.smile__optics-feature .card__badge.top {
+    display: none;
+}
+.smile__optics-feature .card-wrapper {
+    border: none;
+}
+.smile__optics-feature .card__inner  {
+    background: inherit;
+}
+.smile__optics-feature .card:not(.ratio)>.card__content {
+    display: flex;
+    flex-direction: column-reverse;
+    margin-top: -60px;
+}
+.smile__optics-feature .underline-links-hover:hover a {
+    text-decoration: none;
+}
+.smile__optics-feature span.price-item.price-item--regular,
+.smile__optics-feature .price__container,
+.smile__optics-feature .price--on-sale .price-item--regular  {
+    color: #6f60e9;
+    font-size: 19px;
+    line-height: 29px;
+    font-weight: 600;
+    margin: 0;
+}
+.smile__optics-feature button.quick-add__submit.button.button--full-width.button--secondary {
+    font-size: 14px;
+    line-height: 50px;
+    background-color: rgb(255 255 255 / 75%);
+    color: rgb(0 0 0);
+}
+.smile__optics-feature .button:after, .shopify-challenge__button:after, .customer button:after, .shopify-payment-button__button--unbranded:after {
+    box-shadow: none;
+}
+.smile__optics-feature .smile-product_content {
+    font-size: 14px;
+    line-height: 14px;
+    color: #fff;
+    background: #F78FE1;
+    width: max-content;
+    padding: 5px 10px;
+    border-radius: 15px;
+    margin: auto;
+}
+.smile__optics-feature .smile-product_content p{
+    margin: 0;
+}
+.smile__optics-feature .card--standard>.card__content .card__information {
+    padding: 10px;
+}
+@media only screen and (max-width: 768px) {
+.feature_title-mobile{
+  display: none;
+}  
+  .feature-section__soptics .collection__title.title-wrapper {
+      /* display: none; */
+  }
+.smile__optics-feature  {
+    width: 99%;
+    padding: 0 !important;
+    margin: auto;
+}
+.smile__optics-feature ul {
+    /* flex-direction: column; */
+}
+.smile__optics-feature .so__card-wrapper{
+    max-width: 100%;
+    width: 100%;
+}  
+.smile__optics-feature .card:not(.ratio) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    grid-gap: 10px;
+} 
+.card__information .full-unstyled-link {
+    font-size: 14px;
+    line-height: 19px;
+    color: #000;
+    font-weight: 500;
+}
+.smile__optics-feature .smile-product_content {
+    font-size: 11px;
+} 
+.feature-section__soptics .collection__title.title-wrapper h2{
+    font-size: 26px;
+    line-height: 31px;
+}
+}

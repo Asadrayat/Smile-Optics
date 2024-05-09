@@ -1,0 +1,594 @@
+<style>
+  .secondary__product--{{ section.id }}{
+     margin-top: {{ section.settings.margin_top | append:'px' }};
+     margin-bottom: {{ section.settings.margin_bottom | append:'px' }};
+     padding-top: {{ section.settings.padding_top | append:'px' }};
+     padding-bottom: {{ section.settings.padding_bottom | append:'px' }};
+     overflow: hidden;
+  }
+  .second__product-wrapper.page-width{
+    max-width: 100%;
+    padding: 0;
+  }
+  .second__product-wrapper {
+    display: flex;
+    align-items: stretch;
+  }
+  .second__product-wrapper > div{
+    flex: 1 1 33.33%;
+  }
+  .second__product{
+    background-color: #cfcff5;
+    padding: 45px 85px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .second__product h4{
+    font-size: 17px;
+    line-height: 27px;
+    color: #fff;
+    margin: 0;
+  }
+  .second__product h4 span{
+    color: rgb(255, 235, 170);
+  }
+  .second__product h2{
+    font-size: 27px;
+    line-height: 1;
+    color: rgb(92, 67, 154);
+    font-weight: 600;
+    margin: 0 0 12px;
+  }
+  .second__product-prices{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  .second__product-prices .price, .second__product-prices .price span.price-item.price-item--regular{
+    font-size: 30px;
+    line-height: 1;
+    color: rgb(111, 96, 233) !important;
+  }
+  .second__product-prices > span{
+    display: inline-block;
+    font-size: 12px;
+    line-height: 14px;
+    color: #000;
+    border: 1px solid #000;
+    padding: 6px 12px;
+    border-radius: 50px;
+    transition: all 0.4s;
+  }
+  .second__product-prices > span:hover{
+    border-color: #1b0177;
+    background-color: #1b0177;
+    color: #a7f2f6;
+  }
+  .second__product small{
+    display: inline-block;
+    font-size: 10px;
+    line-height: 14px;
+    color: rgb(111, 96, 233);
+    margin: 9px 0 0;
+  }
+  .second__product p{
+    font-size: 13px;
+    line-height: 18px;
+    color: #000;
+    margin: 9px 0 13px;
+  }
+  .second__product a{
+    border-color: rgb(0, 0, 0);
+    border-radius: 20px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(111, 96, 233);
+    border-width: 0px;
+    font-size: 14px;
+    line-height: 21px;
+    padding: 10px 16px;
+    min-width: 196px;
+    text-align: center;
+    font-weight: 600;
+    display: inline-block;
+    text-decoration: none;
+    margin: 20px 0 0;
+    transition: all 0.4s;
+  }
+  .second__product a:hover{
+    opacity: 0.7;
+  }
+  .second__icons{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 10px;
+  }
+  .second__icon-item{
+    font-size: 0;
+    line-height: 0;
+    fill: #5c439a;
+    stroke: #5e97ff;
+    text-align: center
+  }
+  .second__icon-item svg{
+    height: 28px;
+    width: 28px;
+  }
+  .second__icon-item p{
+    font-size: 9px;
+    line-height: 11px;
+    color: #000;
+    margin: 8px 0;
+    font-weight: 600;
+  }
+  .second__video{
+    font-size: 0;
+    line-height: 0;
+  }
+  .second__video video{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .second__image{
+    padding: 0px 85px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #60dbd9;
+  }
+  .second__image-inner {
+    display: grid;
+    grid-template-rows: repeat(12, 0.1fr);
+    grid-template-columns: 100%;
+    height: 100%;
+  }
+  .second__image-container{
+    font-size: 0;
+    line-height: 0;
+    position: relative;
+    grid-column: 1/2;
+    grid-row: 1/-1;
+    justify-self: start;
+    align-self: start;
+    height: 100%;
+  }
+  .second__image-container img{
+    width: 100%;
+    height: 100%;
+    /* max-width: 307px; */
+    object-fit: cover;
+  }
+  .caption__item{
+    display: flex;
+    align-items: center;
+  }
+  .second__caption-1{
+    position: relative;
+    left: -120px;
+    top: 10px;
+    grid-row: 3/4;
+    grid-column: 1/2;
+  }
+  .second__caption-2{
+    position: relative;
+    grid-column: 1/2;
+    grid-row: 9/10;
+    left: -231px;
+    bottom: -74%;
+  }
+  .caption__text{
+    font-size: 12px;
+    line-height: 17px;
+    color: #000;
+    max-width: 250px;
+    min-width: 180px;
+    border-radius: 15px;
+    border: 1px solid #000;
+    background-color: #fff;
+    box-sizing: border-box;
+    padding: 5px;
+  }
+  .caption__item svg{
+    max-width: 70px;
+  }
+  @media screen and (min-width: 800px) and (max-width: 1200px){
+    .second__image-container img {
+      max-width: 307px;
+    }
+  }
+  @media screen and (max-width: 1200px){
+    .secondary__product--{{ section.id }}{
+       margin-top: {{ section.settings.margin_top_mobile | append:'px' }};
+       margin-bottom: {{ section.settings.margin_bottom_mobile | append:'px'  }};
+       padding-top: {{ section.settings.padding_top_mobile | append:'px' }};
+       padding-bottom: {{ section.settings.padding_bottom_mobile | append:'px' }};
+    }
+    .second__product-wrapper{
+      flex-direction: column;
+    }
+    .second__product-wrapper > div {
+      flex: 0 0 100%;
+    }
+    .second__image{
+      order: 1;
+      padding: 0;
+    }
+    .second__product{
+      order: 2;
+      padding: 45px 20px;
+    }
+    .second__product h4{
+      font-size: 19px;
+      line-height: 32px;
+    }
+    .second__product h2{
+      font-size: 32px;
+      margin: 0 0 16px;
+    }
+    .second__product-prices .price, .second__product-prices .price span.price-item.price-item--regular{
+      font-size: 36px;
+    }
+    .second__product small{
+      font-size: 14px;
+      line-height: 18px;
+    }
+    .second__product a{
+      font-size: 18px;
+      line-height: 22px;
+      padding: 13px 16px;
+      min-width: 100%;
+    }
+    .second__product a:hover{
+      opacity: 0.7;
+    }
+    .second__icon-item p {
+      font-size: 12px;
+      line-height: 16px;
+    }
+
+    .second__video{
+      order: 3;
+    }
+  }
+
+  @media screen and (max-width: 799px){
+    .second__image-inner {
+      width: 100%;
+    }
+    .second__image-container {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    .second__image-container img {
+      max-width: 215px;
+      object-fit: cover;
+      transform: scale(1.2);
+    }
+    .caption__item {
+      justify-content: flex-end;
+    }
+    .caption__text {
+      max-width: 180px;
+      min-width: 140px;
+      border-radius: 10px;
+    }
+    .second__caption-1 {
+      left: -26%;
+      top: -27%;
+    }
+    .second__caption-2 {
+      left: -41%;
+      bottom: -48%;
+    }
+    .caption__item svg {
+      max-width: 50px;
+    }
+  }
+  @media screen and (min-width: 500px) and (max-width: 799px){
+    .second__caption-1 {
+      left: -16%;
+      top: -27%;
+    }
+    .second__caption-2 {
+      left: -25%;
+      bottom: -48%;
+    }
+  }
+</style>
+
+<section class="secondary__product--{{ section.id }}">
+  <div class="second__product-wrapper page-width">
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when 'product' %}
+          <div class="second__product">
+            <div class="second__product-inner">
+              {% if block.settings.title != blank %}
+                <h4>{{ block.settings.title }}</h4>
+              {% endif %}
+              {% if block.settings.product %}
+                <h2>{{ block.settings.product.title }}</h2>
+                <div class="second__product-prices">
+                  {% render 'price', product: block.settings.product %}
+                  {% if block.settings.charge != blank %}
+                    <span>{{ block.settings.charge }}</span>
+                  {% endif %}
+                </div>
+              {% endif %}
+              {% if block.settings.percent != blank %}
+                <small>{{ block.settings.percent }}</small>
+              {% endif %}
+              {% if block.settings.text != blank %}
+                <p>{{ block.settings.text }}</p>
+              {% endif %}
+              <div class="second__icons">
+                {% for i in (1..3) %}
+                  <div class="second__icon-item">
+                    {% liquid
+                      capture icon
+                        echo 'icon' | append: i
+                      endcapture
+                      capture text
+                        echo 'text' | append: i
+                      endcapture
+                    %}
+                    {% unless block.settings[icon] == blank %}
+                      {{ block.settings[icon] }}
+                    {% endunless %}
+                    {% unless block.settings[text] == blank %}
+                      <p>{{ block.settings[text] }}</p>
+                    {% endunless %}
+                  </div>
+                {% endfor %}
+              </div>
+              <a href="{{ block.settings.product.url }}">Add to Cart</a>
+            </div>
+          </div>
+        {% when 'video' %}
+         <div class="second__video">
+            {{ block.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false }}
+         </div>
+        {% when 'image' %}
+         <div class="second__image">
+            <div class="second__image-inner">
+                <div class="second__image-container">
+                  {% if block.settings.image %}
+                    {{ block.settings.image | image_url: width: 500 | image_tag }}
+                  {% endif %}
+                </div>
+               <div data-aos="fade-left" class="caption__item second__caption-1">
+                 <div class="caption__text">
+                   {{ block.settings.text1 }}
+                 </div>
+                 {%- render 'smile-all-icons', name: 'caption-left' -%}
+               </div>
+               <div data-aos="fade-left" class="caption__item second__caption-2">
+                 <div class="caption__text">
+                   {{ block.settings.text2 }}
+                 </div>
+                 {%- render 'smile-all-icons', name: 'caption-left' -%}
+               </div>
+            </div>
+         </div>
+      {% endcase %}
+    {% endfor %}
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Secondary Product",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Desktop Spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Mobile Spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top (Mobile)",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom (Mobile)",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top  (Mobile)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom  (Mobile)",
+      "default": 20
+    }
+  ],
+  "blocks": [
+     {
+       "name": "Product",
+       "type": "product",
+       "limit": 1,
+       "settings": [
+         {
+           "type": "header",
+           "content": "Text Content"
+         },
+         {
+            "type": "textarea",
+            "id": "title",
+            "label": "Content 1"
+         },
+         {
+            "type": "text",
+            "id": "charge",
+            "label": "Content 2"
+         },
+         {
+            "type": "text",
+            "id": "percent",
+            "label": "Content 3"
+         },
+         {
+            "type": "text",
+            "id": "text",
+            "label": "Content 4"
+         },
+         {
+           "type": "header",
+           "content": "Product"
+         },
+         {
+            "type": "product",
+            "id": "product",
+            "label": "Product"
+         },
+         {
+           "type": "header",
+           "content": "Icon and Text"
+         },
+         {
+           "type": "html",
+           "id": "icon1",
+           "label": "Icon 1"
+         },
+         {
+            "type": "text",
+            "id": "text1",
+            "label": "Text 1"
+         },
+         {
+           "type": "html",
+           "id": "icon2",
+           "label": "Icon 2"
+         },
+         {
+            "type": "text",
+            "id": "text2",
+            "label": "Text 2"
+         },
+         {
+           "type": "html",
+           "id": "icon3",
+           "label": "Icon 3"
+         },
+         {
+            "type": "text",
+            "id": "text3",
+            "label": "Text 3"
+         }
+       ]
+     },
+     {
+       "name": "Video",
+       "type": "video",
+       "limit": 1,
+       "settings": [
+         {
+           "type": "video",
+           "id": "video",
+           "label": "Video"
+         }
+       ]
+     },
+     {
+       "name": "Image",
+       "type": "image",
+       "limit": 1,
+       "settings": [
+         {
+           "type": "image_picker",
+           "id": "image",
+           "label": "Image"
+         }, 
+         {
+           "type": "header",
+           "content": "Captions"
+         },
+         {
+            "type": "text",
+            "id": "text1",
+            "label": "Caption 1"
+         },
+         {
+            "type": "text",
+            "id": "text2",
+            "label": "Caption 2"
+         }
+       ]
+     }
+   ],
+  "presets": [
+    {
+      "name": "Secondary Product"
+    }
+  ]
+}
+{% endschema %}

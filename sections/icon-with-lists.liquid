@@ -1,0 +1,242 @@
+<style>
+  .icon__with-lists--{{ section.id }}{
+    margin-top: {{ section.settings.margin_top }}px;
+    margin-bottom: {{ section.settings.margin_bottom }}px;
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-color: #FFFAF2;
+    position: relative;
+  }
+  .icon__with-lists--{{ section.id }} > svg{
+    max-width: 64px;
+    fill: #B2DEE7;
+    position: absolute;
+    top: -2px;
+    left: 46%;
+    transform: rotate(180deg) translateX(-50%);
+  }
+  .iwl__items{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: space-between;
+  }
+  .iwl__item{
+    flex: 0 0 350px;
+    border-radius: 20px;
+    padding: 20px;
+    background-color: #fff;
+  }
+  .iwl__item img{
+    width: 55px;
+    height: 50px;
+  }
+  .iwl__item h2{
+    font-size: 18px;
+    line-height: 1;
+    color: rgb(27, 1, 119);
+    margin: 12px 0;
+  }
+  .iwl__item p{
+    font-size: 12px;
+    line-height: 16px;
+    color: rgb(27,1,119);
+    margin: 0;
+  }
+  .iwl__item p a{
+    color: rgb(1, 166, 165);
+  }
+  .iwl__texts{
+    margin: 50px 0 0;
+  }
+  .iwl__texts *{
+    text-align: center;
+    font-size: 10px;
+    line-height: 16px;
+    margin: 0;
+    color: rgb(89, 89, 89);
+  }
+  .iwl__texts a{
+    color: rgb(1, 166, 165);
+  }
+
+  @media screen and (max-width: 990px){
+   .icon__with-lists--{{ section.id }}{
+      margin-top: {{ section.settings.margin_top }}px;
+      margin-bottom: {{ section.settings.margin_bottom }}px;
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+   }
+    .iwl__item{
+      flex: 0 0 100%;
+    }
+    .iwl__item-header{
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 0 0 16px;
+    }
+    .iwl__item img{
+      width: 27px;
+      height: 31px;
+    }
+    .icon__with-lists--{{ section.id }} > svg{
+      left: 35%;
+    }
+  }
+</style>
+<section class="icon__with-lists--{{ section.id }}">
+  <div class="iwl__wrapper page-width">
+    <div class="iwl__items">
+      {% for block in section.blocks %}
+        <div class="iwl__item">
+          <div class="iwl__item-header">
+            {% if block.settings.image %}
+              <img src="{{ block.settings.image | img_url: "master" }}" alt="{{ block.settings.title }}">
+            {% endif %}
+            {% if block.settings.title %}
+              <h2>{{ block.settings.title }}</h2>
+            {% endif %}
+          </div>
+          {% if block.settings.text %}
+            {{ block.settings.text }}
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+    {% if section.settings.text %}
+      <div class="iwl__texts">
+        {{ section.settings.text }}
+      </div>
+    {% endif %}
+  </div>
+  {% render 'all-icons', name: "trigon" %}
+</section>
+{% schema %}
+{
+  "name": "Icon With Lists",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "header",
+      "content": "Spacing (Desktop)"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Spacing (Mobile)"
+    },
+    {
+      "type": "range",
+      "id": "margin_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top (Mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom (Mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top  (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom  (Mobile)",
+      "default": 0
+    }
+  ],
+  "blocks": [
+     {
+       "name": "Text",
+       "type": "text",
+       "settings": [
+         {
+           "type": "image_picker",
+           "id": "image",
+           "label": "Image"
+         },
+         {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+         },
+         {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text"
+         }
+       ]
+     }
+   ],
+  "presets": [
+    {
+      "name": "Icon With Lists"
+    }
+  ]
+}
+{% endschema %}

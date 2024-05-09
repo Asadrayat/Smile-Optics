@@ -1,0 +1,36 @@
+{% comment %}
+  Renders a standard dropdown style menu for the header.
+
+  Usage:
+  {% render 'header-dropdown-menu' %}
+{% endcomment %}
+
+<nav class="header__inline-menu header__inline-menu-desktop">
+  <ul class="menu menu__parent">
+    {% for link in section.settings.menu.links %}
+      <li class="menu-link">
+        <a href="{{ link.url }}">{{ link.title }} {% if link.links.size > 0 %}<span>▼</span>{% endif %}</a>
+  
+        {% if link.links.size > 0 %}
+          <ul class="menu dropdown-child menu__child">
+            {% for child_link in link.links %}
+              <li class="menu-link">
+                <a href="{{ child_link.url }}">{{ child_link.title }} {% if child_link.links.size > 0 %}<span>▼</span>{% endif %}</a>
+  
+                {% if child_link.links.size > 0 %}
+                  <ul class="menu dropdown-grandchild menu__grandchild">
+                    {% for grandchild_link in child_link.links %}
+                      <li class="menu-link">
+                        <a href="{{ grandchild_link.url }}">{{ grandchild_link.title }}</a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</nav>

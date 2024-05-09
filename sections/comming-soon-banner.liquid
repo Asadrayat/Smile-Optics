@@ -1,0 +1,515 @@
+{% liquid
+  assign id = section.id
+  assign settings = section.settings
+  assign blocks = section.blocks
+%}
+
+<style>
+  #shopify-section-{{id}} {
+    box-sizing: border-box;
+    margin-top: {{section.settings.margin_top | append: 'px'}};
+    margin-bottom: {{section.settings.margin_bottom | append: 'px'}};
+    padding-top: {{section.settings.padding_top | append: 'px'}};
+    padding-bottom: {{section.settings.padding_bottom | append: 'px'}};
+    background: radial-gradient(circle at 59% 11%, #A7F2F6 0%, #9EE7E8 100%);
+    overflow: hidden;
+  }
+  .mobile__only-{{ id }} {
+    display: none;
+  }
+  .wrapper-{{id}} {
+   
+    position: relative;
+    box-sizing: border-box;
+    padding-top: 60px;
+  }
+  .shape_image img{
+    width: 100%;
+    height: auto;
+  }
+  .shape_image {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: auto;
+    width: 100%;
+    font-size: 0;
+    line-height: 0;
+  }
+  .text-wrapper-{{id}} {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .heading-{{ id }} {
+    font-size: 65px;
+    line-height: 65px;
+    color: #1b0177;
+    text-align: center;
+    margin: 0 0 0 0;
+  }
+  .sub-heading-{{ id }} {
+    font-size: 16px;
+    line-height: 26px;
+    color: #1b0177;
+    text-align: center;
+    margin: 23px 0;
+    max-width: 1000px;
+  }
+
+  .button-{{ id }} {
+    cursor: pointer;
+    background-color: #00a6a5;
+    color: #fff;
+    text-align: center;
+    margin: 0 0 0 0;
+    height: 42px;
+    line-height: 42px;
+    border: none;
+    border-radius: 21px;
+    display: inline-block;
+    padding-inline: 46px;
+    box-sizing: border-box;
+    text-decoration: none;
+  }
+  .button-{{ id }}:hover{
+    background-color: #1b0177;
+  }
+  .img-wrapper-{{ id }} {
+    font-size: 0;
+    line-height: 0;
+    position: relative;
+    z-index: 5;
+    margin-top: 50px;
+  }
+  .img-wrapper-{{ id }} img{
+    width: 100%;
+    height: auto;
+    transform: translateX(0px) scale(1.2);
+  }
+  .icon-wrapper-{{ id }} {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 105px;
+  }
+  .icon-wrapper-{{ id }} img{
+    max-width: 174px;
+    height: auto;
+  }
+  .review-{{id}} {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .review-{{id}} img{
+    max-width: 93px;
+    height: auto;
+  }
+  .review-{{id}} h2{
+    margin: 5px 0 0 0;
+    font-size: 40px;
+    line-height: 40px;
+    color: #000;
+  }
+  .review-{{id}} h3{
+    margin: 5px 0;
+    font-size: 20px;
+    line-height: 24px;
+    color: #000;
+  }
+  .review-{{id}} p{
+    margin: 0;
+    font-size: 12px;
+    line-height: 12px;
+    color: #3899ec;
+    text-decoration: underline;
+  }
+  .feature__text-{{ id }} {
+      text-align: center;
+      font-style: italic;
+      letter-spacing: 0px;
+      color: #999997;
+      font-size: 12px;
+   }
+
+  @media(max-width: 768px) {
+    #shopify-section-{{id}} {
+      margin-top: {{section.settings.margin_top_m | append: 'px'}};
+      margin-bottom: {{section.settings.margin_bottom_m | append: 'px'}};
+      padding-top: {{section.settings.padding_top_m | append: 'px'}};
+      padding-bottom: {{section.settings.padding_bottom_m | append: 'px'}};
+    }
+    .mobile__only-{{ id }} {
+      display: block;
+    }
+   .review-{{id}} {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .review-m-{{ id }} {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+    }
+    .review-m-{{ id }} img{
+      max-width: 93px;
+      height: auto;
+    }
+    .review-m-{{ id }} h2{
+      margin: 5px 0 0 0;
+      font-size: 40px;
+      line-height: 40px;
+      color: #000;
+    }
+    .review-m-{{ id }} h3{
+      margin: 5px 0;
+      font-size: 20px;
+      line-height: 24px;
+      color: #000;
+    }
+    .review-m-{{ id }} p{
+      margin: 0;
+      font-size: 12px;
+      line-height: 12px;
+      color: #3899ec;
+      text-decoration: underline;
+    }
+    .desktop__only-{{ id }} {
+      display: none;
+    }
+    .text-wrapper-{{ id }}{
+      padding: 0 1.5rem;
+    }
+    .text-wrapper-{{ id }} h2{
+     font-size: 24px;
+    }
+    .text-wrapper-{{ id }} p{
+      font-size: 14px;
+      line-height: 17.6px;
+      font-weight: 500;
+      text-align: center;
+      margin-top: 0;
+    }
+    .img-wrapper-{{ id }} {
+      margin-top: 0px;
+    }
+    .img-wrapper-{{ id }} img{
+      transform: scale(1);
+    }
+    .icon-wrapper-{{ id }} {
+      gap: 20px;
+      margin-top: 25px;
+    }
+    .icon-wrapper-{{ id }} img{
+      width: 100%;
+      object-fit: cover;
+    }
+  .feature__text-{{ id }} {
+      text-align: center;
+      font-style: italic;
+      z-index: 999;
+      position: relative;
+   }
+  
+  }
+</style>
+
+
+<div class="sec-{{ id }}">
+  <div class="{% unless section.settings.full_width %}page-width{% endunless %}">
+    <div class="wrapper-{{ id }}">
+      <div class="text-wrapper-{{ id }}">
+        {% unless section.settings.heading == blank %}
+          <h2 class="heading-{{ id }}">{{ section.settings.heading }}</h2>
+        {% endunless %}
+        {% unless section.settings.text == blank %}
+          <p class="sub-heading-{{ id }}">{{ section.settings.text }}</p>
+        {% endunless %}
+        {% unless section.settings.button_text == blank %}
+          <a class="button-{{ id }} button-font " href="{{ section.settings.button_url }}">{{ section.settings.button_text }}</a>
+        {% endunless %}
+      </div>
+      <div class="img-wrapper-{{ id }}">
+        <picture>
+        {% unless section.settings.image_desktop == blank %}
+          <source  media="(min-width: 650px)" srcset="{{ section.settings.image_desktop | image_url: width: section.settings.image_desktop.width }}">
+        {% endunless %}
+        {% unless section.settings.image_mobile == blank %}
+          <source  media="(min-width: 265px)" srcset="{{ section.settings.image_mobile | image_url: width: section.settings.image_mobile.width }}">
+        {% endunless %}
+        {% unless section.settings.image_desktop == blank %}
+         <img src="{{ section.settings.image_desktop | image_url: width: 500 }}">
+        {% endunless %}
+      </picture>
+      </div>
+      <div class="review-m-{{ id }} mobile__only-{{ id }}">
+        {% for block in section.blocks %}
+          {% case block.type %}
+           {% when 'review' %}
+            {% unless block.settings.image == blank %}
+               {{ block.settings.image | image_url: width: block.settings.image.width | image_tag: loading: 'lazy' }}
+            {% endunless %}
+            <h2>{{ block.settings.reviews }}</h2>
+            <h3>{{ block.settings.text }}</h3>
+            <p>{{ block.settings.small_text }}</p>
+          {% endcase %}
+        {% endfor %}
+      </div>
+      <p class="feature__text-{{ id }} mobile__only-{{ id }}">As Featured In</p>
+      <div class="icon-wrapper-{{ id }} page-width">
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'icon' %}
+              <div data-aos="fade-up" {% if forloop.index == 1 %}data-aos-delay="200"{% elsif forloop.index == 2 %}data-aos-delay="350"{% elsif forloop.index == 4 %}data-aos-delay="400"{% elsif forloop.index == 5 %}data-aos-delay="250"{% endif %}>               
+                <p class="feature__text-{{ id }} desktop__only-{{ id }}">As Featured In</p>   
+                {% unless block.settings.image == blank  %}
+                  {{ block.settings.image | image_url: width: block.settings.image.width | image_tag: loading: 'lazy' }}
+                {% endunless %}
+              </div>
+            {% when 'review' %}
+              <div class="review-{{ id }} desktop__only-{{ id }}"  data-aos="fade-up" data-aos-delay="50">
+                {% unless block.settings.image == blank %}
+                   {{ block.settings.image | image_url: width: block.settings.image.width | image_tag: loading: 'lazy' }}
+                {% endunless %}
+                <h2>{{ block.settings.reviews }}</h2>
+                <h3>{{ block.settings.text }}</h3>
+                <p>{{ block.settings.small_text }}</p>
+              </div>
+          {% endcase %}
+        {% endfor %}
+      </div>
+      <div class="shape_image hidden"><img src="https://cdn.shopify.com/s/files/1/0588/2825/9406/files/banner-bg.webp?v=1707821907"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let isEntry = false
+  const bannerObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      
+      if (entry.isIntersecting) {
+        isEntry = true       
+      } else{
+        isEntry = false
+      }
+    });
+  });
+
+  const secIdBanner = document.querySelector('.sec-{{ id }}');
+  let imageWrapper = document.querySelector(".img-wrapper-{{ id }} img")
+  if(secIdBanner)
+    bannerObserver.observe(secIdBanner);
+
+  window.addEventListener("scroll", e => {
+    if(isEntry && screen.width > 768 ) {
+      imageWrapper.style.transform = `translateX(${this.scrollY/6}px) scale(1.2)`
+    }
+  })
+</script>
+
+{% schema %}
+  {
+    "name": "Comming Soon Banner",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "full_width",
+        "label": "Full Width Section",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "image_desktop",
+        "label": "Select Image For Desktop"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_mobile",
+        "label": "Select Image For Mobile"
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "heading",
+        "default": "This page is coming soon."
+      },
+      {
+        "type": "textarea",
+        "id": "text",
+        "label": "Text",
+        "default": "Organna is committed to providing the best experience possible for our site visitors. Transparency, reliability, and consistency are the fundamental values Organna was founded on. . And for that reason, we are constantly adding to our website to provide you with a better experience while visiting our website. Please check back soon to learn more! "
+      },
+      {
+        "type": "header",
+        "content": "Button"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button Label",
+        "default": "Go Home"
+      },
+      {
+        "type": "url",
+        "id": "button_url",
+        "label": "Button URL"
+      },
+      {
+        "type": "header",
+        "content": "Section Spacing Desktop"
+      },
+      {
+        "type": "range",
+        "id": "margin_top",
+        "min": -200,
+        "max": 100,
+        "step": 10,
+        "unit": "px",
+        "label": "Margin Top",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "margin_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Margin Bottom",
+        "default": 24
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding Top",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding Bottom",
+        "default": 0
+      },
+      {
+        "type": "header",
+        "content": "Section Spacing Mobile"
+      },
+      {
+        "type": "range",
+        "id": "margin_top_m",
+        "min": -200,
+        "max": 100,
+        "step": 10,
+        "unit": "px",
+        "label": "Margin Top",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "margin_bottom_m",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Margin Bottom",
+        "default": 24
+      },
+      {
+        "type": "range",
+        "id": "padding_top_m",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding Top",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom_m",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding Bottom",
+        "default": 0
+      }
+    ],
+    "blocks": [
+      {
+        "type": "icon",
+        "name": "Icon",
+        "limit": 4,
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "text",
+            "label": "text"
+          }
+        ]
+      },
+      {
+        "type": "review",
+        "name": "Review",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Star Image"
+          },
+          {
+            "type": "text",
+            "id": "reviews",
+            "label": "Reviews",
+            "default": "+1000"
+          },
+          {
+            "type": "text",
+            "id": "text",
+            "label": "Text",
+            "default": "5-Star Reviews"
+          },
+          {
+            "type": "text",
+            "id": "small_text",
+            "label": "Small Text",
+            "default": "Kudobuzz™ Verified Reviews"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Comming Soon Banner"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

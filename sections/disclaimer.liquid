@@ -1,0 +1,228 @@
+{% assign id = section.id %}
+
+<style>
+  .disclaimer--{{ id }} {
+     margin-top: {{ section.settings.margin_top }}px;
+     margin-bottom: {{ section.settings.margin_bottom }}px;
+     padding-top: {{ section.settings.padding_top }}px;
+     padding-bottom: {{ section.settings.padding_bottom }}px;
+     background: #F8F7F7;
+  }
+  .container-{{ id }} {
+     width: 906px;
+     width: 80%;
+     margin: auto;
+  }
+  .wrapper-{{ id }} h1{
+    color: rgb(27, 1, 119);
+    font-size: 50px;
+    line-height: 50px;
+  }
+  .wrapper-{{ id }} h3{
+    color: rgb(1, 166, 165);
+    font-size: 24px;
+    line-height: 24px;
+    font-weight: 700; 
+  }
+  .wrapper-{{ id }} p{
+    color: #000;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: justify;
+  }
+  .wrapper-{{ id }} span{
+    background-color: #FF0000;
+    color: #fff;
+  }
+  .update-{{ id }} {
+    color: #000;
+    font-size: 12px;
+    line-height: 14px;
+    text-align: justify;
+    font-style: italic;
+    margin: 0;
+  }
+  
+
+@media screen and (max-width: 890px){
+   
+   .disclaimer--{{ id }} {
+     margin-top: {{ section.settings.margin_top-m }}px;
+     margin-bottom: {{ section.settings.margin_bottom-m }}px;
+     padding-top: {{ section.settings.padding_top-m }}px;
+     padding-bottom: {{ section.settings.padding_bottom-padding_bottom-m }}px;
+    }
+    .container-{{ id }} {
+     width: 90%;
+     margin: auto;
+  }
+  .wrapper-{{ id }} h1{
+    font-size: 25px;
+    line-height: 25px;
+  }
+  .wrapper-{{ id }} h3{
+    font-size: 18px;
+    line-height: 18px;
+  }
+  .wrapper-{{ id }} p{
+    font-size: 12px;
+    line-height: 14px;
+  }
+  .update-{{ id }} {
+    font-size: 10px;
+  }
+}
+</style>
+
+<section class="disclaimer--{{ id }}">
+  <div class="container-{{ id }} page-width">
+    <div class="wrapper-{{ id }}">
+      <h1><span>!</span>{{ section.settings.title }}</h1>
+      <h3>{{ section.settings.heading1 }}</h3>
+      <p>{{ section.settings.desc1 }}</p>
+      <h3>{{ section.settings.heading2 }}</h3>
+      <p>{{ section.settings.desc2 }}</p>    
+    </div>
+    <p class="update-{{ id }}">{{ section.settings.update }}</p>
+  </div>
+</section>
+
+
+
+{% schema %}
+{
+  "name": "Disclaimer",
+  "settings": [
+    {
+      "id": "title",
+      "type": "text",
+      "label": "Add Title"
+    },
+    {
+      "id": "heading1",
+      "type": "text",
+      "label": "Add Sub-heading 1",
+      "default": "CUSTOMER CARE;"
+    },
+    {
+      "id": "desc1",
+      "type": "richtext",
+      "label": "Add Description 1"
+    },
+    {
+      "id": "heading2",
+      "type": "text",
+      "label": "Add Sub-heading 2",
+      "default": "SHIPPING POLICY"
+    },
+    {
+      "id": "desc2",
+      "type": "richtext",
+      "label": "Add Description 2"
+    },
+    {
+      "id": "update",
+      "type": "textarea",
+      "label": "Add Update",
+      "default": "*this statement is subjective to change by State to State. This was last updated on 05.04.2022"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 8
+    },
+
+    {
+      "type": "header",
+      "content": "Spacing (Mobile)"
+    },
+    {
+      "type": "range",
+      "id": "margin_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top  (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom  (Mobile)",
+      "default": 0
+    }
+  ],
+  "blocks": [],
+  "presets":[
+    {
+      "name": "Disclaimer"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

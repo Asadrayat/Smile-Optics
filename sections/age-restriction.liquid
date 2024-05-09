@@ -1,0 +1,321 @@
+{% assign id = section.id %}
+
+<style>
+  .container--{{ id }} {
+     margin-top: {{ section.settings.margin_top }}px;
+     margin-bottom: {{ section.settings.margin_bottom }}px;
+     padding-top: {{ section.settings.padding_top }}px;
+     padding-bottom: {{ section.settings.padding_bottom }}px;
+     background: #F8F7F7;
+  }
+  .box-{{ id }} {
+    border-bottom: 1px solid #C7C7C7;
+  }
+  .wrapper-{{ id }},
+  .content-{{ id }},
+  .info{{ id }}{
+     width: 906px;
+     margin: auto;
+  }
+  .wrapper-{{ id }} h1{
+    color: rgb(27, 1, 119);
+    font-size: 32px;
+    line-height: 32px;
+    font-weight: 700;
+    margin: 0;
+  }
+  .wrapper-{{ id }} span{
+    background-color: #FF0000;
+    color: #fff;
+    font-size: 13px;
+    line-height: 17px;
+    font-weight: 700;
+    letter-spacing: 0px;
+  }
+  .wrapper-{{ id }} p{
+    font-size: 16px;
+    line-height: 19px;
+    color: rgb(202, 98, 98);
+    text-align: justify;
+  }
+
+  .update-{{ id }}{    
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .update-{{ id }},
+  .update-{{ id }} span{    
+    color: rgb(102, 102, 102);
+    font-size: 12px;
+    line-height: 12px;
+    font-style: italic;
+    background: unset;
+  }
+  .content-{{ id }}{    
+    background: #fff;
+    padding: 15px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    box-shadow: 0 0 3px #d3d3d3;
+    margin-block: 40px;
+  }
+  .content-{{ id }} h2{    
+    margin: 0;
+    text-align: center;
+    color: rgb(255, 0, 0);
+    font-size: 25px;
+    line-height: 35px;
+  }
+  .content-{{ id }} h6{    
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 500;
+    font-family: courier new;
+  }
+  .info{{ id }} h2{
+    color: rgb(27, 1, 119);
+    text-align: center;
+    font-size: 32px;
+    line-height: 32px;
+    font-weight: 700;
+    margin: 40px 0 0 0;
+  }
+  .info{{ id }} h2 span{
+    color: rgb(94, 77, 153);
+    text-align: center;
+    font-size: 25px;
+    line-height: 38px;
+    font-weight: 700;
+    margin: 0;
+  }
+  .info{{ id }} h4{
+    font-size: 16px;
+    line-height: 19px;
+    color: #000;
+    font-weight: normal;
+    text-align: justify;
+  }
+  .info{{ id }} p a{
+    font-size: 16px;
+    line-height: 19px;
+    color: rgb(0, 125, 125);
+    font-weight: normal;
+    text-align: justify;
+  }
+@media screen and (max-width: 890px){
+   
+   .container--{{ id }} {
+     margin-top: {{ section.settings.margin_top-m }}px;
+     margin-bottom: {{ section.settings.margin_bottom-m }}px;
+     padding-top: {{ section.settings.padding_top-m }}px;
+     padding-bottom: {{ section.settings.padding_bottom-padding_bottom-m }}px;
+    }
+  .wrapper-{{ id }},
+  .content-{{ id }},
+  .info{{ id }}{
+     width: 90%;
+    margin: 40px auto;
+  }
+  .wrapper-{{ id }} h1{
+    font-size: 21px;
+    line-height: 21px;
+  }  
+  .wrapper-{{ id }} span{
+    font-size: 11px;
+    line-height: 12px;
+  }  
+  .wrapper-{{ id }} p{
+    font-size: 12px;
+    line-height: 14px;
+  }  
+  .update-{{ id }},
+  .update-{{ id }} span{    
+    font-size: 10px;
+    line-height: 10px;
+  }  
+  .content-{{ id }} h2{    
+    font-size: 24px;
+    line-height: 34px;
+  }  
+  .info{{ id }} h2{
+    font-size: 19px;
+    line-height: 23px;
+  }
+  .info{{ id }} p{
+    font-size: 11px;
+    line-height: 13px;
+  }
+}
+</style>
+
+<section class="container--{{ id }} ">
+  <div class="page-width box-{{ id }}">
+    <div class="wrapper-{{ id }}">
+      <h1>{{ section.settings.title }}</h1>
+      <span>{{ section.settings.subtitle }}</span>
+      <p>{{section.settings.desc }}</p>
+      <small class="update-{{ id }}"><span>--</span>{{ section.settings.update }}</small>
+    </div>
+    <div class="content-{{ id }}">
+      <h2>{{ section.settings.heading2 }}</h2>
+      <h6>{{ section.settings.desc2 }}</h6>
+    </div>
+  </div>
+  <div class=info{{ id }}>
+    <h2>{{ section.settings.heading3 }}</h2>
+    <h4>{{ section.settings.desc3 }}</h4>
+    <small class="update-{{ id }}"><span>--</span>{{ section.settings.update }}</small>
+  </div>
+</section>
+
+
+
+{% schema %}
+{
+  "name": "Age Restriction",
+  "settings": [
+    {
+      "id": "title",
+      "type": "text",
+      "label": "Add Title"
+    },
+    {
+      "id": "subtitle",
+      "type": "text",
+      "label": "Add Sub Title",
+      "default": "NOT FOR SALE TO MINORS"
+    },
+    {
+      "id": "desc",
+      "type": "richtext",
+      "label": "Add Description "
+    },
+    {
+      "id": "update",
+      "type": "textarea",
+      "label": "Add Update",
+      "default": "Last Revised 06/22/2022"
+    },
+    {
+      "id": "heading2",
+      "type": "text",
+      "label": "Add Heading 2",
+      "default": "FDA WARNING:"
+    },
+    {
+      "id": "desc2",
+      "type": "richtext",
+      "label": "Add Description 2"
+    },
+    {
+      "id": "heading3",
+      "type": "text",
+      "label": "Add Heading 3",
+      "default": "American With Disabilities Act (ADA):"
+    },
+    {
+      "id": "desc3",
+      "type": "richtext",
+      "label": "Add Description 3"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 8
+    },
+
+    {
+      "type": "header",
+      "content": "Spacing (Mobile)"
+    },
+    {
+      "type": "range",
+      "id": "margin_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Top (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin Bottom (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top  (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom-m",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom  (Mobile)",
+      "default": 0
+    }
+  ],
+  "blocks": [],
+  "presets":[
+    {
+      "name": "Age Restriction"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
