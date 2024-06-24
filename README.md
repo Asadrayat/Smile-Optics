@@ -19,8 +19,8 @@ Explore our collection and shop now: [Store Link]([https://www.yourstore.com](ht
 
 ## Screenshots
 
-![Homepage](https://i.ibb.co/5jTbG8v/screencapture-smileoptics-2024-05-09-12-27-38.png)
-![Product Page](https://i.ibb.co/8D95Z4V/screencapture-smileoptics-products-v34-color-correcting-toothpaste-2024-05-09-12-31-56.png)
+![Homepage]([https://i.ibb.co/5jTbG8v/screencapture-smileoptics-2024-05-09-12-27-38.png](https://i.ibb.co/YcFQdFF/screencapture-malibumd-2024-06-25-00-50-33.png))
+
 
 
 ## Technologies Used
