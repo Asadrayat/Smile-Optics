@@ -1,6 +1,6 @@
 # [smileOptics]
 
-<a href="https://www.malibumd.com/">https://www.malibumd.com/</a>
+<a href="https://smileoptics.com/">https://smileoptics.com</a>
 
 Welcome to [smileOptics], where style meets functionality! Our carefully curated collection offers a seamless shopping experience for fashion-forward individuals seeking quality and trendsetting designs.
 
