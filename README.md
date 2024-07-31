@@ -31,6 +31,8 @@ Explore our collection and shop now: [Store Link]([https://www.yourstore.com](ht
 - HTML
 - CSS
 - JavaScript
+- liquid
+- scss
 
 
 
